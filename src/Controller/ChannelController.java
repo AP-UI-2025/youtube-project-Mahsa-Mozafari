@@ -15,20 +15,20 @@ public class ChannelController {
         return null;
     }
 
-    public Channel publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
-        return null;
+    public void publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
+
     }
 
-    public Channel publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution) {
-        return null;
+    public void publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution) {
+
     }
 
-    public Channel publishShortVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String musicReference) {
-        return null;
+    public void publishShortVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String musicReference) {
+
     }
 
-    public Channel publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, Date scheduledTime) {
-        return null;
+    public void publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, Date scheduledTime) {
+
     }
 
     public ArrayList<Channel> searchChannel(String searchBox) {
