@@ -1,5 +1,5 @@
 package Model.ContentPck;
 
-public class Content {
+public abstract class Content {
 
 }
