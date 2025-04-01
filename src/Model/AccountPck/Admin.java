@@ -1,0 +1,17 @@
+package Model.AccountPck;
+
+public class Admin extends Account {
+    private static Admin admin;
+
+    public Admin(String username, String fullName, String phoneNumber, String email) {
+        super(username, fullName, phoneNumber, email);
+    }
+
+    public static Admin getInstance() {
+        if (admin == null) {
+            admin = new Admin("Mahsa123","Mahsa Mozafari" ,"000000", "Mahsa@gmail.com");
+        }
+        return admin;
+    }
+}
+
