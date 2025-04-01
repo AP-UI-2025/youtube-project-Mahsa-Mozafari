@@ -8,13 +8,13 @@ public abstract class Account {
     private String profileCover;
     private String phoneNumber;
 
-    public Account(String username, String fullName, String phoneNumber, String email) {
+    public Account(String username, String fullName, String phoneNumber, String email,String profileCover) {
         this.username=username;
         this.email=email;
         this.fullName=fullName;
         this.phoneNumber=phoneNumber;
         this.password="";
-        this.profileCover="";
+        this.profileCover=profileCover;
     }
 
 

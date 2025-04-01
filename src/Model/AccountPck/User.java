@@ -13,8 +13,8 @@ public abstract class User extends Account {
     private ArrayList<Channel> subscriptions;
     private ArrayList<Category> favoriteCategories;
 
-    public User(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories) {
-        super(username, fullName, phoneNumber, email);
+    public User(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories, String profileCover) {
+        super(username, fullName, phoneNumber, email, profileCover);
         this.credit = 0.0;
         this.favoriteCategories = favoriteCategories != null ? favoriteCategories : new ArrayList<>();
         this.playlists = new ArrayList<>();
