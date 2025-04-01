@@ -8,10 +8,11 @@ import java.util.Date;
 public class PremiumUser extends User {
     private Date subscriptionEndDate;
 
-    public PremiumUser(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories) {
-        super(username, fullName, phoneNumber, email, favoriteCategories);
+    public PremiumUser(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories, String profileCover) {
+        super(username, fullName, phoneNumber, email, favoriteCategories, profileCover);
         this.subscriptionEndDate=new Date();
     }
+
 
     public Date getSubscriptionEndDate() {
         return subscriptionEndDate;

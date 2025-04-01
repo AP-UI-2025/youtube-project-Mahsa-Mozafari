@@ -8,8 +8,8 @@ public class RegularUser extends User {
     private final int MAX_CONTENT_PER_PLAYLIST;
     private final int MAX_PLAYLIST;
 
-    public RegularUser(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories) {
-        super(username, fullName, phoneNumber, email, favoriteCategories);
+    public RegularUser(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories, String profileCover) {
+        super(username, fullName, phoneNumber, email, favoriteCategories, profileCover);
         this.MAX_CONTENT_PER_PLAYLIST=10;
         this.MAX_PLAYLIST=3;
     }
