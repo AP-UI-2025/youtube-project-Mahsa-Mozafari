@@ -12,6 +12,10 @@ public class AuthController {
         this.loggedInUser=null;
     }
 
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
+
     public boolean signUp(String username, String password, String fullName, String email, String phoneNumber, String profileCoverLink) {
         return false;
     }

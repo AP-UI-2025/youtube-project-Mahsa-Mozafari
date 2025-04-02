@@ -5,10 +5,11 @@ import Model.Category;
 public abstract class Video extends Content {
     private String videoSubtitle;
 
-    public Video(String title, int contentId, String fileLink, Category category, boolean isExclusive) {
-        super(title, contentId, fileLink, category, isExclusive);
+    public Video(ContentSpecialStatus isExclusive, String title, String description, int duration, Category category, String fileLink, String thumbnail) {
+        super(isExclusive, title, description, duration, category, fileLink, thumbnail);
         this.videoSubtitle="";
     }
+
 
     public String getVideoSubtitle() {
         return videoSubtitle;

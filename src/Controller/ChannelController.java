@@ -1,34 +1,112 @@
 package Controller;
 
+import Model.AccountPck.User;
 import Model.Category;
 import Model.Channel;
-import Model.ContentPck.ContentSpecialStatus;
-import Model.ContentPck.VideoResolution;
+import Model.ContentPck.*;
+import Model.Database;
+import Model.Playlist;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class ChannelController {
+    private Database database;
+    private AuthController authController;
 
-
-    public ArrayList<Channel> createChannel(String channelName, String description, String channelCover) {
-        return null;
+    ChannelController(){
+        this.database=Database.getInstance();
     }
 
-    public void publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
 
+    public boolean createChannel(String channelName, String description, String channelCover) {
+        User loggedInUser= authController.getLoggedInUser();
+        if(loggedInUser==null){
+            return false;
+        }
+        Channel newChannel= new Channel(channelName,description,channelCover,loggedInUser.getFullName());
+        Playlist allContents=new Playlist("allContents");
+        newChannel.getPlaylists().add(allContents);
+        database.getChannels().add(newChannel);
+        return true;
     }
 
-    public void publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution) {
-
+    public boolean publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
+        User loggedInUser = authController.getLoggedInUser();
+        if (loggedInUser == null) {
+            return false;
+        }
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(loggedInUser.getFullName())) {
+                if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
+                    return false;
+                }
+                Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
+                channel.getPlaylists().get(0).getContents().add(newPodcast);
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void publishShortVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String musicReference) {
-
+    public boolean publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
+        User loggedInUser = authController.getLoggedInUser();
+        if (loggedInUser == null) {
+            return false;
+        }
+        for (Channel channel :database.getChannels()) {
+            if (channel.getCreator().equals(loggedInUser.getFullName())) {
+                if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
+                    return false;
+                }
+                NormalVideo newNormalVideo =new NormalVideo(code,title,description,duration,category,fileLink,thumbnail,subtitle,resolution,format);
+                channel.getPlaylists().get(0).getContents().add(newNormalVideo);
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, Date scheduledTime) {
 
+    public boolean publishShortVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail,String subtitle, String musicReference) {
+        if (duration >= 30) {
+            return false;
+        }
+
+        User loggedInUser = authController.getLoggedInUser();
+        if (loggedInUser == null) {
+            return false;
+        }
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(loggedInUser.getFullName())) {
+                if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
+                    return false;
+                }
+                ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail,subtitle,musicReference);
+                channel.getPlaylists().get(0).getContents().add(newShortVideo);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail,String subtitle, Date scheduledTime) {
+        User loggedInUser = authController.getLoggedInUser();
+        if (loggedInUser == null) {
+            return false;
+        }
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(loggedInUser.getFullName())) {
+                if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
+                    return false;
+                }
+                LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail,subtitle, scheduledTime);
+                channel.getPlaylists().get(0).getContents().add(newLiveStream);
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Channel> searchChannel(String searchBox) {

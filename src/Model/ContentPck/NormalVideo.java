@@ -6,11 +6,12 @@ public class NormalVideo extends Video {
     private VideoFormat format;
     private VideoResolution resolution;
 
-    public NormalVideo(String title, int contentId, String fileLink, Category category, boolean isExclusive, VideoResolution resolution, VideoFormat format) {
-        super(title, contentId, fileLink, category, isExclusive);
+    public NormalVideo(ContentSpecialStatus isExclusive, String title, String description, int duration, Category category, String fileLink, String thumbnail, String videoSubtitle, VideoResolution resolution, VideoFormat format) {
+        super(isExclusive, title, description, duration, category, fileLink, thumbnail);
         this.format=format;
         this.resolution=resolution;
     }
+
 
     public VideoFormat getFormat() {
         return format;

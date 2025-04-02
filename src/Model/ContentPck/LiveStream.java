@@ -8,11 +8,12 @@ public class LiveStream extends Video {
     private int viewers;
     private Date scheduledTime;
 
-    public LiveStream(String title, int contentId, String fileLink, Category category, boolean isExclusive) {
-        super(title, contentId, fileLink, category, isExclusive);
-        this.scheduledTime=new Date();
+    public LiveStream(ContentSpecialStatus isExclusive, String title, String description, int duration, Category category, String fileLink, String thumbnail, String videoSubtitle, Date scheduledTime) {
+        super(isExclusive, title, description, duration, category, fileLink, thumbnail);
         this.viewers=0;
+        this.scheduledTime=scheduledTime;
     }
+
 
     public int getViewers() {
         return viewers;

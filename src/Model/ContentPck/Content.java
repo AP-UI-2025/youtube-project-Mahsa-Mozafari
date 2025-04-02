@@ -20,15 +20,15 @@ public abstract class Content{
     private Date publishDate;
     private Category category;
     private ArrayList<Comment> comments;
-    private boolean isExclusive;
+    private ContentSpecialStatus isExclusive;
 
-    public Content(String title, int contentId, String fileLink, Category category,boolean isExclusive ){
+    public Content(ContentSpecialStatus isExclusive ,String title, String description,int duration, Category category,String fileLink,String thumbnail){
         this.contentId=idCounter++;
         this.likes=0;
         this.views=0;
         this.duration=0;
-        this.thumbnail ="";
-        this.description="";
+        this.thumbnail =thumbnail;
+        this.description=description;
         this.fileLink=fileLink;
         this.category=category;
         this.isExclusive=isExclusive;
@@ -106,8 +106,12 @@ public abstract class Content{
         this.duration = duration;
     }
 
-    public void setExclusive(boolean exclusive) {
-        isExclusive = exclusive;
+    public ContentSpecialStatus getIsExclusive() {
+        return isExclusive;
+    }
+
+    public void setIsExclusive(ContentSpecialStatus isExclusive) {
+        this.isExclusive = isExclusive;
     }
 
     public void setFileLink(String fileLink) {

@@ -5,10 +5,11 @@ import Model.Category;
 public class Podcast extends Content {
     private String creator;
 
-    public Podcast(String title, int contentId, String fileLink, Category category, boolean isExclusive, String creator) {
-        super(title, contentId, fileLink, category, isExclusive);
+    public Podcast(ContentSpecialStatus isExclusive, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
+        super(isExclusive, title, description, duration, category, fileLink, thumbnail);
         this.creator=creator;
     }
+
 
     public String getCreator() {
         return creator;
