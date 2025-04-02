@@ -10,11 +10,9 @@ import java.util.Date;
 
 public class ContentController {
     private Database database;
-    private ArrayList<Content> contents;
 
     public ContentController() {
         this.database = Database.getInstance();
-        this.contents=new ArrayList<>();
     }
 
 
@@ -32,7 +30,7 @@ public class ContentController {
     }
 
     public ArrayList<Content> sortContentByLikes() {
-        ArrayList<Content> sortedList = new ArrayList<>(contents);
+        ArrayList<Content> sortedList = new ArrayList<>(database.getContents());
 
         for (int i = 0; i < sortedList.size() - 1; i++) {
             for (int j = 0; j < sortedList.size() - i - 1; j++) {
@@ -48,7 +46,7 @@ public class ContentController {
     }
 
     public ArrayList<Content> sortContentByViews() {
-        ArrayList<Content> sortedList = new ArrayList<>(contents);
+        ArrayList<Content> sortedList = new ArrayList<>(database.getContents());
         for (int i = 0; i < sortedList.size() - 1; i++) {
             for (int j = 0; j < sortedList.size() - i - 1; j++) {
                 if (sortedList.get(j).getViews() < sortedList.get(j + 1).getViews()) {
