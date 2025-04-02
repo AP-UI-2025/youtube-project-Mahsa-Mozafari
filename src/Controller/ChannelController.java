@@ -110,10 +110,19 @@ public class ChannelController {
     }
 
     public ArrayList<Channel> searchChannel(String searchBox) {
-        return null;
+        ArrayList<Channel> result = new ArrayList<>();
+        String searchLower = searchBox.toLowerCase();
+
+        for (Channel c: database.getChannels()) {
+            String channelNameLower = c.getChannelName().toLowerCase();
+            if (channelNameLower.contains(searchLower)) {
+                result.add(c);
+            }
+        }
+        return result;
     }
 
-    public Object[] viewChannel(){
+    public Object[] viewChannelInfo(){
         return null;
     }
 
