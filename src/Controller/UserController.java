@@ -1,14 +1,24 @@
 package Controller;
 
 import Model.AccountPck.PremiumPackage;
+import Model.AccountPck.PremiumUser;
+import Model.AccountPck.RegularUser;
 import Model.AccountPck.User;
 import Model.Channel;
 import Model.ContentPck.Content;
+import Model.Database;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UserController {
+    private Database database;
+    private AuthController authController;
+
+    UserController(){
+        this.database=Database.getInstance();
+    }
 
     public Object[] getUserInfo(){
         return null;
@@ -42,8 +52,35 @@ public class UserController {
         return Double.parseDouble(null);
     }
 
-    public boolean getPremium(PremiumPackage packageType){
-        return false;
+    public boolean buyPremium(PremiumPackage packageType){
+        User loggedInUser= authController.getLoggedInUser();
+        if(loggedInUser==null){
+            return false;
+        }
+
+            if (loggedInUser.getCredit() >=packageType.getPrice()) {
+                loggedInUser.setCredit(loggedInUser.getCredit() - packageType.getPrice());
+                if (loggedInUser instanceof RegularUser) {
+                    PremiumUser premiumUser = new PremiumUser(
+                            loggedInUser.getUsername(),
+                            loggedInUser.getFullName(),
+                            loggedInUser.getPhoneNumber(),
+                            loggedInUser.getEmail(),
+                            loggedInUser.getFavoriteCategories(),
+                            loggedInUser.getProfileCover()
+                    );
+                    premiumUser.setCredit(loggedInUser.getCredit());
+                    premiumUser.setSubscriptionEndDate(new Date(System.currentTimeMillis() + packageType.getDays()));
+                    database.getUsers().remove(loggedInUser);
+                    database.getUsers().add(premiumUser);
+                } else if (loggedInUser instanceof PremiumUser) {
+                    extendSubscription((PremiumUser) loggedInUser, packageType);
+                }
+                return true;
+            }
+            return false;
+        }
+
     }
 
     public ArrayList<Channel> showChannels(){
