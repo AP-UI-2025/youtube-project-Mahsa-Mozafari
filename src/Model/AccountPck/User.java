@@ -2,6 +2,7 @@ package Model.AccountPck;
 
 import Model.Category;
 import Model.Channel;
+import Model.ContentPck.Content;
 import Model.Playlist;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public abstract class User extends Account {
         playlists.add(new Playlist("Favorites"));
         playlists.add(new Playlist("Watch Later"));
     }
+
+    public abstract boolean canCreatePlaylist();
+    public abstract boolean addToPlaylist(Playlist playlist, Content content);
 
 
     public ArrayList<Category> getFavoriteCategories() {

@@ -1,6 +1,8 @@
 package Model.AccountPck;
 
 import Model.Category;
+import Model.ContentPck.Content;
+import Model.Playlist;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,5 +22,15 @@ public class PremiumUser extends User {
 
     public void setSubscriptionEndDate(Date subscriptionEndDate) {
         this.subscriptionEndDate = subscriptionEndDate;
+    }
+
+    @Override
+    public boolean canCreatePlaylist() {
+        return true;
+    }
+
+    @Override
+    public boolean addToPlaylist(Playlist playlist, Content content) {
+        return true;
     }
 }

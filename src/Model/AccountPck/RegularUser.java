@@ -1,6 +1,8 @@
 package Model.AccountPck;
 
 import Model.Category;
+import Model.ContentPck.Content;
+import Model.Playlist;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,21 @@ public class RegularUser extends User {
         return MAX_PLAYLIST;
     }
 
+    @Override
+    public boolean canCreatePlaylist() {
+        if ((getPlaylists().size()-2)>=MAX_PLAYLIST){
+            return false;
+        }
+        return true;
+    }
 
+    @Override
+    public boolean addToPlaylist(Playlist playlist, Content content) {
+        if (playlist.getContents().size() >= MAX_CONTENT_PER_PLAYLIST) {
+            return false;
+        }
+        playlist.getContents().add(content);
+        return true;
+    }
 }
 
