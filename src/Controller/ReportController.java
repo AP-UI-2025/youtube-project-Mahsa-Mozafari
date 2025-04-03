@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AccountPck.Account;
 import Model.AccountPck.User;
 import Model.ContentPck.Content;
 import Model.Database;
@@ -24,10 +25,11 @@ public class ReportController {
     }
 
     public boolean createReport(int reportedContentId, String description){
-        User loggedInUser = authController.getLoggedInUser();
-        if (loggedInUser == null) {
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
             return false;
         }
+        User user= (User) loggedInUser;
 
         Content reportedContent=findContentById(reportedContentId);
         if (reportedContent==null){
@@ -39,14 +41,14 @@ public class ReportController {
             return false;
         }
 
-        Report newReport = new Report(reportedContentId, loggedInUser, description);
+        Report newReport = new Report(reportedContentId, user, description);
         newReport.setReportedUserId(uploader.getUserId());
         database.getReports().add(newReport);
         return true;
 
     }
 
-    private Content findContentById(int contentId){
+    public Content findContentById(int contentId){
         for(Content content: database.getContents()){
             if(content.getContentId()==contentId){
                 return content;

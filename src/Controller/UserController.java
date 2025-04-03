@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.AccountPck.PremiumPackage;
-import Model.AccountPck.PremiumUser;
-import Model.AccountPck.RegularUser;
-import Model.AccountPck.User;
+import Model.AccountPck.*;
 import Model.Channel;
 import Model.ContentPck.Content;
 import Model.Database;
@@ -60,15 +57,22 @@ public class UserController {
     }
 
     public void increaseCredit(double amount){
-       User user=authController.getLoggedInUser();
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return;
+        }
+        User user= (User) loggedInUser;
        if(user!=null){
            user.setCredit(user.getCredit()+amount);
        }
     }
 
     public boolean buyPremium(PremiumPackage packageType) {
-        User user = authController.getLoggedInUser();
-        if (user == null) return false;
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return false;
+        }
+        User user= (User) loggedInUser;
 
         double packageCost = packageType.getPrice();
         if (user.getCredit() >= packageCost) {

@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AccountPck.Account;
 import Model.AccountPck.PremiumPackage;
 import Model.AccountPck.PremiumUser;
 import Model.AccountPck.User;
@@ -27,7 +28,11 @@ public class PremiumController {
     }
 
     public void extendSubscription(PremiumPackage packageType){
-        User user = authController.getLoggedInUser();
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return;
+        }
+        User user= (User) loggedInUser;
         if (user instanceof PremiumUser) {
             PremiumUser premiumUser = (PremiumUser) user;
             Date newEndDate = new Date(premiumUser.getSubscriptionEndDate().getTime() + packageType.getDays());

@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AccountPck.Account;
 import Model.AccountPck.User;
 import Model.Category;
 import Model.Channel;
@@ -28,10 +29,11 @@ public class ChannelController {
 
 
     public boolean createChannel(String channelName, String description, String channelCover) {
-        User loggedInUser= authController.getLoggedInUser();
-        if(loggedInUser==null){
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
             return false;
         }
+        User user= (User) loggedInUser;
         Channel newChannel= new Channel(channelName,description,channelCover,loggedInUser.getFullName());
         Playlist allContents=new Playlist("allContents");
         newChannel.getPlaylists().add(allContents);
@@ -40,17 +42,18 @@ public class ChannelController {
     }
 
     public boolean publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
-        User loggedInUser = authController.getLoggedInUser();
-        if (loggedInUser == null) {
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
             return false;
         }
+        User user= (User) loggedInUser;
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
                     return false;
                 }
                 Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
-                newPodcast.setUploader(loggedInUser);
+                newPodcast.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newPodcast);
                 return true;
             }
@@ -60,17 +63,18 @@ public class ChannelController {
     }
 
     public boolean publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
-        User loggedInUser = authController.getLoggedInUser();
-        if (loggedInUser == null) {
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
             return false;
         }
+        User user= (User) loggedInUser;
         for (Channel channel :database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
                     return false;
                 }
                 NormalVideo newNormalVideo =new NormalVideo(code,title,description,duration,category,fileLink,thumbnail,subtitle,resolution,format);
-                newNormalVideo.setUploader(loggedInUser);
+                newNormalVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newNormalVideo);
                 return true;
             }
@@ -84,10 +88,11 @@ public class ChannelController {
             return false;
         }
 
-        User loggedInUser = authController.getLoggedInUser();
-        if (loggedInUser == null) {
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
             return false;
         }
+        User user= (User) loggedInUser;
 
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
@@ -95,7 +100,7 @@ public class ChannelController {
                     return false;
                 }
                 ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail,subtitle,musicReference);
-                newShortVideo.setUploader(loggedInUser);
+                newShortVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newShortVideo);
                 return true;
             }
@@ -104,17 +109,18 @@ public class ChannelController {
     }
 
     public boolean publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail,String subtitle, Date scheduledTime) {
-        User loggedInUser = authController.getLoggedInUser();
-        if (loggedInUser == null) {
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
             return false;
         }
+        User user= (User) loggedInUser;
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
                     return false;
                 }
                 LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail,subtitle, scheduledTime);
-                newLiveStream.setUploader(loggedInUser);
+                newLiveStream.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newLiveStream);
                 return true;
             }

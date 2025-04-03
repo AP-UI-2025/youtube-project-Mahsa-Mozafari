@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.AccountPck.Account;
+import Model.AccountPck.Admin;
 import Model.AccountPck.User;
 import Model.Channel;
 import Model.ContentPck.Content;
@@ -57,25 +59,101 @@ public class AdminController {
         return null;
     }
 
-    public void confirmReport(int reportedContentId){
+    public boolean confirmReport(int reportedContentId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return false;
+        }
+
+        Report report = findReport(reportedContentId);
+        if (report == null) {
+            return false;
+        }
+        boolean contentDeleted = deleteReportedContent(reportedContentId);
+        if (!contentDeleted) {
+            return false;
+        }
+        boolean userBanned = banUser(report.getReportedUserId());
+
+        return userBanned;
 
     }
 
-    public void rejectReport(int reportedContentId){
-
+    public boolean rejectReport(int reportedContentId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return false;
+        }
+        Report report=findReport(reportedContentId);
+        if(report==null){
+            return false;
+        }
+        database.getReports().remove(report);
+        return true;
     }
 
     public boolean unbanUser(int reportedUserId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return false;
+        }
+
+        User userToUnban = findUserById(reportedUserId);
+        if (userToUnban != null) {
+            userToUnban.setBanned(false);
+            return true;
+        }
         return false;
     }
 
     public boolean banUser(int reportedUserId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return false;
+        }
+
+        User userToBan = findUserById(reportedUserId);
+        if (userToBan != null) {
+            userToBan.setBanned(true);
+            return true;
+        }
         return false;
     }
 
     public boolean deleteReportedContent(int reportedContentId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return false;
+        }
+
+        Content contentToDelete = reportController.findContentById(reportedContentId);
+        if (contentToDelete != null) {
+            database.getContents().remove(contentToDelete);
+            return true;
+        }
         return false;
+    }
+    private User findUserById(int userId) {
+        for (User user : database.getUsers()) {
+            if (user.getUserId() == userId) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private Report findReport(int contentId){
+        for (Report report: database.getReports()){
+            if (report.getReportedContentId()==contentId) {
+                return report;
+            }
+        }
+        return null;
     }
 
 }
+
+
+
+
 

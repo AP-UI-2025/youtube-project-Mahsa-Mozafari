@@ -1,12 +1,13 @@
 package Controller;
 
+import Model.AccountPck.Account;
 import Model.AccountPck.User;
 import Model.Database;
 
 public class AuthController {
     private static AuthController authController;
     private Database database;
-    private User loggedInUser;
+    private Account loggedInUser;
 
     private AuthController() {
         this.database = Database.getInstance();
@@ -19,7 +20,7 @@ public class AuthController {
         return authController;
     }
 
-    public User getLoggedInUser() {
+    public Account getLoggedInUser() {
         return loggedInUser;
     }
 
@@ -28,9 +29,12 @@ public class AuthController {
     }
 
     public boolean login(String username, String password) {
-        User user=searchForUsername(username);
-        if (user!=null && user.getPassword().equals(password)){
-            loggedInUser=user;
+        Account account = searchForUsername(username);
+        if (account != null && account.getPassword().equals(password)) {
+            if (account instanceof User && ((User) account).isBanned()) {
+                return false;
+            }
+            loggedInUser = account;
             return true;
         }
         return false;
@@ -40,7 +44,7 @@ public class AuthController {
         loggedInUser=null;
     }
 
-    public User searchForUsername(String username){
+    public Account searchForUsername(String username){
         for (User user : database.getUsers()){
             if(user.getUsername().equals(username)){
                 return user;

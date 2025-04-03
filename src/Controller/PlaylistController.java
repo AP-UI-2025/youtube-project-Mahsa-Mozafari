@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AccountPck.Account;
 import Model.AccountPck.User;
 import Model.ContentPck.Content;
 import Model.Database;
@@ -23,8 +24,11 @@ public class PlaylistController {
     }
 
     public boolean createPlaylistForUser(String playlistName){
-        User user = authController.getLoggedInUser();
-        if (user == null) return false;
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return false;
+        }
+        User user= (User) loggedInUser;
 
         if (!user.canCreatePlaylist()) {
             return false;
@@ -42,8 +46,11 @@ public class PlaylistController {
 
     public boolean addToPlaylist(int playlistId, int contentId){
 
-        User user = authController.getLoggedInUser();
-        if (user == null) return false;
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return false;
+        }
+        User user= (User) loggedInUser;
 
         Playlist playlist = findPlaylist(playlistId);
         Content content = findContent(contentId);
@@ -54,8 +61,11 @@ public class PlaylistController {
     }
 
     public Playlist findPlaylist(int playlistId) {
-        User user = authController.getLoggedInUser();
-        if (user == null) return null;
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return null;
+        }
+        User user= (User) loggedInUser;
 
         for (Playlist playlist : user.getPlaylists()) {
             if (playlist.getPlaylistId() == playlistId) {

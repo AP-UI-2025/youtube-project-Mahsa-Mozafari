@@ -15,6 +15,7 @@ public abstract class User extends Account {
     private ArrayList<Category> favoriteCategories;
     private int userId;
     private static int idCounter=1;
+    private boolean banned;
 
     public User(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories, String profileCover) {
         super(username, fullName, phoneNumber, email, profileCover);
@@ -31,6 +32,9 @@ public abstract class User extends Account {
     public abstract boolean canCreatePlaylist();
     public abstract boolean addToPlaylist(Playlist playlist, Content content);
 
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
 
     public ArrayList<Category> getFavoriteCategories() {
         return favoriteCategories;
@@ -78,6 +82,10 @@ public abstract class User extends Account {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean isBanned(){
+        return this.banned;
     }
 }
 
