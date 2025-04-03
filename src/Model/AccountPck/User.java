@@ -13,6 +13,8 @@ public abstract class User extends Account {
     private Channel channel;
     private ArrayList<Channel> subscriptions;
     private ArrayList<Category> favoriteCategories;
+    private int userId;
+    private static int idCounter=1;
 
     public User(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories, String profileCover) {
         super(username, fullName, phoneNumber, email, profileCover);
@@ -21,6 +23,7 @@ public abstract class User extends Account {
         this.playlists = new ArrayList<>();
         this.subscriptions = new ArrayList<>();
         this.channel = null;
+        this.userId=idCounter++;
         playlists.add(new Playlist("Favorites"));
         playlists.add(new Playlist("Watch Later"));
     }
@@ -69,5 +72,12 @@ public abstract class User extends Account {
         this.channel = channel;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }
 

@@ -50,11 +50,13 @@ public class ChannelController {
                     return false;
                 }
                 Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
+                newPodcast.setUploader(loggedInUser);
                 channel.getPlaylists().get(0).getContents().add(newPodcast);
                 return true;
             }
         }
         return false;
+
     }
 
     public boolean publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
@@ -68,6 +70,7 @@ public class ChannelController {
                     return false;
                 }
                 NormalVideo newNormalVideo =new NormalVideo(code,title,description,duration,category,fileLink,thumbnail,subtitle,resolution,format);
+                newNormalVideo.setUploader(loggedInUser);
                 channel.getPlaylists().get(0).getContents().add(newNormalVideo);
                 return true;
             }
@@ -92,6 +95,7 @@ public class ChannelController {
                     return false;
                 }
                 ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail,subtitle,musicReference);
+                newShortVideo.setUploader(loggedInUser);
                 channel.getPlaylists().get(0).getContents().add(newShortVideo);
                 return true;
             }
@@ -110,6 +114,7 @@ public class ChannelController {
                     return false;
                 }
                 LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail,subtitle, scheduledTime);
+                newLiveStream.setUploader(loggedInUser);
                 channel.getPlaylists().get(0).getContents().add(newLiveStream);
                 return true;
             }

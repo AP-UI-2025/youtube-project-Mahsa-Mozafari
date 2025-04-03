@@ -1,5 +1,6 @@
 package Model.ContentPck;
 
+import Model.AccountPck.User;
 import Model.Category;
 import Model.Comment;
 
@@ -21,6 +22,7 @@ public abstract class Content{
     private Category category;
     private ArrayList<Comment> comments;
     private ContentSpecialStatus isExclusive;
+    private User uploader;
 
     public Content(ContentSpecialStatus isExclusive ,String title, String description,int duration, Category category,String fileLink,String thumbnail){
         this.contentId=idCounter++;
@@ -34,7 +36,16 @@ public abstract class Content{
         this.isExclusive=isExclusive;
         this.publishDate=new Date();
         this.comments=new ArrayList<>();
+        this.uploader=null;
 
+    }
+
+    public void setUploader(User uploader) {
+        this.uploader = uploader;
+    }
+
+    public User getUploader() {
+        return uploader;
     }
 
     public int getDuration() {
