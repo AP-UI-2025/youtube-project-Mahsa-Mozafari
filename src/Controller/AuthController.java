@@ -4,12 +4,19 @@ import Model.AccountPck.User;
 import Model.Database;
 
 public class AuthController {
+    private static AuthController authController;
     private Database database;
     private User loggedInUser;
 
-    public AuthController() {
+    private AuthController() {
         this.database = Database.getInstance();
         this.loggedInUser=null;
+    }
+    public static AuthController getInstance(){
+        if (authController==null){
+            authController=new AuthController();
+        }
+        return authController;
     }
 
     public User getLoggedInUser() {

@@ -11,11 +11,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ChannelController {
+    private static ChannelController  channelController;
     private Database database;
     private AuthController authController;
 
-    ChannelController(){
+    private ChannelController(){
         this.database=Database.getInstance();
+        this.authController=AuthController.getInstance();
+    }
+    public static ChannelController getInstance(){
+        if (channelController==null){
+            channelController=new ChannelController();
+        }
+        return channelController;
     }
 
 
