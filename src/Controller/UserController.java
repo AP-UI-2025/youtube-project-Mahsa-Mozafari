@@ -9,15 +9,26 @@ import Model.ContentPck.Content;
 import Model.Database;
 
 
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class UserController {
+    private static UserController userController;
     private Database database;
     private AuthController authController;
+    private PremiumController premiumController;
 
-    UserController(){
+    private UserController(){
         this.database=Database.getInstance();
+        this.premiumController=PremiumController.getInstance();
+    }
+
+    public static UserController getInstance(){
+        if (userController==null){
+            userController=new UserController();
+        }
+        return userController;
     }
 
     public Object[] getUserInfo(){
@@ -48,40 +59,41 @@ public class UserController {
         return null;
     }
 
-    public double increaseCredit(double amount){
-        return Double.parseDouble(null);
+    public void increaseCredit(double amount){
+       User user=authController.getLoggedInUser();
+       if(user!=null){
+           user.setCredit(user.getCredit()+amount);
+       }
     }
 
-    public boolean buyPremium(PremiumPackage packageType){
-        User loggedInUser= authController.getLoggedInUser();
-        if(loggedInUser==null){
-            return false;
-        }
+    public boolean buyPremium(PremiumPackage packageType) {
+        User user = authController.getLoggedInUser();
+        if (user == null) return false;
 
-            if (loggedInUser.getCredit() >=packageType.getPrice()) {
-                loggedInUser.setCredit(loggedInUser.getCredit() - packageType.getPrice());
-                if (loggedInUser instanceof RegularUser) {
-                    PremiumUser premiumUser = new PremiumUser(
-                            loggedInUser.getUsername(),
-                            loggedInUser.getFullName(),
-                            loggedInUser.getPhoneNumber(),
-                            loggedInUser.getEmail(),
-                            loggedInUser.getFavoriteCategories(),
-                            loggedInUser.getProfileCover()
-                    );
-                    premiumUser.setCredit(loggedInUser.getCredit());
-                    premiumUser.setSubscriptionEndDate(new Date(System.currentTimeMillis() + packageType.getDays()));
-                    database.getUsers().remove(loggedInUser);
-                    database.getUsers().add(premiumUser);
-                } else if (loggedInUser instanceof PremiumUser) {
-                    extendSubscription((PremiumUser) loggedInUser, packageType);
-                }
-                return true;
+        double packageCost = packageType.getPrice();
+        if (user.getCredit() >= packageCost) {
+            user.setCredit(user.getCredit() - packageCost);
+            if (user instanceof RegularUser) {
+                PremiumUser premiumUser = new PremiumUser(
+                        user.getUsername(),
+                        user.getFullName(),
+                        user.getPhoneNumber(),
+                        user.getEmail(),
+                        user.getFavoriteCategories(),
+                        user.getProfileCover()
+                );
+                premiumUser.setCredit(user.getCredit());
+                premiumUser.setSubscriptionEndDate(new Date(System.currentTimeMillis() + packageType.getDays()));
+                database.getUsers().remove(user);
+                database.getUsers().add(premiumUser);
+            } else if (user instanceof PremiumUser) {
+                premiumController.extendSubscription(packageType);
             }
-            return false;
+            return true;
         }
-
+        return false;
     }
+
 
     public ArrayList<Channel> showChannels(){
         return null;
