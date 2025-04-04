@@ -2,7 +2,7 @@ package View;
 
 public class UserPannel {
     private boolean signupCompleted=false;
-    private boolean isLogin =false;
+    private boolean isLoggedIn =false;
     private AuthView authView;
     private UserView userView;
     private ChannelView channelView;
@@ -18,6 +18,11 @@ public class UserPannel {
 
         if (signupCompleted && !command.equals("FavouriteCategories")){
             System.out.println("You must set your favorite categories first");
+            return;
+        }
+
+        if (!isLoggedIn && !command.equals("Signup") && !command.equals("FavouriteCategories")) {
+            System.out.println("You must log in first.");
             return;
         }
 
@@ -40,12 +45,12 @@ public class UserPannel {
                 break;
             case "Logout":
                 authView.handleLogout();
-                isLogin=false;
+                isLoggedIn =false;
 
                 break;
             case "Login":
                 if (authView.handleLogin(parts)){
-                    isLogin = true;
+                    isLoggedIn = true;
                     System.out.println("Login successfully");
         }
                 break;
