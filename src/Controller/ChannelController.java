@@ -145,20 +145,17 @@ public class ChannelController {
         return null;
     }
 
-    public ArrayList<Content> showChannelContents(int channelId, String channelName){
+    public ArrayList<Content> showChannel(int channelId){
         Channel channel = findChannelById(channelId);
 
         if (channel == null) {
-            return null;
-        }
-        if (!channel.getChannelName().equalsIgnoreCase(channelName)){
             return null;
         }
 
         return getChannelContents(channel);
     }
 
-    private Channel findChannelById(int channelId) {
+    public Channel findChannelById(int channelId) {
             for (Channel channel :database.getChannels()) {
                 if (channel.getChannelId() == channelId) {
                     return channel;

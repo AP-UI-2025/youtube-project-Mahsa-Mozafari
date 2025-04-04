@@ -5,7 +5,7 @@ import Model.Category;
 import Model.Channel;
 import Model.ContentPck.Content;
 import Model.Database;
-
+import Model.Playlist;
 
 
 import java.util.ArrayList;
@@ -16,11 +16,13 @@ public class UserController {
     private Database database;
     private AuthController authController;
     private PremiumController premiumController;
+    private ChannelController channelController;
 
     private UserController(){
         this.database=Database.getInstance();
         this.premiumController=PremiumController.getInstance();
         this.authController=AuthController.getInstance();
+        this.channelController=ChannelController.getInstance();
     }
 
     public static UserController getInstance(){
@@ -34,29 +36,132 @@ public class UserController {
         return null;
     }
 
-    public User editUserName(String newValue){
-        return null;
+    public boolean editUserName(String newValue){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
+
+        for (User user:database.getUsers()){
+            if(user.getUsername().equalsIgnoreCase(newValue))
+                return false;
+        }
+        loggedInUser.setUsername(newValue);
+        return true;
+
     }
 
-    public User editUserPassword(String newValue){
-        return null;
+    public boolean editUserPassword(String newValue){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
+
+        for (User user:database.getUsers()){
+            if(user.getPassword().equalsIgnoreCase(newValue))
+                return false;
+        }
+        loggedInUser.setPassword(newValue);
+        return true;
+
     }
 
-    public void subscribe(int channelId){
+    public boolean subscribe(int channelId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
+
+        User user = (User) loggedInUser;
+
+        Channel channel = channelController.findChannelById(channelId);
+        if (channel == null) {
+            return false;
+        }
+        if (user.getSubscriptions().contains(channel)) {
+            return false;
+        }
+
+        user.getSubscriptions().add(channel);
+        channel.getSubscribers().add(user);
+        return true;
 
     }
 
-    public void unsubscribe(int channelId){
+    public boolean unsubscribe(int channelId){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
+
+        User user = (User) loggedInUser;
+
+        Channel channel = channelController.findChannelById(channelId);
+        if (channel == null) {
+            return false;
+        }
+        if (!user.getSubscriptions().contains(channel)) {
+            return false;
+        }
+
+        user.getSubscriptions().remove(channel);
+        channel.getSubscribers().remove(user);
+        return true;
 
     }
 
     public ArrayList<Content> showChannelContent(){
-        return null;
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return null;
+        }
+        User user = (User) loggedInUser;
+        ArrayList<Content> userContents = new ArrayList<>();
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                userContents.addAll(getChannelContents(channel));
+            }
+        }
+
+        return userContents;
     }
 
-    public ArrayList<User> showChannelSubscribers(){
-        return null;
+    private ArrayList<Content> getChannelContents(Channel channel) {
+        ArrayList<Content> contents = new ArrayList<>();
+        for (Playlist playlist : channel.getPlaylists()) {
+            contents.addAll(playlist.getContents());
+        }
+        return contents;
     }
+
+    public int showChannelSubscribers(){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return 0;
+        }
+
+        User user = (User) loggedInUser;
+        int totalSubscribers = 0;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                totalSubscribers += channel.getSubscribers().size();
+            }
+        }
+
+        return totalSubscribers;
+    }
+
+    public ArrayList<Channel> showSubscriptions() {
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return null;
+        }
+
+        User user = (User) loggedInUser;
+        return user.getSubscriptions();
+    }
+
 
     public void increaseCredit(double amount){
         Account loggedInUser= authController.getLoggedInUser();
@@ -101,16 +206,38 @@ public class UserController {
     }
 
 
-    public ArrayList<Channel> showChannels(){
-        return null;
+    public boolean editChannelName(String newName){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
+
+        User user = (User) loggedInUser;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                channel.setChannelName(newName);
+                return true;
+            }
+        }
+        return false;
     }
 
-    public Channel editChannelName(String newName){
-        return null;
-    }
+    public boolean editChannelDescription(String newDescription){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
 
-    public Channel editChannelDescription(String newDescription){
-        return null;
+        User user = (User) loggedInUser;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                channel.setDescription(newDescription);
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Content> getSuggestions() {
