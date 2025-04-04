@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.AccountPck.Account;
+import Model.AccountPck.RegularUser;
 import Model.AccountPck.User;
 import Model.Database;
 
@@ -8,6 +9,7 @@ public class AuthController {
     private static AuthController authController;
     private Database database;
     private Account loggedInUser;
+    private RegularUser signUpUser;
 
     private AuthController() {
         this.database = Database.getInstance();
@@ -24,8 +26,50 @@ public class AuthController {
         return loggedInUser;
     }
 
-    public boolean signUp(String username, String password, String fullName, String email, String phoneNumber, String profileCoverLink) {
-        return false;
+    public void setLoggedInUser(Account loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
+
+    public RegularUser getSignUpUser() {
+        return signUpUser;
+    }
+
+    public void setSignUpUser(RegularUser signUpUser) {
+        this.signUpUser = signUpUser;
+    }
+
+    public String signUp(String username, String password, String fullName, String email, String phoneNumber, String profileCoverLink) {
+        if (searchForUsername(username) != null) {
+            return "duplicate_username";
+        }
+
+        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            return "invalid_email";
+        }
+
+        if (!phoneNumber.matches("^(\\+98|0)?9\\d{9}$")) {
+            return "invalid_phone";
+        }
+
+        if (!password.matches(".{8,}")) {
+            return "invalid_password";
+        }
+
+        boolean hasUpper = password.matches(".*[A-Z].*");
+        boolean hasLower = password.matches(".*[a-z].*");
+        boolean hasDigit = password.matches(".*\\d.*");
+        boolean hasSymbol = password.matches(".*[@#$%^&+=!].*");
+
+        if (!(hasUpper && hasLower && hasDigit && hasSymbol)) {
+            return "weak_password";
+        }
+
+        signUpUser = new RegularUser(username, fullName, phoneNumber, email, profileCoverLink);
+        signUpUser.setPassword(password);
+
+        database.getUsers().add(signUpUser);
+
+        return "success";
     }
 
     public boolean login(String username, String password) {

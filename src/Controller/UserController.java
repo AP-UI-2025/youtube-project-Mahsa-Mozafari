@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.AccountPck.*;
+import Model.Category;
 import Model.Channel;
 import Model.ContentPck.Content;
 import Model.Database;
@@ -19,6 +20,7 @@ public class UserController {
     private UserController(){
         this.database=Database.getInstance();
         this.premiumController=PremiumController.getInstance();
+        this.authController=AuthController.getInstance();
     }
 
     public static UserController getInstance(){
@@ -115,7 +117,49 @@ public class UserController {
         return null;
     }
 
-    public boolean getFavoriteCategories(String categoryName){
+    public boolean setFavoriteCategories(String input, User user) {
+
+        RegularUser signUpUser= authController.getSignUpUser();
+
+        if (signUpUser==null){
+            return false;
+        }
+
+
+        String[] parts = input.split(",");
+        ArrayList<Category> selected = new ArrayList<>();
+
+        for (String part : parts) {
+            String trimmed = part.trim().toUpperCase();
+
+            for (Category c : Category.values()) {
+                if (c.name().equals(trimmed)) {
+                    boolean alreadyExists = false;
+                    for (Category existing : selected) {
+                        if (existing.name().equals(trimmed)) {
+                            alreadyExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyExists) {
+                        selected.add(c);
+                    }
+
+                    break;
+                }
+            }
+
+            if (selected.size() > 4) {
+                break;
+            }
+        }
+
+        if (selected.size() == 4) {
+            signUpUser.setFavoriteCategories(selected);
+            return true;
+        }
+
         return false;
     }
 
