@@ -3,6 +3,8 @@ package Controller;
 import Model.AccountPck.Account;
 import Model.AccountPck.User;
 import Model.Category;
+import Model.ContentPck.Podcast;
+import Model.ContentPck.Video;
 import Model.Database;
 import Model.ContentPck.Content;
 
@@ -72,8 +74,26 @@ public class ContentController {
     }
 
 
-    public ArrayList<Content> filterByContentType(){
-        return null;
+    public ArrayList<Content> filterByVideo(){
+        ArrayList<Content> result = new ArrayList<>();
+        for (Content content :database.getContents()) {
+            if (content instanceof Video) {
+                result.add(content);
+            }
+        }
+        return result;
+
+    }
+
+    public ArrayList<Content> filterByPodcast(){
+        ArrayList<Content> result = new ArrayList<>();
+        for (Content content : database.getContents()) {
+            if (content instanceof Podcast) {
+                result.add(content);
+            }
+        }
+        return result;
+
     }
 
     public ArrayList<Content> filterByCategory(Category category) {
