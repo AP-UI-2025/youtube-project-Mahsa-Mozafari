@@ -10,10 +10,12 @@ public class ReportController {
     private static ReportController reportController;
     private AuthController authController;
     private Database database;
+    private ContentController contentController;
 
     private ReportController(){
         this.authController=AuthController.getInstance();
         this.database=Database.getInstance();
+        this.contentController=ContentController.getInstance();
 
     }
 
@@ -31,7 +33,7 @@ public class ReportController {
         }
         User user= (User) loggedInUser;
 
-        Content reportedContent=findContentById(reportedContentId);
+        Content reportedContent=contentController.findContentById(reportedContentId);
         if (reportedContent==null){
             return false;
         }
@@ -48,12 +50,5 @@ public class ReportController {
 
     }
 
-    public Content findContentById(int contentId){
-        for(Content content: database.getContents()){
-            if(content.getContentId()==contentId){
-                return content;
-            }
-        }
-        return null;
-    }
+
 }

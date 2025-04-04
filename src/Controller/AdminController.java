@@ -15,12 +15,12 @@ public class AdminController {
     private static AdminController adminController;
     private Database database;
     private AuthController authController;
-    private ReportController reportController;
+    private ContentController contentController;
 
     private AdminController(){
         this.database=Database.getInstance();
         this.authController=AuthController.getInstance();
-        this.reportController=ReportController.getInstance();
+        this.contentController=ContentController.getInstance();
 
     }
 
@@ -126,7 +126,7 @@ public class AdminController {
             return false;
         }
 
-        Content contentToDelete = reportController.findContentById(reportedContentId);
+        Content contentToDelete = contentController.findContentById(reportedContentId);
         if (contentToDelete != null) {
             database.getContents().remove(contentToDelete);
             return true;

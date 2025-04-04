@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.AccountPck.Account;
+import Model.AccountPck.User;
 import Model.Category;
 import Model.Database;
 import Model.ContentPck.Content;
@@ -11,6 +13,7 @@ import java.util.Date;
 public class ContentController {
     private static ContentController contentController;
     private Database database;
+    private AuthController authController;
 
     public static ContentController getInstance(){
         if (contentController==null){
@@ -21,6 +24,7 @@ public class ContentController {
 
     public ContentController() {
         this.database = Database.getInstance();
+        this.authController=AuthController.getInstance();
     }
 
 
@@ -83,15 +87,42 @@ public class ContentController {
     }
 
 
-    public ArrayList<Content> filterByDate(Date start, Date end){
-        return null;
+    public void playContent(int contentId){
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+           return ;
+        }
+        Content content = findContentById(contentId);
+        if (content != null) {
+            content.setViews(content.getViews() + 1);
+        }
+
     }
 
-    public Content playContent(int contentId){
-        return null;
+    public void likeOrDislike(int contentId){
+        Account loggedInUser= authController.getLoggedInUser();
+        if(!(loggedInUser instanceof User)){
+            return ;
+        }
+        User user= (User) loggedInUser;
+        Content content = findContentById(contentId);
+        if (content != null) {
+            if (user.getLikedContents().contains(content)) {
+                content.setLikes(content.getLikes() - 1);
+                user.getLikedContents().remove(content);
+            } else {
+                content.setLikes(content.getLikes() + 1);
+               user.getLikedContents().add(content);
+            }
+        }
     }
 
-    public Content likeOrDislike(int contentId){
+    public Content findContentById(int contentId){
+        for(Content content: database.getContents()){
+            if(content.getContentId()==contentId){
+                return content;
+            }
+        }
         return null;
     }
 

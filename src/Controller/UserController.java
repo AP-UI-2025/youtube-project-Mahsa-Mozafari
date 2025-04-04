@@ -171,13 +171,6 @@ public class UserController {
         return suggestions;
     }
 
-
-
-
-
-
-
-
     public boolean setFavoriteCategories(String input) {
 
         RegularUser signUpUser= authController.getSignUpUser();
