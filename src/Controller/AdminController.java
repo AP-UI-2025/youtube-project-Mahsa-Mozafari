@@ -72,7 +72,7 @@ public class AdminController {
     }
 
     public boolean confirmReport(int reportedContentId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
             return false;
         }
@@ -92,7 +92,7 @@ public class AdminController {
     }
 
     public boolean rejectReport(int reportedContentId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
             return false;
         }
@@ -105,7 +105,7 @@ public class AdminController {
     }
 
     public boolean unbanUser(int reportedUserId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
             return false;
         }
@@ -119,7 +119,7 @@ public class AdminController {
     }
 
     public boolean banUser(int reportedUserId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
             return false;
         }
@@ -133,12 +133,12 @@ public class AdminController {
     }
 
     public boolean deleteReportedContent(int reportedContentId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
             return false;
         }
 
-        Content contentToDelete = contentController.findContentById(reportedContentId);
+        Content contentToDelete = getContentController().findContentById(reportedContentId);
         if (contentToDelete != null) {
             database.getContents().remove(contentToDelete);
             return true;

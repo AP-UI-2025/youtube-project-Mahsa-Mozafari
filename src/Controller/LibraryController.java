@@ -33,7 +33,7 @@ public class LibraryController {
     }
 
     public ArrayList<Channel> showSubscriptions() {
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return null;
         }
@@ -47,7 +47,7 @@ public class LibraryController {
     }
 
     public ArrayList<Content> showLikedPlaylistContents() {
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return null;
         }

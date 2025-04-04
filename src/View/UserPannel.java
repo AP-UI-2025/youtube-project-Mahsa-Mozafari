@@ -5,10 +5,12 @@ public class UserPannel {
     private boolean isLogin =false;
     private AuthView authView;
     private UserView userView;
+    private ChannelView channelView;
 
     public UserPannel(){
         this.userView=new UserView();
         this.authView=new AuthView();
+        this.channelView=new ChannelView();
     }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
@@ -49,7 +51,7 @@ public class UserPannel {
                 break;
 
             case "CreateChannel":
-                channelView.handleLogin(parts);
+                channelView.handleCreateChannel(parts);
                 break;
             default:
                 System.out.println("invalid command");

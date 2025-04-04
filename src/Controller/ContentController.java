@@ -123,7 +123,7 @@ public class ContentController {
 
 
         public void playContent(int contentId) {
-            Account loggedInUser = authController.getLoggedInUser();
+            Account loggedInUser = getAuthController().getLoggedInUser();
             if (!(loggedInUser instanceof User)) {
                 return;
             }
@@ -133,7 +133,7 @@ public class ContentController {
 
             if (content != null) {
                 content.setViews(content.getViews() + 1);
-                Playlist watchLater = playlistController.findPlaylistByName(user, "Watch Later");
+                Playlist watchLater = getPlaylistController().findPlaylistByName(user, "Watch Later");
                 if (watchLater != null && !watchLater.getContents().contains(content)) {
                     watchLater.getContents().add(content);
                 }
@@ -142,7 +142,7 @@ public class ContentController {
 
 
     public void likeContent(int contentId) {
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return;
         }
@@ -151,7 +151,7 @@ public class ContentController {
         Content content = findContentById(contentId);
 
         if (content != null) {
-            Playlist likedPlaylist = playlistController.findPlaylistByName(user, "Liked");
+            Playlist likedPlaylist = getPlaylistController().findPlaylistByName(user, "Liked");
 
             if (!user.getLikedContents().contains(content)) {
                 content.setLikes(content.getLikes() + 1);
@@ -165,7 +165,7 @@ public class ContentController {
     }
 
     public void dislikeContent(int contentId) {
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return;
         }
@@ -174,7 +174,7 @@ public class ContentController {
         Content content = findContentById(contentId);
 
         if (content != null) {
-            Playlist likedPlaylist = playlistController.findPlaylistByName(user, "Liked");
+            Playlist likedPlaylist = getPlaylistController().findPlaylistByName(user, "Liked");
 
             if (user.getLikedContents().contains(content)) {
                 content.setLikes(content.getLikes() - 1);

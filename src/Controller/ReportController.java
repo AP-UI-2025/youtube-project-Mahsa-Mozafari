@@ -38,13 +38,13 @@ public class ReportController {
     }
 
     public boolean createReport(int reportedContentId, String description){
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
         User user= (User) loggedInUser;
 
-        Content reportedContent=contentController.findContentById(reportedContentId);
+        Content reportedContent=getContentController().findContentById(reportedContentId);
         if (reportedContent==null){
             return false;
         }

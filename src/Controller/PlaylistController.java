@@ -31,7 +31,7 @@ public class PlaylistController {
     }
 
     public boolean createPlaylistForUser(String playlistName){
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -47,7 +47,7 @@ public class PlaylistController {
     }
 
     public boolean createPlaylistForChannel(String playlistName){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
@@ -72,7 +72,7 @@ public class PlaylistController {
 
     public boolean addToPlaylist(int playlistId, int contentId){
 
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -87,7 +87,7 @@ public class PlaylistController {
     }
 
     public Playlist findPlaylist(int playlistId) {
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return null;
         }

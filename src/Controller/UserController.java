@@ -55,7 +55,7 @@ public class UserController {
     }
 
     public boolean editUserName(String newValue){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
@@ -70,7 +70,7 @@ public class UserController {
     }
 
     public boolean editUserPassword(String newValue){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
@@ -153,7 +153,7 @@ public class UserController {
     }
 
     public int showChannelSubscribers(){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return 0;
         }
@@ -171,7 +171,7 @@ public class UserController {
     }
 
     public void increaseCredit(double amount){
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return;
         }
@@ -214,7 +214,7 @@ public class UserController {
 
 
     public boolean editChannelName(String newName){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
@@ -231,7 +231,7 @@ public class UserController {
     }
 
     public boolean editChannelDescription(String newDescription){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
@@ -248,7 +248,7 @@ public class UserController {
     }
 
     public ArrayList<Content> getSuggestions() {
-        Account account = authController.getLoggedInUser();
+        Account account = getAuthController().getLoggedInUser();
         if (!(account instanceof User)) {
             return new ArrayList<>();
         }

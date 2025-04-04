@@ -34,21 +34,24 @@ public class ChannelController {
     }
 
 
-    public boolean createChannel(String channelName, String description, String channelCover) {
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String createChannel(String channelName, String description, String channelCover) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can create channels.";
         }
-        User user= (User) loggedInUser;
-        Channel newChannel= new Channel(channelName,description,channelCover,loggedInUser.getFullName());
-        Playlist allContents=new Playlist("allContents");
+
+        User user = (User) loggedInUser;
+        Channel newChannel = new Channel(channelName, description, channelCover, loggedInUser.getFullName());
+        Playlist allContents = new Playlist("allContents");
         newChannel.getPlaylists().add(allContents);
         database.getChannels().add(newChannel);
-        return true;
+
+        return "Channel created successfully.";
     }
 
     public boolean publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -61,6 +64,7 @@ public class ChannelController {
                 Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
                 newPodcast.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newPodcast);
+                database.getContents().add(newPodcast);
                 return true;
             }
         }
@@ -69,7 +73,7 @@ public class ChannelController {
     }
 
     public boolean publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -82,6 +86,7 @@ public class ChannelController {
                 NormalVideo newNormalVideo =new NormalVideo(code,title,description,duration,category,fileLink,thumbnail,subtitle,resolution,format);
                 newNormalVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newNormalVideo);
+                database.getContents().add(newNormalVideo);
                 return true;
             }
         }
@@ -94,7 +99,7 @@ public class ChannelController {
             return false;
         }
 
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -108,6 +113,7 @@ public class ChannelController {
                 ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail,subtitle,musicReference);
                 newShortVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newShortVideo);
+                database.getContents().add(newShortVideo);
                 return true;
             }
         }
@@ -115,7 +121,7 @@ public class ChannelController {
     }
 
     public boolean publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail,String subtitle, Date scheduledTime) {
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -128,6 +134,7 @@ public class ChannelController {
                 LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail,subtitle, scheduledTime);
                 newLiveStream.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newLiveStream);
+                database.getContents().add(newLiveStream);
                 return true;
             }
         }

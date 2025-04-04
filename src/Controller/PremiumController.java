@@ -40,7 +40,7 @@ public class PremiumController {
     }
 
     public void extendSubscription(PremiumPackage packageType){
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return;
         }
@@ -54,6 +54,6 @@ public class PremiumController {
     }
 
     public boolean upgradePremiumPackage(PremiumPackage packageType){
-        return userController.buyPremium(packageType);
+        return getUserController().buyPremium(packageType);
     }
 }

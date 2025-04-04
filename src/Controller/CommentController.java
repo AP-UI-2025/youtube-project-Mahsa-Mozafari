@@ -30,7 +30,7 @@ public class CommentController {
     }
 
     public boolean addComment (int contentId, String text){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
