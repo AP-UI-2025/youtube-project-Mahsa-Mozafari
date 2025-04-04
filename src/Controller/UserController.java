@@ -287,14 +287,12 @@ public class UserController {
         return suggestions;
     }
 
-    public boolean setFavoriteCategories(String input) {
+    public String setFavoriteCategories(String input) {
+        RegularUser signUpUser = authController.getSignUpUser();
 
-        RegularUser signUpUser= authController.getSignUpUser();
-
-        if (signUpUser==null){
-            return false;
+        if (signUpUser == null) {
+            return "No user found.";
         }
-
 
         String[] parts = input.split(",");
         ArrayList<Category> selected = new ArrayList<>();
@@ -303,34 +301,23 @@ public class UserController {
             String trimmed = part.trim().toUpperCase();
 
             for (Category c : Category.values()) {
-                if (c.name().equals(trimmed)) {
-                    boolean alreadyExists = false;
-                    for (Category existing : selected) {
-                        if (existing.name().equals(trimmed)) {
-                            alreadyExists = true;
-                            break;
-                        }
-                    }
-
-                    if (!alreadyExists) {
-                        selected.add(c);
-                    }
-
+                if (c.name().equals(trimmed) && !selected.contains(c)) {
+                    selected.add(c);
                     break;
                 }
             }
 
-            if (selected.size() > 4) {
+            if (selected.size() == 4) {
                 break;
             }
         }
 
-        if (selected.size() == 4) {
-            signUpUser.setFavoriteCategories(selected);
-            return true;
+        if (selected.isEmpty()) {
+            return "Select at least one category.";
         }
 
-        return false;
+        signUpUser.setFavoriteCategories(selected);
+        return "Categories updated.";
     }
 
 }

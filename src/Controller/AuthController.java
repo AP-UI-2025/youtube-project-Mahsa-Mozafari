@@ -79,7 +79,7 @@ public class AuthController {
                 return "banned_user";
             }
             loggedInUser = account;
-            return "sucess";
+            return "success";
         }
         return "invalid";
     }
