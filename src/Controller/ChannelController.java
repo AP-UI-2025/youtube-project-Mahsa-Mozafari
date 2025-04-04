@@ -145,8 +145,34 @@ public class ChannelController {
         return null;
     }
 
-    public ArrayList<Channel> showChannelContents(int channelId, String channelName){
-        return null;
+    public ArrayList<Content> showChannelContents(int channelId, String channelName){
+        Channel channel = findChannelById(channelId);
+
+        if (channel == null) {
+            return null;
+        }
+        if (!channel.getChannelName().equalsIgnoreCase(channelName)){
+            return null;
+        }
+
+        return getChannelContents(channel);
+    }
+
+    private Channel findChannelById(int channelId) {
+            for (Channel channel :database.getChannels()) {
+                if (channel.getChannelId() == channelId) {
+                    return channel;
+                }
+            }
+            return null;
+    }
+
+    private ArrayList<Content> getChannelContents(Channel channel) {
+        ArrayList<Content> contents = new ArrayList<>();
+        for (Playlist playlist : channel.getPlaylists()) {
+            contents.addAll(playlist.getContents());
+        }
+        return contents;
     }
 
 }
