@@ -28,8 +28,20 @@ public class ContentController {
 
     public ContentController() {
         this.database = Database.getInstance();
-        this.authController=AuthController.getInstance();
-        this.playlistController=PlaylistController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
+    }
+
+    public PlaylistController getPlaylistController() {
+        if (playlistController == null) {
+           playlistController = PlaylistController.getInstance();
+        }
+        return playlistController;
     }
 
 

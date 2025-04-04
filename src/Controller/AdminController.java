@@ -19,8 +19,20 @@ public class AdminController {
 
     private AdminController(){
         this.database=Database.getInstance();
-        this.authController=AuthController.getInstance();
-        this.contentController=ContentController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
+    }
+
+    public ContentController getContentController() {
+        if (contentController == null) {
+           contentController= ContentController.getInstance();
+        }
+        return contentController;
 
     }
 

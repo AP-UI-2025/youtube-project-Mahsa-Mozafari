@@ -20,9 +20,27 @@ public class UserController {
 
     private UserController(){
         this.database=Database.getInstance();
-        this.premiumController=PremiumController.getInstance();
-        this.authController=AuthController.getInstance();
-        this.channelController=ChannelController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
+    }
+
+    public ChannelController getChannelController() {
+        if (channelController == null) {
+            channelController = ChannelController.getInstance();
+        }
+        return channelController;
+    }
+
+    public PremiumController getPremiumController() {
+        if (premiumController == null) {
+           premiumController = PremiumController.getInstance();
+        }
+        return premiumController;
     }
 
     public static UserController getInstance(){
@@ -67,14 +85,14 @@ public class UserController {
     }
 
     public boolean subscribe(int channelId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
 
         User user = (User) loggedInUser;
 
-        Channel channel = channelController.findChannelById(channelId);
+        Channel channel = getChannelController().findChannelById(channelId);
         if (channel == null) {
             return false;
         }
@@ -89,14 +107,14 @@ public class UserController {
     }
 
     public boolean unsubscribe(int channelId){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return false;
         }
 
         User user = (User) loggedInUser;
 
-        Channel channel = channelController.findChannelById(channelId);
+        Channel channel = getChannelController().findChannelById(channelId);
         if (channel == null) {
             return false;
         }
@@ -111,7 +129,7 @@ public class UserController {
     }
 
     public ArrayList<Content> showChannelContent(){
-        Account loggedInUser = authController.getLoggedInUser();
+        Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return null;
         }
@@ -164,7 +182,7 @@ public class UserController {
     }
 
     public boolean buyPremium(PremiumPackage packageType) {
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
@@ -187,7 +205,7 @@ public class UserController {
                 database.getUsers().remove(user);
                 database.getUsers().add(premiumUser);
             } else if (user instanceof PremiumUser) {
-                premiumController.extendSubscription(packageType);
+                getPremiumController().extendSubscription(packageType);
             }
             return true;
         }
@@ -288,7 +306,7 @@ public class UserController {
     }
 
     public String setFavoriteCategories(String input) {
-        RegularUser signUpUser = authController.getSignUpUser();
+        RegularUser signUpUser = getAuthController().getSignUpUser();
 
         if (signUpUser == null) {
             return "No user found.";

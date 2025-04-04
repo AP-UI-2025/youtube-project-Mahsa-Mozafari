@@ -16,8 +16,20 @@ public class PremiumController {
 
     private PremiumController(){
         this.database=Database.getInstance();
-        this.authController=AuthController.getInstance();
-        this.userController=UserController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
+    }
+
+    public UserController getUserController() {
+        if (userController == null) {
+           userController = UserController.getInstance();
+        }
+        return userController;
     }
 
     public static PremiumController getInstance(){

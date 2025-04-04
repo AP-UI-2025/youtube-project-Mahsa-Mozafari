@@ -18,13 +18,19 @@ public class ChannelController {
 
     private ChannelController(){
         this.database=Database.getInstance();
-        this.authController=AuthController.getInstance();
     }
     public static ChannelController getInstance(){
         if (channelController==null){
             channelController=new ChannelController();
         }
         return channelController;
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
     }
 
 

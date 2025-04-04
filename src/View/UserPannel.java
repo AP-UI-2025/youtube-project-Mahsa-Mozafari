@@ -2,14 +2,20 @@ package View;
 
 public class UserPannel {
     private boolean signupCompleted=false;
-    AuthView authView;
+    private AuthView authView;
+    private UserView userView;
+
+    public UserPannel(){
+        this.userView=new UserView();
+        this.authView=new AuthView();
+    }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
         String command = parts[0];
 
         if (signupCompleted && !command.equals("FavouriteCategories")){
             System.out.println("You must set your favorite categories first");
-            return;;
+            return;
         }
 
         switch (command) {
@@ -20,7 +26,14 @@ public class UserPannel {
                 }
                 break;
             case "FavouriteCategories":
-                contentView.handleFavoriteCategories;
+                if (parts.length < 2) {
+                    System.out.println("Please provide at least one category.");
+                    return;
+                }
+                String result = userView.handleFavoriteCategories(parts[1]);
+                if (result.equals("Categories updated.")) {
+                    signupCompleted = false;
+                }
                 break;
             case "Logout":
                 authView.handleLogout();

@@ -20,7 +20,13 @@ public class CommentController {
 
     private CommentController(){
         this.database=Database.getInstance();
-        this.authController=AuthController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
     }
 
     public boolean addComment (int contentId, String text){

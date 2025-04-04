@@ -16,7 +16,13 @@ public class LibraryController {
 
     private LibraryController(){
         this.database=Database.getInstance();
-        this.authController=AuthController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
     }
 
     public static LibraryController getInstance(){

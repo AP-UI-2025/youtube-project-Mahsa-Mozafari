@@ -14,7 +14,13 @@ public class PlaylistController {
 
     private PlaylistController(){
         this.database=Database.getInstance();
-        this.authController=AuthController.getInstance();
+    }
+
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
     }
 
     public static PlaylistController getInstance(){

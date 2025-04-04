@@ -13,10 +13,21 @@ public class ReportController {
     private ContentController contentController;
 
     private ReportController(){
-        this.authController=AuthController.getInstance();
         this.database=Database.getInstance();
-        this.contentController=ContentController.getInstance();
+    }
 
+    public AuthController getAuthController() {
+        if (authController == null) {
+            authController = AuthController.getInstance();
+        }
+        return authController;
+    }
+
+    public ContentController getContentController() {
+        if (contentController == null) {
+            contentController= ContentController.getInstance();
+        }
+        return contentController;
     }
 
     public static ReportController getInstance(){

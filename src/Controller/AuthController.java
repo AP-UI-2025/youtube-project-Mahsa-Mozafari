@@ -22,6 +22,7 @@ public class AuthController {
         return authController;
     }
 
+
     public Account getLoggedInUser() {
         return loggedInUser;
     }
