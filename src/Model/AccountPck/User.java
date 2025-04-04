@@ -27,7 +27,7 @@ public abstract class User extends Account {
         this.likedContents=new ArrayList<>();
         this.channel = null;
         this.userId=idCounter++;
-        playlists.add(new Playlist("Favorites"));
+        playlists.add(new Playlist("Liked"));
         playlists.add(new Playlist("Watch Later"));
     }
 

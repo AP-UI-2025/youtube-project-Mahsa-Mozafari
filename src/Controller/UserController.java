@@ -152,17 +152,6 @@ public class UserController {
         return totalSubscribers;
     }
 
-    public ArrayList<Channel> showSubscriptions() {
-        Account loggedInUser = authController.getLoggedInUser();
-        if (!(loggedInUser instanceof User)) {
-            return null;
-        }
-
-        User user = (User) loggedInUser;
-        return user.getSubscriptions();
-    }
-
-
     public void increaseCredit(double amount){
         Account loggedInUser= authController.getLoggedInUser();
         if(!(loggedInUser instanceof User)){

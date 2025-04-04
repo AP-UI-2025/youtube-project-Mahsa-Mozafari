@@ -7,6 +7,7 @@ import Model.ContentPck.Podcast;
 import Model.ContentPck.Video;
 import Model.Database;
 import Model.ContentPck.Content;
+import Model.Playlist;
 
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class ContentController {
     private static ContentController contentController;
     private Database database;
     private AuthController authController;
+    private PlaylistController playlistController;
 
     public static ContentController getInstance(){
         if (contentController==null){
@@ -27,6 +29,7 @@ public class ContentController {
     public ContentController() {
         this.database = Database.getInstance();
         this.authController=AuthController.getInstance();
+        this.playlistController=PlaylistController.getInstance();
     }
 
 
@@ -107,35 +110,71 @@ public class ContentController {
     }
 
 
-    public void playContent(int contentId){
-        Account loggedInUser= authController.getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-           return ;
-        }
-        Content content = findContentById(contentId);
-        if (content != null) {
-            content.setViews(content.getViews() + 1);
+        public void playContent(int contentId) {
+            Account loggedInUser = authController.getLoggedInUser();
+            if (!(loggedInUser instanceof User)) {
+                return;
+            }
+
+            User user = (User) loggedInUser;
+            Content content = findContentById(contentId);
+
+            if (content != null) {
+                content.setViews(content.getViews() + 1);
+                Playlist watchLater = playlistController.findPlaylistByName(user, "Watch Later");
+                if (watchLater != null && !watchLater.getContents().contains(content)) {
+                    watchLater.getContents().add(content);
+                }
+            }
         }
 
-    }
 
-    public void likeOrDislike(int contentId){
-        Account loggedInUser= authController.getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return ;
+    public void likeContent(int contentId) {
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return;
         }
-        User user= (User) loggedInUser;
+
+        User user = (User) loggedInUser;
         Content content = findContentById(contentId);
+
         if (content != null) {
-            if (user.getLikedContents().contains(content)) {
-                content.setLikes(content.getLikes() - 1);
-                user.getLikedContents().remove(content);
-            } else {
+            Playlist likedPlaylist = playlistController.findPlaylistByName(user, "Liked");
+
+            if (!user.getLikedContents().contains(content)) {
                 content.setLikes(content.getLikes() + 1);
-               user.getLikedContents().add(content);
+                user.getLikedContents().add(content);
+
+                if (likedPlaylist != null && !likedPlaylist.getContents().contains(content)) {
+                    likedPlaylist.getContents().add(content);
+                }
             }
         }
     }
+
+    public void dislikeContent(int contentId) {
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return;
+        }
+
+        User user = (User) loggedInUser;
+        Content content = findContentById(contentId);
+
+        if (content != null) {
+            Playlist likedPlaylist = playlistController.findPlaylistByName(user, "Liked");
+
+            if (user.getLikedContents().contains(content)) {
+                content.setLikes(content.getLikes() - 1);
+                user.getLikedContents().remove(content);
+                if (likedPlaylist != null) {
+                    likedPlaylist.getContents().remove(content);
+                }
+            }
+        }
+    }
+
+
 
     public Content findContentById(int contentId){
         for(Content content: database.getContents()){

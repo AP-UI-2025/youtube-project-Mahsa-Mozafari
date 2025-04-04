@@ -104,5 +104,14 @@ public class PlaylistController {
         return null;
     }
 
+    public Playlist findPlaylistByName(User user, String name) {
+        for (Playlist playlist : user.getPlaylists()) {
+            if (playlist.getPlaylistName().equalsIgnoreCase(name)) {
+                return playlist;
+            }
+        }
+        return null;
+    }
+
 }
 
