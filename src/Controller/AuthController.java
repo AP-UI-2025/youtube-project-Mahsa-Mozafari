@@ -85,8 +85,12 @@ public class AuthController {
         return "invalid";
     }
 
-    public void logout() {
-        loggedInUser=null;
+    public boolean logout() {
+       if(loggedInUser!=null){
+           loggedInUser=null;
+           return true;
+       }
+       return false;
     }
 
     public Account searchForUsername(String username){

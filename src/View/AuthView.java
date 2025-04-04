@@ -36,13 +36,13 @@ public class AuthView {
         return false;
     }
 
-    public void handleLogin(String[] parts){
+    public boolean handleLogin(String[] parts){
         String result = authController.login(parts[1], parts[2]);
 
         switch (result) {
             case "success":
                 System.out.println("Login successful. Welcome, " + parts[1] + "!");
-                break;
+                return true;
             case "banned_user":
                 System.out.println("You are banned. Please contact admin.");
                 break;
@@ -52,11 +52,16 @@ public class AuthView {
             default:
                 System.out.println("Login failed.");
         }
+        return false;
     }
 
     public void handleLogout(){
-        authController.logout();
-        System.out.println("Successful Logout");
+        boolean logoutSuccess=authController.logout();
+        if (logoutSuccess){
+            System.out.println("Logout Successful");
+        }else {
+            System.out.println("no User logged in");
+        }
     }
 
 }

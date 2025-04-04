@@ -2,6 +2,7 @@ package View;
 
 public class UserPannel {
     private boolean signupCompleted=false;
+    private boolean isLogin =false;
     private AuthView authView;
     private UserView userView;
 
@@ -20,8 +21,8 @@ public class UserPannel {
 
         switch (command) {
             case "Signup":
-                if(authView.handleSignup(parts)){
-                    signupCompleted=true;
+                if (authView.handleSignup(parts)) {
+                    signupCompleted = true;
 
                 }
                 break;
@@ -37,9 +38,18 @@ public class UserPannel {
                 break;
             case "Logout":
                 authView.handleLogout();
+                isLogin=false;
+
                 break;
             case "Login":
-                authView.handleLogin(parts);
+                if (authView.handleLogin(parts)){
+                    isLogin = true;
+                    System.out.println("Login successfully");
+        }
+                break;
+
+            case "CreateChannel":
+                channelView.handleLogin(parts);
                 break;
             default:
                 System.out.println("invalid command");

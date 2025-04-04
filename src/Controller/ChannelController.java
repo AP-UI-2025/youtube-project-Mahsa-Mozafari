@@ -35,7 +35,7 @@ public class ChannelController {
 
 
     public boolean createChannel(String channelName, String description, String channelCover) {
-        Account loggedInUser= authController.getLoggedInUser();
+        Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return false;
         }
