@@ -9,7 +9,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ContentController {
+    private static ContentController contentController;
     private Database database;
+
+    public static ContentController getInstance(){
+        if (contentController==null){
+            contentController=new ContentController();
+        }
+        return contentController;
+    }
 
     public ContentController() {
         this.database = Database.getInstance();
@@ -64,9 +72,16 @@ public class ContentController {
         return null;
     }
 
-    public ArrayList<Content> filterByCategory(Category category){
-        return null;
+    public ArrayList<Content> filterByCategory(Category category) {
+        ArrayList<Content> result = new ArrayList<>();
+        for (Content content : database.getContents()) {
+            if (content.getCategory() == category) {
+                result.add(content);
+            }
+        }
+        return result;
     }
+
 
     public ArrayList<Content> filterByDate(Date start, Date end){
         return null;

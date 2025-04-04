@@ -16,6 +16,7 @@ public abstract class User extends Account {
     private int userId;
     private static int idCounter=1;
     private boolean banned;
+    private ArrayList<Content> likedContents;
 
     public User(String username, String fullName, String phoneNumber, String email, ArrayList<Category> favoriteCategories, String profileCover) {
         super(username, fullName, phoneNumber, email, profileCover);
@@ -23,6 +24,7 @@ public abstract class User extends Account {
         this.favoriteCategories = favoriteCategories != null ? favoriteCategories : new ArrayList<>();
         this.playlists = new ArrayList<>();
         this.subscriptions = new ArrayList<>();
+        this.likedContents=new ArrayList<>();
         this.channel = null;
         this.userId=idCounter++;
         playlists.add(new Playlist("Favorites"));
@@ -46,6 +48,14 @@ public abstract class User extends Account {
 
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
+    }
+
+    public ArrayList<Content> getLikedContents() {
+        return likedContents;
+    }
+
+    public void setLikedContents(ArrayList<Content> likedContents) {
+        this.likedContents = likedContents;
     }
 
     public Channel getChannel() {

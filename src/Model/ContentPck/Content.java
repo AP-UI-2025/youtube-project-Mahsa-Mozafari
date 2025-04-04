@@ -23,6 +23,7 @@ public abstract class Content{
     private ArrayList<Comment> comments;
     private ContentSpecialStatus isExclusive;
     private User uploader;
+    private int suggestionPriority;
 
     public Content(ContentSpecialStatus isExclusive ,String title, String description,int duration, Category category,String fileLink,String thumbnail){
         this.contentId=idCounter++;
@@ -37,7 +38,16 @@ public abstract class Content{
         this.publishDate=new Date();
         this.comments=new ArrayList<>();
         this.uploader=null;
+        this.suggestionPriority=0;
 
+    }
+
+    public void setSuggestionPriority(int suggestionPriority) {
+        this.suggestionPriority = suggestionPriority;
+    }
+
+    public int getSuggestionPriority() {
+        return suggestionPriority;
     }
 
     public void setUploader(User uploader) {
