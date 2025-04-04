@@ -72,16 +72,16 @@ public class AuthController {
         return "success";
     }
 
-    public boolean login(String username, String password) {
+    public String login(String username, String password) {
         Account account = searchForUsername(username);
         if (account != null && account.getPassword().equals(password)) {
             if (account instanceof User && ((User) account).isBanned()) {
-                return false;
+                return "banned_user";
             }
             loggedInUser = account;
-            return true;
+            return "sucess";
         }
-        return false;
+        return "invalid";
     }
 
     public void logout() {
