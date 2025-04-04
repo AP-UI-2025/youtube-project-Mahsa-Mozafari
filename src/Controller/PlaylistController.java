@@ -2,6 +2,7 @@ package Controller;
 
 import Model.AccountPck.Account;
 import Model.AccountPck.User;
+import Model.Channel;
 import Model.ContentPck.Content;
 import Model.Database;
 import Model.Playlist;
@@ -39,8 +40,27 @@ public class PlaylistController {
 
     }
 
-    public Playlist createPlaylistForChannel(String playlistName){
-        return null;
+    public boolean createPlaylistForChannel(String playlistName){
+        Account loggedInUser = authController.getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return false;
+        }
+
+        User user = (User) loggedInUser;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                for (Playlist playlist : channel.getPlaylists()) {
+                    if (playlist.getPlaylistName().equalsIgnoreCase(playlistName)) {
+                        return false;
+                    }
+                }
+                channel.getPlaylists().add(new Playlist(playlistName));
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
