@@ -317,12 +317,19 @@ public class UserController {
 
         for (String part : parts) {
             String trimmed = part.trim().toUpperCase();
-
+            boolean isValid = false;
             for (Category c : Category.values()) {
-                if (c.name().equals(trimmed) && !selected.contains(c)) {
-                    selected.add(c);
+                if (c.name().toUpperCase().equals(trimmed)) {
+                    if (!selected.contains(c)) {
+                        selected.add(c);
+                    }
+                    isValid = true;
                     break;
                 }
+            }
+
+            if (!isValid) {
+                return "Invalid category: " + part.trim();
             }
 
             if (selected.size() == 4) {
@@ -331,7 +338,7 @@ public class UserController {
         }
 
         if (selected.isEmpty()) {
-            return "Select at least one category.";
+            return "Select at least one valid category.";
         }
 
         signUpUser.setFavoriteCategories(selected);

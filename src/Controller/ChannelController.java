@@ -50,95 +50,104 @@ public class ChannelController {
         return "Channel created successfully.";
     }
 
-    public boolean publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can publish podcasts.";
         }
-        User user= (User) loggedInUser;
+
+        User user = (User) loggedInUser;
+
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
-                    return false;
+                    return "Missing 'allContents' playlist in your channel.";
                 }
+
                 Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
                 newPodcast.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newPodcast);
                 database.getContents().add(newPodcast);
-                return true;
+                return "Podcast published successfully.";
             }
         }
-        return false;
 
+        return "You must have a channel to publish a podcast.";
     }
 
-    public boolean publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can publish videos.";
         }
-        User user= (User) loggedInUser;
-        for (Channel channel :database.getChannels()) {
+
+        User user = (User) loggedInUser;
+        for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
-                    return false;
+                    return "No valid 'allContents' playlist found.";
                 }
-                NormalVideo newNormalVideo =new NormalVideo(code,title,description,duration,category,fileLink,thumbnail,subtitle,resolution,format);
+
+                NormalVideo newNormalVideo = new NormalVideo(code, title, description, duration, category, fileLink, thumbnail, subtitle, resolution, format);
                 newNormalVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newNormalVideo);
                 database.getContents().add(newNormalVideo);
-                return true;
+                return "Normal video published successfully.";
             }
         }
-        return false;
+        return "User does not own a channel.";
     }
 
 
-    public boolean publishShortVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail,String subtitle, String musicReference) {
+    public String publishShortVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, String musicReference) {
         if (duration >= 30) {
-            return false;
+            return "Short video must be under 30 seconds.";
         }
 
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can publish videos.";
         }
-        User user= (User) loggedInUser;
 
+        User user = (User) loggedInUser;
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
-                    return false;
+                    return "No valid 'allContents' playlist found.";
                 }
-                ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail,subtitle,musicReference);
+
+                ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail, subtitle, musicReference);
                 newShortVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newShortVideo);
                 database.getContents().add(newShortVideo);
-                return true;
+                return "Short video published successfully.";
             }
         }
-        return false;
+        return "User does not own a channel.";
     }
 
-    public boolean publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail,String subtitle, Date scheduledTime) {
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String publishLiveStream(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, Date scheduledTime) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can publish live streams.";
         }
-        User user= (User) loggedInUser;
+
+        User user = (User) loggedInUser;
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
-                    return false;
+                    return "No valid 'allContents' playlist found.";
                 }
-                LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail,subtitle, scheduledTime);
+
+                LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail, subtitle, scheduledTime);
                 newLiveStream.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newLiveStream);
                 database.getContents().add(newLiveStream);
-                return true;
+                return "Live stream published successfully.";
             }
         }
-        return false;
+        return "User does not own a channel.";
     }
 
     public ArrayList<Channel> searchChannel(String searchBox) {

@@ -1,15 +1,7 @@
 package Model.ContentPck;
 
 public enum ContentSpecialStatus {
-    SPECIAL('Y'),
-    NOT_SPECIAL('N');
-    private final char code;
+    SPECIAL,
+    NOT_SPECIAL
 
-    ContentSpecialStatus(char code) {
-        this.code = code;
-    }
-
-    public char getCode() {
-        return code;
-    }
 }

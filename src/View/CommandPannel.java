@@ -1,13 +1,13 @@
 package View;
 
-public class UserPannel {
+public class CommandPannel {
     private boolean signupCompleted=false;
     private boolean isLoggedIn =false;
     private AuthView authView;
     private UserView userView;
     private ChannelView channelView;
 
-    public UserPannel(){
+    public CommandPannel(){
         this.userView=new UserView();
         this.authView=new AuthView();
         this.channelView=new ChannelView();
@@ -21,7 +21,7 @@ public class UserPannel {
             return;
         }
 
-        if (!isLoggedIn && !command.equals("Signup") && !command.equals("FavouriteCategories")) {
+        if (!isLoggedIn && !command.equals("Signup") && !command.equals("FavouriteCategories")&&!command.equals("Login")) {
             System.out.println("You must log in first.");
             return;
         }
@@ -58,6 +58,16 @@ public class UserPannel {
             case "CreateChannel":
                 channelView.handleCreateChannel(parts);
                 break;
+            case "Publish":
+                if(parts[1].equals("NV")){
+                    channelView.handlePublishNormalVideo(parts);
+                } else if (parts[1].equals("SV")) {
+                    channelView.handlePublishShortVideo(parts);
+                } else if (parts[1].equals("P")) {
+                    channelView.handlePublishPodcast(parts);
+                } else if (parts[1].equals("LS")) {
+                    channelView.handlePublishLiveStream(parts);
+                }
             default:
                 System.out.println("invalid command");
         }

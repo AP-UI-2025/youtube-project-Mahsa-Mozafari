@@ -1,12 +1,23 @@
 package View;
 
 import Controller.ChannelController;
+import Controller.UserController;
+import Model.Category;
+import Model.ContentPck.ContentSpecialStatus;
+import Model.ContentPck.VideoFormat;
+import Model.ContentPck.VideoResolution;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChannelView {
 
     private ChannelController channelController;
+    private UserController userController;
     ChannelView(){
         this.channelController=ChannelController.getInstance();
+        this.userController=UserController.getInstance();
     }
     public void handleCreateChannel(String[] parts) {
         if (parts.length < 4) {
@@ -15,16 +26,91 @@ public class ChannelView {
         }
 
         String result = channelController.createChannel(parts[1], parts[2], parts[3]);
+        System.out.println(result);
+    }
 
-        switch (result) {
-            case "Only regular users can create channels.":
-                System.out.println("Only regular users can create channels.");
-                break;
-            case "Channel created successfully.":
-                System.out.println("Channel created successfully.");
-                break;
-            default:
-                System.out.println("An unexpected error occurred.");
+    public void handlePublishPodcast(String[] parts) {
+        if (parts.length < 10) {
+            System.out.println("Invalid command format");
+            return;
+        }
+
+        try {
+            String input = parts[2];
+            ContentSpecialStatus code;
+            switch (input) {
+                case "N":
+                    code = ContentSpecialStatus.NOT_SPECIAL;
+                    break;
+                case "P":
+                    code = ContentSpecialStatus.SPECIAL;
+                    break;
+                default:
+                    System.out.println("Invalid content status.");
+                    return;
+            }
+            String title = parts[3];
+            String description = parts[4];
+            int duration = Integer.parseInt(parts[5]);
+            Category category = Category.valueOf(parts[6].toUpperCase());
+            String fileLink = parts[7];
+            String thumbnail = parts[8];
+            String creator = parts[9];
+
+            String result = channelController.publishPodcast(code, title, description, duration, category, fileLink, thumbnail, creator);
+            System.out.println(result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid category or status code.");
         }
     }
+
+    public void handlePublishNormalVideo(String[] parts) {
+        if (parts.length < 12) {
+            System.out.println("Invalid command. Provide all required fields.");
+            return;
+        }
+        String input = parts[2];
+        ContentSpecialStatus code;
+        switch (input) {
+            case "N":
+                code = ContentSpecialStatus.NOT_SPECIAL;
+                break;
+            case "P":
+                code = ContentSpecialStatus.SPECIAL;
+                break;
+            default:
+                System.out.println("Invalid content status.");
+                return;
+        }
+        String result = channelController.publishNormalVideo(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9], VideoResolution.valueOf(parts[10]), VideoFormat.valueOf(parts[11]));
+        System.out.println(result);
+    }
+
+    public void handlePublishShortVideo(String[] parts) {
+        if (parts.length < 11) {
+            System.out.println("Invalid command. Provide all required fields.");
+            return;
+        }
+        ContentSpecialStatus code = ContentSpecialStatus.valueOf(parts[2]);
+        String result = channelController.publishShortVideo(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9], parts[10]);
+        System.out.println(result);
+    }
+
+    public void handlePublishLiveStream(String[] parts) {
+        if (parts.length < 11) {
+            System.out.println("Invalid command. Provide all required fields.");
+            return;
+        }
+        try {
+            ContentSpecialStatus code = ContentSpecialStatus.valueOf(parts[2]);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date scheduledTime = format.parse(parts[10]);
+            String result = channelController.publishLiveStream(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9], scheduledTime);
+            System.out.println(result);
+        } catch (Exception e) {
+            System.out.println("Failed to parse date. Use format: yyyy-MM-dd HH:mm");
+        }
+    }
+
+
 }
