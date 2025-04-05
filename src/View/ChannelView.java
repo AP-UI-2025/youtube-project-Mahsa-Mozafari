@@ -82,7 +82,24 @@ public class ChannelView {
                 System.out.println("Invalid content status.");
                 return;
         }
-        String result = channelController.publishNormalVideo(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9], VideoResolution.valueOf(parts[10]), VideoFormat.valueOf(parts[11]));
+        String inbox=parts[10];
+        VideoResolution resolution;
+            switch (inbox) {
+                case "1080":
+                    resolution=VideoResolution.HIGH;
+                    break;
+                case "720":
+                   resolution=VideoResolution.MEDIUM;
+                    break;
+                case "360":
+                    resolution=VideoResolution.LOW;
+                    break;
+                default:
+                    System.out.println("Invalid resolution");
+                    return;
+            }
+
+        String result = channelController.publishNormalVideo(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9],resolution, VideoFormat.valueOf(parts[11].trim().toUpperCase()));
         System.out.println(result);
     }
 

@@ -22,6 +22,7 @@ public class AuthView {
                 System.out.println("Invalid email format.");
                 break;
             case "invalid_phone":
+
                 System.out.println("Invalid phone number format.");
                 break;
             case "invalid_password":

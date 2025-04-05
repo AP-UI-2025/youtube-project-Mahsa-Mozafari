@@ -68,6 +68,7 @@ public class CommandPannel {
                 } else if (parts[1].equals("LS")) {
                     channelView.handlePublishLiveStream(parts);
                 }
+                break;
             default:
                 System.out.println("invalid command");
         }
