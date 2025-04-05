@@ -46,7 +46,7 @@ public class LibraryController {
         return null;
     }
 
-    public ArrayList<Content> showLikedPlaylistContents() {
+    public ArrayList<Content> showLikedContents() {
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return null;

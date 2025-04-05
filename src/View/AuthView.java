@@ -10,7 +10,7 @@ public class AuthView {
     }
 
     public boolean handleSignup(String[] parts) {
-        String result = authController.signUp(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
+        String result = authController.signup(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
         switch (result) {
             case "success":
                 System.out.println("Signup successful. Now set your favorite categories.");

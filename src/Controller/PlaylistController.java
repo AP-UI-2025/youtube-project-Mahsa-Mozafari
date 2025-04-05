@@ -11,6 +11,7 @@ public class PlaylistController {
     private static PlaylistController playlistController;
     private Database database;
     private AuthController authController;
+    private ContentController contentController;
 
     private PlaylistController(){
         this.database=Database.getInstance();
@@ -22,6 +23,16 @@ public class PlaylistController {
         }
         return authController;
     }
+
+    public ContentController getContentController()
+    {
+        if (contentController == null) {
+            contentController = ContentController.getInstance();
+        }
+        return contentController;
+
+    }
+
 
     public static PlaylistController getInstance(){
         if (playlistController==null){
@@ -78,15 +89,15 @@ public class PlaylistController {
         }
         User user= (User) loggedInUser;
 
-        Playlist playlist = findPlaylist(playlistId);
-        Content content = findContent(contentId);
+        Playlist playlist = findPlaylistById(playlistId);
+        Content content = getContentController().findContentById(contentId);
 
         if (playlist == null || content == null) return false;
 
         return user.addToPlaylist(playlist, content);
     }
 
-    public Playlist findPlaylist(int playlistId) {
+    public Playlist findPlaylistById(int playlistId) {
         Account loggedInUser= getAuthController().getLoggedInUser();
         if(!(loggedInUser instanceof User)){
             return null;
@@ -96,15 +107,6 @@ public class PlaylistController {
         for (Playlist playlist : user.getPlaylists()) {
             if (playlist.getPlaylistId() == playlistId) {
                 return playlist;
-            }
-        }
-        return null;
-    }
-
-    public Content findContent(int contentId) {
-        for (Content content : database.getContents()) {
-            if (content.getContentId() == contentId) {
-                return content;
             }
         }
         return null;

@@ -39,7 +39,7 @@ public class AuthController {
         this.signUpUser = signUpUser;
     }
 
-    public String signUp(String username, String password, String fullName, String email, String phoneNumber, String profileCoverLink) {
+    public String signup(String username, String password, String fullName, String email, String phoneNumber, String profileCoverLink) {
         if (searchForUsername(username) != null) {
             return "duplicate_username";
         }

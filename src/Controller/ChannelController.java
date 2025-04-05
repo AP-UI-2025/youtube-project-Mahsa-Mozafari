@@ -186,7 +186,7 @@ public class ChannelController {
             return null;
     }
 
-    private ArrayList<Content> getChannelContents(Channel channel) {
+    public ArrayList<Content> getChannelContents(Channel channel) {
         ArrayList<Content> contents = new ArrayList<>();
         for (Playlist playlist : channel.getPlaylists()) {
             contents.addAll(playlist.getContents());
