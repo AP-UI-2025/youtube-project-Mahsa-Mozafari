@@ -8,6 +8,8 @@ public class CommandPannel {
     private ChannelView channelView;
     private PlaylistView playlistView;
     private ContentView contentView;
+    private PremiumView premiumView;
+
 
     public CommandPannel(){
         this.userView=new UserView();
@@ -15,6 +17,7 @@ public class CommandPannel {
         this.channelView=new ChannelView();
         this.playlistView=new PlaylistView();
         this.contentView=new ContentView();
+        this.premiumView=new PremiumView();
     }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
@@ -83,9 +86,17 @@ public class CommandPannel {
                     channelView.handlePublishLiveStream(parts);
                 }
                 break;
-
             case "Search":
                 contentView.handleSearch(parts);
+                break;
+            case "GetPremium":
+                userView.handleBuyPremium(parts);
+                break;
+            case "IncreaseCredit":
+                userView.handleIncreaseCredit(parts);
+                break;
+            case"ExtendSubscription":
+                premiumView.handleExtendSubscription(parts);
                 break;
             default:
                 System.out.println("invalid command");
