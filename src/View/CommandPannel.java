@@ -6,11 +6,13 @@ public class CommandPannel {
     private AuthView authView;
     private UserView userView;
     private ChannelView channelView;
+    private PlaylistView playlistView;
 
     public CommandPannel(){
         this.userView=new UserView();
         this.authView=new AuthView();
         this.channelView=new ChannelView();
+        this.playlistView=new PlaylistView();
     }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
@@ -57,6 +59,16 @@ public class CommandPannel {
 
             case "CreateChannel":
                 channelView.handleCreateChannel(parts);
+                break;
+            case "CreatePlaylist":
+                if(parts[1].equals("U")){
+                    playlistView.handleCreatePlaylistForUser(parts);
+                } else if (parts[1].equals("C")) {
+                    playlistView.handleCreatePlaylistForChannel(parts);
+                }
+                break;
+            case "AddToPlaylist":
+                playlistView.handleAddToPlaylist(parts);
                 break;
             case "Publish":
                 if(parts[1].equals("NV")){

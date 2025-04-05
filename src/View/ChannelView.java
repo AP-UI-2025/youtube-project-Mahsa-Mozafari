@@ -35,7 +35,6 @@ public class ChannelView {
             return;
         }
 
-        try {
             String input = parts[2];
             ContentSpecialStatus code;
             switch (input) {
@@ -48,7 +47,8 @@ public class ChannelView {
                 default:
                     System.out.println("Invalid content status.");
                     return;
-            }
+                    }
+
             String title = parts[3];
             String description = parts[4];
             int duration = Integer.parseInt(parts[5]);
@@ -59,9 +59,7 @@ public class ChannelView {
 
             String result = channelController.publishPodcast(code, title, description, duration, category, fileLink, thumbnail, creator);
             System.out.println(result);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Invalid category or status code.");
-        }
+
     }
 
     public void handlePublishNormalVideo(String[] parts) {

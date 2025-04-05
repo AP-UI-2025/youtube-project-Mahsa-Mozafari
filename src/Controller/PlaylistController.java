@@ -41,26 +41,32 @@ public class PlaylistController {
         return playlistController;
     }
 
-    public boolean createPlaylistForUser(String playlistName){
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String createPlaylistForUser(String playlistName){
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can create playlists.";
         }
-        User user= (User) loggedInUser;
+
+        User user = (User) loggedInUser;
 
         if (!user.canCreatePlaylist()) {
-            return false;
+            return "You cannot create more playlists.";
+        }
+
+        for (Playlist p : user.getPlaylists()) {
+            if (p.getPlaylistName().equalsIgnoreCase(playlistName)) {
+                return "Playlist with this name already exists.";
+            }
         }
 
         user.getPlaylists().add(new Playlist(playlistName));
-        return true;
-
+        return "Playlist created successfully.";
     }
 
-    public boolean createPlaylistForChannel(String playlistName){
+    public String createPlaylistForChannel(String playlistName){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only regular users can create channel playlists.";
         }
 
         User user = (User) loggedInUser;
@@ -69,46 +75,56 @@ public class PlaylistController {
             if (channel.getCreator().equals(user.getFullName())) {
                 for (Playlist playlist : channel.getPlaylists()) {
                     if (playlist.getPlaylistName().equalsIgnoreCase(playlistName)) {
-                        return false;
+                        return "Channel already has a playlist with this name.";
                     }
                 }
                 channel.getPlaylists().add(new Playlist(playlistName));
-                return true;
+                return "Playlist created for channel successfully.";
             }
         }
 
-        return false;
+        return "You don’t have a channel.";
     }
 
 
-    public boolean addToPlaylist(int playlistId, int contentId){
-
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String addToPlaylist(int playlistId, int contentId) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only regular users can add to playlist.";
         }
-        User user= (User) loggedInUser;
+        User user = (User) loggedInUser;
 
         Playlist playlist = findPlaylistById(playlistId);
         Content content = getContentController().findContentById(contentId);
 
-        if (playlist == null || content == null) return false;
+        if (playlist == null) {
+            return "Playlist not found.";
+        }
+        if (content == null) {
+            return "Content not found.";
+        }
 
-        return user.addToPlaylist(playlist, content);
+        boolean added = user.addToPlaylist(playlist, content);
+        return added ? "Content added to playlist successfully." : "Failed to add content to playlist.";
     }
 
-    public Playlist findPlaylistById(int playlistId) {
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return null;
-        }
-        User user= (User) loggedInUser;
+    public Playlist findPlaylistById(int id) {
+        Account user = getAuthController().getLoggedInUser();
+        if (user instanceof User) {
+            User u = (User) user;
 
-        for (Playlist playlist : user.getPlaylists()) {
-            if (playlist.getPlaylistId() == playlistId) {
-                return playlist;
+            for (Playlist p : u.getPlaylists()) {
+                if (p.getPlaylistId() == id) return p;
+            }
+            for (Channel c : database.getChannels()) {
+                if (c.getCreator().equals(user.getFullName())) {
+                    for (Playlist p : c.getPlaylists()) {
+                        if (p.getPlaylistId() == id) return p;
+                    }
+                }
             }
         }
+
         return null;
     }
 
