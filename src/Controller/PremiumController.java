@@ -39,21 +39,25 @@ public class PremiumController {
         return premiumController;
     }
 
-    public void extendSubscription(PremiumPackage packageType){
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return;
+    public String extendSubscription(PremiumPackage packageType) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "No user logged in.";
         }
-        User user= (User) loggedInUser;
+        User user = (User) loggedInUser;
+
         if (user instanceof PremiumUser) {
             PremiumUser premiumUser = (PremiumUser) user;
-            Date newEndDate = new Date(premiumUser.getSubscriptionEndDate().getTime() + packageType.getDays());
-            premiumUser.setSubscriptionEndDate(newEndDate);
+            Date now = new Date();
+            Date endDate = premiumUser.getSubscriptionEndDate();
+            if (endDate != null && endDate.before(now) && user.getCredit() >= packageType.getPrice()) {
+                user.setCredit(user.getCredit() - packageType.getPrice());
+                Date newEndDate = new Date(endDate.getTime() + packageType.getDays());
+                premiumUser.setSubscriptionEndDate(newEndDate);
+                return "Subscription extended successfully.";
+            }
         }
-
+        return "Failed to extend subscription.";
     }
 
-    public boolean upgradePremiumPackage(PremiumPackage packageType){
-        return getUserController().buyPremium(packageType);
-    }
 }

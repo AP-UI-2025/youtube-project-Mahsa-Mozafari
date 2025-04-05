@@ -150,19 +150,6 @@ public class ChannelController {
         return "User does not own a channel.";
     }
 
-    public ArrayList<Channel> searchChannel(String searchBox) {
-        ArrayList<Channel> result = new ArrayList<>();
-        String searchLower = searchBox.toLowerCase();
-
-        for (Channel c: database.getChannels()) {
-            String channelNameLower = c.getChannelName().toLowerCase();
-            if (channelNameLower.contains(searchLower)) {
-                result.add(c);
-            }
-        }
-        return result;
-    }
-
     public Object[] viewChannelInfo(){
         return null;
     }

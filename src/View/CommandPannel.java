@@ -7,12 +7,14 @@ public class CommandPannel {
     private UserView userView;
     private ChannelView channelView;
     private PlaylistView playlistView;
+    private ContentView contentView;
 
     public CommandPannel(){
         this.userView=new UserView();
         this.authView=new AuthView();
         this.channelView=new ChannelView();
         this.playlistView=new PlaylistView();
+        this.contentView=new ContentView();
     }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
@@ -80,6 +82,10 @@ public class CommandPannel {
                 } else if (parts[1].equals("LS")) {
                     channelView.handlePublishLiveStream(parts);
                 }
+                break;
+
+            case "Search":
+                contentView.handleSearch(parts);
                 break;
             default:
                 System.out.println("invalid command");

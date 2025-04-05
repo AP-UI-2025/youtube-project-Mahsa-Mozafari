@@ -170,46 +170,45 @@ public class UserController {
         return totalSubscribers;
     }
 
-    public void increaseCredit(double amount){
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return;
+    public String increaseCredit(double amount) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "No user logged in.";
         }
-        User user= (User) loggedInUser;
-       if(user!=null){
-           user.setCredit(user.getCredit()+amount);
-       }
+        User user = (User) loggedInUser;
+        user.setCredit(user.getCredit() + amount);
+        return "Credit increased successfully.";
     }
 
-    public boolean buyPremium(PremiumPackage packageType) {
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String buyPremium(PremiumPackage packageType) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "No user logged in.";
         }
-        User user= (User) loggedInUser;
-
+        User user = (User) loggedInUser;
         double packageCost = packageType.getPrice();
-        if (user.getCredit() >= packageCost) {
-            user.setCredit(user.getCredit() - packageCost);
-            if (user instanceof RegularUser) {
-                PremiumUser premiumUser = new PremiumUser(
-                        user.getUsername(),
-                        user.getFullName(),
-                        user.getPhoneNumber(),
-                        user.getEmail(),
-                        user.getFavoriteCategories(),
-                        user.getProfileCover()
-                );
-                premiumUser.setCredit(user.getCredit());
-                premiumUser.setSubscriptionEndDate(new Date(System.currentTimeMillis() + packageType.getDays()));
-                database.getUsers().remove(user);
-                database.getUsers().add(premiumUser);
-            } else if (user instanceof PremiumUser) {
-                getPremiumController().extendSubscription(packageType);
-            }
-            return true;
+        if (user.getCredit() < packageCost) {
+            return "Not enough credits.";
         }
-        return false;
+
+        if (user instanceof RegularUser) {
+            user.setCredit(user.getCredit() - packageCost);
+            PremiumUser premiumUser = new PremiumUser(
+                    user.getUsername(),
+                    user.getFullName(),
+                    user.getPhoneNumber(),
+                    user.getEmail(),
+                    user.getFavoriteCategories(),
+                    user.getProfileCover()
+            );
+            premiumUser.setCredit(user.getCredit());
+            premiumUser.setSubscriptionEndDate(new Date(System.currentTimeMillis() + packageType.getDays()));
+            database.getUsers().remove(user);
+            database.getUsers().add(premiumUser);
+            return "Premium package purchased successfully.";
+        }
+
+        return "Failed to buy premium package.";
     }
 
 

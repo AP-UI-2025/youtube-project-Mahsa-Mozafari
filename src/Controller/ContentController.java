@@ -12,7 +12,6 @@ import Model.Playlist;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ContentController {
     private static ContentController contentController;
@@ -46,17 +45,23 @@ public class ContentController {
     }
 
 
-    public ArrayList<Content> searchContent(String searchBox) {
-        ArrayList<Content> result = new ArrayList<>();
-        String searchLower = searchBox.toLowerCase();
+    public ArrayList<String> searchInContentsAndChannels(String searchBox) {
+        ArrayList<String> results = new ArrayList<>();
+        String lowerKeyword = searchBox.toLowerCase();
 
-        for (Content c: database.getContents()) {
-            String titleLower = c.getTitle().toLowerCase();
-            if (titleLower.contains(searchLower)) {
-                result.add(c);
+        for (Content content : database.getContents()) {
+            if (content.getTitle().toLowerCase().contains(lowerKeyword)) {
+                results.add("Content: " + content.getTitle());
             }
         }
-        return result;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getChannelName().toLowerCase().contains(lowerKeyword)) {
+                results.add("Channel: " + channel.getChannelName());
+            }
+        }
+
+        return results;
     }
 
     public ArrayList<Content> sortContentByLikes() {
