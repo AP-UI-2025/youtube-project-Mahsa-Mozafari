@@ -127,5 +127,10 @@ public class ChannelView {
         }
     }
 
+    public void handleViewChannelInfo(){
+        String result = channelController.viewChannelInfo();
+        System.out.println(result);
+    }
+
 
 }

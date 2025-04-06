@@ -205,25 +205,11 @@ public class ContentController {
             content.setSuggestionPriority(0);
 
             if (user.getFavoriteCategories().contains(content.getCategory())) {
-                content.setSuggestionPriority(content.getSuggestionPriority() + 3);
+                content.setSuggestionPriority(content.getSuggestionPriority() + 2);
             }
 
             for (Content liked : user.getLikedContents()) {
                 if (liked.getCategory().equals(content.getCategory())) {
-                    content.setSuggestionPriority(content.getSuggestionPriority() + 2);
-                    break;
-                }
-            }
-
-            for (Channel channel : user.getSubscriptions()) {
-                boolean contentInChannel = false;
-                for (Content channelContent : database.getContents()) {
-                    if (channelContent.getContentId() == content.getContentId()) {
-                        contentInChannel = true;
-                        break;
-                    }
-                }
-                if (contentInChannel) {
                     content.setSuggestionPriority(content.getSuggestionPriority() + 1);
                     break;
                 }

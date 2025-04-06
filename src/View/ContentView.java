@@ -3,6 +3,7 @@ package View;
 
 import Controller.ChannelController;
 import Controller.ContentController;
+import Model.Category;
 import Model.ContentPck.Content;
 import Model.Database;
 
@@ -83,6 +84,75 @@ public class ContentView {
         }
     }
 
+    public void handleFilterByCategory(String[] parts) {
+        String categoryStr = parts[1];
+        Category category;
+        try {
+            category = Category.valueOf(categoryStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid category.");
+            return;
+        }
+
+        ArrayList<Content> contents = contentController.filterByCategory(category);
+        if (contents.isEmpty()) {
+            System.out.println("No content found in this category.");
+        } else {
+            System.out.println("Contents in category " + category + ":");
+            for (Content c : contents) {
+                System.out.println(c.getTitle());
+            }
+        }
+    }
+
+    public void handleGetSuggestions() {
+        ArrayList<Content> suggestions = contentController.getSuggestions();
+
+        if (suggestions.isEmpty()) {
+            System.out.println("No suggestions available. You must be logged in as a user.");
+            return;
+        }
+        System.out.println("Suggested content for you:");
+        for (Content content : suggestions) {
+            System.out.println(content.getTitle() +  "Category: " + content.getCategory());
+        }
+    }
+
+    public void handleLikeContent(String[] parts) {
+            int contentId = Integer.parseInt(parts[1]);
+            Content content = contentController.findContentById(contentId);
+
+            if (content == null) {
+                System.out.println("Content not found.");
+                return;
+            }
+
+            contentController.likeContent(contentId);
+            System.out.println("You liked: " + content.getTitle());
+    }
+
+    public void handleDislikeContent(String[] parts) {
+        int contentId = Integer.parseInt(parts[1]);
+        Content content = contentController.findContentById(contentId);
+        if (content == null) {
+            System.out.println("Content not found.");
+            return;
+        }
+        contentController.dislikeContent(contentId);
+        System.out.println("You disliked: " + content.getTitle());
+    }
+
+    public void handlePlayContent(String[] parts) {
+            int contentId = Integer.parseInt(parts[1]);
+            Content content = contentController.findContentById(contentId);
+
+            if (content == null) {
+                System.out.println("Content not found.");
+                return;
+            }
+            contentController.playContent(contentId);
+            System.out.println("Now playing: " + content.getTitle());
+    }
 
 
 

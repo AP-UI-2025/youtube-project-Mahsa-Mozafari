@@ -12,7 +12,6 @@ public class PremiumController {
     private static PremiumController premiumController;
     private Database database;
     private AuthController authController;
-    private UserController userController;
 
     private PremiumController(){
         this.database=Database.getInstance();
@@ -23,13 +22,6 @@ public class PremiumController {
             authController = AuthController.getInstance();
         }
         return authController;
-    }
-
-    public UserController getUserController() {
-        if (userController == null) {
-           userController = UserController.getInstance();
-        }
-        return userController;
     }
 
     public static PremiumController getInstance(){

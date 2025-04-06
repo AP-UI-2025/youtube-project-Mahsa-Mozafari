@@ -1,6 +1,5 @@
 package View;
 
-import Controller.ContentController;
 import Controller.UserController;
 import Model.AccountPck.PremiumPackage;
 
@@ -33,6 +32,11 @@ public class UserView {
 
         PremiumPackage packageType=PremiumPackage.valueOf(parts[1].trim().toUpperCase());
             String result =userController.buyPremium(packageType);
+        System.out.println(result);
+    }
+
+    public void handleGetAccountInfo(){
+        String result = userController.getAccountInfo();
         System.out.println(result);
     }
 }
