@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.AccountPck.Account;
+import Model.AccountPck.Admin;
 import Model.AccountPck.User;
 import Model.Category;
 import Model.Channel;
@@ -150,8 +151,15 @@ public class ChannelController {
         return "User does not own a channel.";
     }
 
-    public Object[] viewChannelInfo(){
-        return null;
+    public String viewChannelInfo(){
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "User should login";
+        }
+        User user=(User) loggedInUser;
+        return "Channel Info:\n" +
+                "Channel Name: " + user.getChannel().getChannelName() + "\n" +
+                "Creator: " + user.getChannel().getCreator()+ "\n";
     }
 
     public ArrayList<Content> showChannel(int channelId){

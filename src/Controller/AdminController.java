@@ -68,8 +68,8 @@ public class AdminController {
 
         for (Content content : sortedContents) {
             result.append("Title: ").append(content.getTitle())
-                    .append(" | Likes: ").append(content.getLikes())
-                    .append(" | Views: ").append(content.getViews())
+                    .append("Likes: ").append(content.getLikes())
+                    .append("Views: ").append(content.getViews())
                     .append("\n");
         }
 
@@ -97,27 +97,102 @@ public class AdminController {
 
         for (Channel channel : channels) {
             result.append("Channel Name: ").append(channel.getChannelName())
-                    .append(" | Subscribers: ").append(channel.getSubscribers().size())
+                    .append("Subscribers: ").append(channel.getSubscribers().size())
                     .append("\n");
         }
 
         return result.toString();
     }
 
-    public ArrayList<User> getAllUsers() {
+    public String getAllChannels() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Access denied: Only admin can view all channels.";
+        }
 
+        ArrayList<Channel> channels = new ArrayList<>(database.getChannels());
+        if (channels.isEmpty()) {
+            return "No channels found in the system.";
+        }
+
+        StringBuilder result = new StringBuilder("All Channels:\n");
+        for (Channel channel : channels) {
+            result.append("Channel Name: ").append(channel.getChannelName())
+                    .append("Creator: ").append(channel.getCreator())
+                    .append("Subscribers: ").append(channel.getSubscribers().size())
+                    .append("\n");
+        }
+        return result.toString();
     }
 
-    public ArrayList<Content> getAllContents(){
-        return null;
+    public String getAllReports() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Access denied: Only admin can view all reports.";
+        }
+
+        ArrayList<Report> reports = new ArrayList<>(database.getReports());
+        if (reports.isEmpty()) {
+            return "No reports found in the system.";
+        }
+
+        StringBuilder result = new StringBuilder("All Reports:\n");
+        for (Report report : reports) {
+            result.append("Reporter: ").append(report.getReporter().getUsername())
+                    .append("Reported Content: ").append(report.getReportedContentId())
+                    .append("Description: ").append(report.getDescription())
+                    .append("\n");
+        }
+
+        return result.toString();
     }
 
-    public ArrayList<Report> getAllReports(){
-        return null;
+    public String getAllUsers() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Access denied: Only admin can view all users.";
+        }
+
+        ArrayList<User> users = new ArrayList<>(database.getUsers());
+
+        if (users.isEmpty()) {
+            return "No users found in the system.";
+        }
+
+        StringBuilder result = new StringBuilder("All Registered Users:\n");
+
+        for (User user : users) {
+            result.append("Username: ").append(user.getUsername())
+                    .append("Full Name: ").append(user.getFullName())
+                    .append("Email: ").append(user.getEmail())
+                    .append("Phone: ").append(user.getPhoneNumber())
+                    .append("\n");
+        }
+
+        return result.toString();
     }
 
-    public ArrayList<Channel> getAllChannels(){
-        return null;
+    public String getAllContents() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Access denied: Only admin can view all contents.";
+        }
+
+        ArrayList<Content> contents = new ArrayList<>(database.getContents());
+        if (contents.isEmpty()) {
+            return "No contents found in the system.";
+        }
+
+        StringBuilder result = new StringBuilder("All Contents:\n");
+        for (Content content : contents) {
+            result.append("Title: ").append(content.getTitle())
+                    .append("Uploader: ").append(content.getUploader().getUsername())
+                    .append("Views: ").append(content.getViews())
+                    .append("Likes: ").append(content.getLikes())
+                    .append("\n");
+        }
+
+        return result.toString();
     }
 
     public boolean confirmReport(int reportedContentId){

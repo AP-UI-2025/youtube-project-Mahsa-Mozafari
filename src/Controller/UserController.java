@@ -50,8 +50,17 @@ public class UserController {
         return userController;
     }
 
-    public Object[] getUserInfo(){
-        return null;
+    public String getAccountInfo(){
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "User should login";
+        }
+        User user=(User) loggedInUser;
+        return "Account Info:\n" +
+                "FullName: " + user.getFullName() + "\n" +
+                "Password: " + user.getPassword()+ "\n"+
+                "Email: " +  user.getEmail()+"\n"+
+                "Username: "+ user.getUsername()+"\n";
     }
 
     public boolean editUserName(String newValue){
