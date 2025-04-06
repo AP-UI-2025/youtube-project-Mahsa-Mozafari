@@ -27,16 +27,8 @@ public class AuthController {
         return loggedInUser;
     }
 
-    public void setLoggedInUser(Account loggedInUser) {
-        this.loggedInUser = loggedInUser;
-    }
-
     public RegularUser getSignUpUser() {
         return signUpUser;
-    }
-
-    public void setSignUpUser(RegularUser signUpUser) {
-        this.signUpUser = signUpUser;
     }
 
     public String signup(String username, String password, String fullName, String email, String phoneNumber, String profileCoverLink) {

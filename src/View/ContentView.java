@@ -85,15 +85,9 @@ public class ContentView {
     }
 
     public void handleFilterByCategory(String[] parts) {
-        String categoryStr = parts[1];
+        String categoryStr = parts[2];
         Category category;
-        try {
             category = Category.valueOf(categoryStr.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Invalid category.");
-            return;
-        }
-
         ArrayList<Content> contents = contentController.filterByCategory(category);
         if (contents.isEmpty()) {
             System.out.println("No content found in this category.");

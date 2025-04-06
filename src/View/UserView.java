@@ -34,12 +34,12 @@ public class UserView {
     }
 
     public void handleEditUsername(String[] parts) {
-        String result = userController.editUserName(parts[1]);
+        String result = userController.editUserName(parts[2]);
         System.out.println(result);
     }
 
     public void handleEditPassword(String[] parts) {
-        String result = userController.editUserPassword(parts[1]);
+        String result = userController.editUserPassword(parts[2]);
         System.out.println(result);
     }
 
@@ -60,18 +60,18 @@ public class UserView {
         System.out.println(result);
     }
 
-    public void handleShowChannelContent() {
-        String result = userController.showChannelContent();
+    public void handleShowUserChannelContent() {
+        String result = userController.showUserChannelContent();
         System.out.println(result);
     }
 
     public void handleEditChannelName(String[] parts) {
-        String result = userController.editChannelName(parts[1]);
+        String result = userController.editChannelName(parts[2]);
         System.out.println(result);
     }
 
     public void handleEditChannelDescription(String[] parts) {
-        String result = userController.editChannelDescription(parts[1]);
+        String result = userController.editChannelDescription(parts[2]);
         System.out.println(result);
     }
 }

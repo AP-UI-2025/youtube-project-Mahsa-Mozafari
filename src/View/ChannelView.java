@@ -3,21 +3,21 @@ package View;
 import Controller.ChannelController;
 import Controller.UserController;
 import Model.Category;
+import Model.ContentPck.Content;
 import Model.ContentPck.ContentSpecialStatus;
 import Model.ContentPck.VideoFormat;
 import Model.ContentPck.VideoResolution;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ChannelView {
 
     private ChannelController channelController;
-    private UserController userController;
     ChannelView(){
         this.channelController=ChannelController.getInstance();
-        this.userController=UserController.getInstance();
     }
     public void handleCreateChannel(String[] parts) {
         if (parts.length < 4) {
@@ -131,6 +131,5 @@ public class ChannelView {
         String result = channelController.viewChannelInfo();
         System.out.println(result);
     }
-
 
 }

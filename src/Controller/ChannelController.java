@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.AccountPck.Account;
-import Model.AccountPck.Admin;
 import Model.AccountPck.User;
 import Model.Category;
 import Model.Channel;
@@ -160,16 +159,6 @@ public class ChannelController {
         return "Channel Info:\n" +
                 "Channel Name: " + user.getChannel().getChannelName() + "\n" +
                 "Creator: " + user.getChannel().getCreator()+ "\n";
-    }
-
-    public ArrayList<Content> showChannel(int channelId){
-        Channel channel = findChannelById(channelId);
-
-        if (channel == null) {
-            return null;
-        }
-
-        return getChannelContents(channel);
     }
 
     public Channel findChannelById(int channelId) {

@@ -233,7 +233,7 @@ public class UserController {
         return "Total Subscribers: " + totalSubscribers;
     }
 
-    public String showChannelContent() {
+    public String showUserChannelContent() {
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return "Only logged-in users can see channel contents.";
@@ -248,8 +248,8 @@ public class UserController {
                 ArrayList<Content> contents = getChannelContents(channel);
                 for (Content content : contents) {
                     sb.append("Title: ").append(content.getTitle())
-                            .append(" | Likes: ").append(content.getLikes())
-                            .append(" | Views: ").append(content.getViews()).append("\n");
+                            .append("Likes: ").append(content.getLikes())
+                            .append("Views: ").append(content.getViews()).append("\n");
                     hasContent = true;
                 }
             }

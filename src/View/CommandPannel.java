@@ -11,6 +11,8 @@ public class CommandPannel {
     private PremiumView premiumView;
     private ReportView reportView;
     private AdminView adminView;
+    private CommentView commentView;
+    private LibraryView libraryView;
 
 
     public CommandPannel(){
@@ -22,6 +24,8 @@ public class CommandPannel {
         this.premiumView=new PremiumView();
         this.reportView=new ReportView();
         this.adminView=new AdminView();
+        this.commentView=new CommentView();
+        this.libraryView=new LibraryView();
     }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
@@ -124,6 +128,77 @@ public class CommandPannel {
                     adminView.handleRejectReport(parts);
                 }
                 break;
+            case"Sort":
+                if(parts[1].equals("L")){
+                    contentView.handleSortByLikes();
+                } else if (parts[1].equals("V")) {
+                    contentView.handleSortByViews();
+                }
+                break;
+            case"Filter":
+                if(parts[1].equals("P")){
+                    contentView.handleFilterByPodcast();
+                } else if (parts[1].equals("V")) {
+                  contentView.handleFilterByVideo();
+                } else if (parts[1].equals("C")) {
+                    contentView.handleFilterByCategory(parts);
+                }
+                break;
+            case"Play":
+                contentView.handlePlayContent(parts);
+                break;
+            case "Like":
+                contentView.handleLikeContent(parts);
+                break;
+            case "Dislike":
+                contentView.handleDislikeContent(parts);
+                break;
+            case "EditUserInfo":
+                if(parts[1].equals("N")){
+                    userView.handleEditUsername(parts);
+                }
+                else if(parts[1].equals("P")){
+                    userView.handleEditPassword(parts);
+                }
+                break;
+            case "Edit":
+                if(parts[1].equals("N")){
+                    userView.handleEditChannelName(parts);
+                } else if (parts[1].equals("D")) {
+                    userView.handleEditChannelDescription(parts);
+                }
+                break;
+            case"ShowChannelContent":
+                userView.handleShowUserChannelContent();
+                break;
+            case"ViewChannel":
+                channelView.handleViewChannelInfo();
+                break;
+            case "ViewPopularContents":
+                adminView.handleViewPopularContents();
+                break;
+            case "ViewPopularChannels":
+                adminView.handleViewPopularChannels();
+                break;
+            case "Subscribe":
+                userView.handleSubscribe(parts);
+                break;
+            case"Unsubscribe":
+                userView.handleUnsubscribe(parts);
+                break;
+            case"AccountInfo":
+                userView.handleGetAccountInfo();
+                break;
+            case"GetSuggestions":
+                contentView.handleGetSuggestions();
+                break;
+            case"ShowChannelSubscribers":
+                userView.handleShowChannelSubscribers();
+                break;
+            case"AddComment":
+                commentView.handleAddComment(parts);
+                break;
+
             default:
                 System.out.println("invalid command");
         }
