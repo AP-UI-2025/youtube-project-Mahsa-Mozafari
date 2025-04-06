@@ -39,4 +39,26 @@ public class UserView {
         String result = userController.getAccountInfo();
         System.out.println(result);
     }
+
+    public void handleEditUsername(String[] parts) {
+        String result = userController.editUserName(parts[1]);
+        System.out.println(result);
+    }
+
+    public void handleEditPassword(String[] parts) {
+        String result = userController.editUserPassword(parts[1]);
+        System.out.println(result);
+    }
+
+    public void handleSubscribe(String[] parts) {
+            int channelId = Integer.parseInt(parts[1]);
+            String result = userController.subscribe(channelId);
+            System.out.println(result);
+    }
+
+    public void handleUnsubscribe(String[] parts) {
+            int channelId = Integer.parseInt(parts[1]);
+            String result = userController.unsubscribe(channelId);
+            System.out.println(result);
+    }
 }

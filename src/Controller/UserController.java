@@ -15,7 +15,6 @@ public class UserController {
     private static UserController userController;
     private Database database;
     private AuthController authController;
-    private PremiumController premiumController;
     private ChannelController channelController;
 
     private UserController(){
@@ -34,13 +33,6 @@ public class UserController {
             channelController = ChannelController.getInstance();
         }
         return channelController;
-    }
-
-    public PremiumController getPremiumController() {
-        if (premiumController == null) {
-           premiumController = PremiumController.getInstance();
-        }
-        return premiumController;
     }
 
     public static UserController getInstance(){
@@ -63,79 +55,80 @@ public class UserController {
                 "Username: "+ user.getUsername()+"\n";
     }
 
-    public boolean editUserName(String newValue){
+    public String editUserName(String newValue){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only users can change their username.";
         }
 
-        for (User user:database.getUsers()){
-            if(user.getUsername().equalsIgnoreCase(newValue))
-                return false;
+        for (User user : database.getUsers()) {
+            if (user.getUsername().equalsIgnoreCase(newValue))
+                return "Username already taken.";
         }
+
         loggedInUser.setUsername(newValue);
-        return true;
-
+        return "Username changed successfully.";
     }
 
-    public boolean editUserPassword(String newValue){
+    public String editUserPassword(String newValue){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only users can change their password.";
         }
 
-        for (User user:database.getUsers()){
-            if(user.getPassword().equalsIgnoreCase(newValue))
-                return false;
+        for (User user : database.getUsers()) {
+            if (user.getPassword().equalsIgnoreCase(newValue))
+                return "Password already in use. Choose a different one.";
         }
+
         loggedInUser.setPassword(newValue);
-        return true;
-
+        return "Password changed successfully.";
     }
 
-    public boolean subscribe(int channelId){
+    public String subscribe(int channelId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only users can subscribe to channels.";
         }
 
         User user = (User) loggedInUser;
-
         Channel channel = getChannelController().findChannelById(channelId);
+
         if (channel == null) {
-            return false;
+            return "Channel not found.";
         }
+
         if (user.getSubscriptions().contains(channel)) {
-            return false;
+            return "You are already subscribed to this channel.";
         }
 
         user.getSubscriptions().add(channel);
         channel.getSubscribers().add(user);
-        return true;
-
+        return "Successfully subscribed to: " + channel.getChannelName();
     }
 
-    public boolean unsubscribe(int channelId){
+    public String unsubscribe(int channelId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only users can unsubscribe from channels.";
         }
 
         User user = (User) loggedInUser;
-
         Channel channel = getChannelController().findChannelById(channelId);
+
         if (channel == null) {
-            return false;
+            return "Channel not found.";
         }
+
         if (!user.getSubscriptions().contains(channel)) {
-            return false;
+            return "You are not subscribed to this channel.";
         }
 
         user.getSubscriptions().remove(channel);
         channel.getSubscribers().remove(user);
-        return true;
-
+        return "Successfully unsubscribed from: " + channel.getChannelName();
     }
+
 
     public ArrayList<Content> showChannelContent(){
         Account loggedInUser = getAuthController().getLoggedInUser();
