@@ -195,79 +195,86 @@ public class AdminController {
         return result.toString();
     }
 
-    public boolean confirmReport(int reportedContentId){
+    public String confirmReport(int reportedContentId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
-            return false;
+            return "Access denied: Only admin can confirm reports.";
         }
 
         Report report = findReport(reportedContentId);
         if (report == null) {
-            return false;
+            return "Report not found.";
         }
-        boolean contentDeleted = deleteReportedContent(reportedContentId);
-        if (!contentDeleted) {
-            return false;
+
+        Content contentToDelete = getContentController().findContentById(reportedContentId);
+        if (contentToDelete == null) {
+            return "Content not found.";
         }
-        boolean userBanned = banUser(report.getReportedUserId());
+        database.getContents().remove(contentToDelete);
 
-        return userBanned;
+        User userToBan = findUserById(report.getReportedUserId());
+        if (userToBan != null) {
+            userToBan.setBanned(true);
+            database.getReports().remove(report);
+            return "Report confirmed. Content deleted and user banned.";
+        }
 
+        return "Content deleted, but user could not be banned.";
     }
 
-    public boolean rejectReport(int reportedContentId){
+    public String rejectReport(int reportedContentId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
-            return false;
+            return "Access denied: Only admin can reject reports.";
         }
-        Report report=findReport(reportedContentId);
-        if(report==null){
-            return false;
+        Report report = findReport(reportedContentId);
+        if (report == null) {
+            return "Report not found.";
         }
         database.getReports().remove(report);
-        return true;
+        return "Report rejected successfully.";
     }
 
-    public boolean unbanUser(int reportedUserId){
+    public String unbanUser(int reportedUserId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
-            return false;
+            return "Access denied: Only admin can unban users.";
         }
 
         User userToUnban = findUserById(reportedUserId);
         if (userToUnban != null) {
             userToUnban.setBanned(false);
-            return true;
+            return "User unbanned successfully.";
         }
-        return false;
+        return "User not found.";
     }
 
-    public boolean banUser(int reportedUserId){
+    public String banUser(int reportedUserId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
-            return false;
+            return "Access denied: Only admin can ban users.";
         }
 
         User userToBan = findUserById(reportedUserId);
         if (userToBan != null) {
             userToBan.setBanned(true);
-            return true;
+            return "User banned successfully.";
         }
-        return false;
+        return "User not found.";
     }
 
-    public boolean deleteReportedContent(int reportedContentId){
+    public String deleteReportedContent(int reportedContentId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
-            return false;
+            return "Access denied: Only admin can delete content.";
         }
 
         Content contentToDelete = getContentController().findContentById(reportedContentId);
         if (contentToDelete != null) {
             database.getContents().remove(contentToDelete);
-            return true;
+            return "Reported content deleted successfully.";
         }
-        return false;
+        return "Content not found.";
     }
 
 

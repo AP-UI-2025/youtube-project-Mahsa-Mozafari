@@ -44,8 +44,37 @@ public class AdminView {
         System.out.println(result);
     }
 
-    public void handleGetAllUsers() {
-        String result = adminController.getAllUsers();
+    public void handleConfirmReport(String[] parts) {
+            int contentId = Integer.parseInt(parts[2]);
+            String result = adminController.confirmReport(contentId);
+            System.out.println(result);
+    }
+
+    public void handleRejectReport(String[] parts) {
+            int contentId = Integer.parseInt(parts[2]);
+            String result = adminController.rejectReport(contentId);
+            System.out.println(result);
+    }
+
+    public void handleBanUser(String[] parts) {
+            int userId = Integer.parseInt(parts[1]);
+            String result = adminController.banUser(userId);
+            System.out.println(result);
+    }
+
+    public void handleUnbanUser(String[] parts) {
+        int userId = Integer.parseInt(parts[1]);
+        String result = adminController.unbanUser(userId);
+        System.out.println(result);
+    }
+
+    public void handleDeleteReportedContent(String[] parts) {
+        int contentId = Integer.parseInt(parts[1]);
+        String result = adminController.deleteReportedContent(contentId);
         System.out.println(result);
     }
 }
+
+
+
+

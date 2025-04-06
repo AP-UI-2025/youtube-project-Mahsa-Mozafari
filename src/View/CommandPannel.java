@@ -9,6 +9,8 @@ public class CommandPannel {
     private PlaylistView playlistView;
     private ContentView contentView;
     private PremiumView premiumView;
+    private ReportView reportView;
+    private AdminView adminView;
 
 
     public CommandPannel(){
@@ -18,6 +20,8 @@ public class CommandPannel {
         this.playlistView=new PlaylistView();
         this.contentView=new ContentView();
         this.premiumView=new PremiumView();
+        this.reportView=new ReportView();
+        this.adminView=new AdminView();
     }
     public void handleCommand(String input) {
         String[] parts = input.split(" - ");
@@ -97,6 +101,28 @@ public class CommandPannel {
                 break;
             case"ExtendSubscription":
                 premiumView.handleExtendSubscription(parts);
+                break;
+            case"Report":
+                reportView.handleCreateReport(parts);
+                break;
+            case"Reports":
+                adminView.handleGetAllReports();
+                break;
+            case"Users":
+                adminView.handleGetAllUsers();
+                break;
+            case"Channels":
+                adminView.handleGetAllChannels();
+                break;
+            case"Contents":
+                adminView.handleGetAllContents();
+                break;
+            case"ManageReport":
+                if(parts[1].equals("C")){
+                    adminView.handleConfirmReport(parts);
+                } else if (parts[1].equals("R")) {
+                    adminView.handleRejectReport(parts);
+                }
                 break;
             default:
                 System.out.println("invalid command");
