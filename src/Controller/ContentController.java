@@ -89,6 +89,7 @@ public class ContentController {
                     sortedList.set(j, sortedList.get(j + 1));
                     sortedList.set(j + 1, temp);
                 }
+
             }
         }
         return sortedList;

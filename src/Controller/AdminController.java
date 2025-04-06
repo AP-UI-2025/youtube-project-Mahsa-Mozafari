@@ -56,16 +56,56 @@ public class AdminController {
                 "Profile Cover: " + Admin.getInstance().getProfileCover();
     }
 
-    public ArrayList<Content> viewPopularContents(){
-        return null;
+
+    public String viewPopularContents() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Access denied: Only admin can view popular contents.";
+        }
+
+        ArrayList<Content> sortedContents = contentController.sortContentByLikes();
+        StringBuilder result = new StringBuilder("Most Popular Contents (by likes):\n");
+
+        for (Content content : sortedContents) {
+            result.append("Title: ").append(content.getTitle())
+                    .append(" | Likes: ").append(content.getLikes())
+                    .append(" | Views: ").append(content.getViews())
+                    .append("\n");
+        }
+
+        return result.toString();
     }
 
-    public ArrayList<Channel> viewPopularChannels(){
-        return null;
+    public String viewPopularChannels() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Access denied: Only admin can view popular channels.";
+        }
+
+        ArrayList<Channel> channels = new ArrayList<>(database.getChannels());
+        for (int i = 0; i < channels.size() - 1; i++) {
+            for (int j = 0; j < channels.size() - i - 1; j++) {
+                if (channels.get(j).getSubscribers().size() < channels.get(j + 1).getSubscribers().size()) {
+                    Channel temp = channels.get(j);
+                    channels.set(j, channels.get(j + 1));
+                    channels.set(j + 1, temp);
+                }
+            }
+        }
+
+        StringBuilder result = new StringBuilder("Most Popular Channels (by followers):\n");
+
+        for (Channel channel : channels) {
+            result.append("Channel Name: ").append(channel.getChannelName())
+                    .append(" | Subscribers: ").append(channel.getSubscribers().size())
+                    .append("\n");
+        }
+
+        return result.toString();
     }
 
     public ArrayList<User> getAllUsers() {
-        return null;
+
     }
 
     public ArrayList<Content> getAllContents(){
