@@ -43,6 +43,7 @@ public class ChannelController {
 
         User user = (User) loggedInUser;
         Channel newChannel = new Channel(channelName, description, channelCover, loggedInUser.getFullName());
+        user.setChannel(newChannel);
         Playlist allContents = new Playlist("allContents");
         newChannel.getPlaylists().add(allContents);
         database.getChannels().add(newChannel);
@@ -90,9 +91,10 @@ public class ChannelController {
                 }
 
                 NormalVideo newNormalVideo = new NormalVideo(code, title, description, duration, category, fileLink, thumbnail, subtitle, resolution, format);
+                database.getContents().add(newNormalVideo);
                 newNormalVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newNormalVideo);
-                database.getContents().add(newNormalVideo);
+
                 return "Normal video published successfully.";
             }
         }
@@ -118,9 +120,10 @@ public class ChannelController {
                 }
 
                 ShortVideo newShortVideo = new ShortVideo(code, title, description, duration, category, fileLink, thumbnail, subtitle, musicReference);
+                database.getContents().add(newShortVideo);
                 newShortVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newShortVideo);
-                database.getContents().add(newShortVideo);
+
                 return "Short video published successfully.";
             }
         }
@@ -141,9 +144,10 @@ public class ChannelController {
                 }
 
                 LiveStream newLiveStream = new LiveStream(code, title, description, duration, category, fileLink, thumbnail, subtitle, scheduledTime);
+                database.getContents().add(newLiveStream);
                 newLiveStream.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newLiveStream);
-                database.getContents().add(newLiveStream);
+
                 return "Live stream published successfully.";
             }
         }

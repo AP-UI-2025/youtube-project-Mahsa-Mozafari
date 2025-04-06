@@ -12,9 +12,6 @@ public class PremiumView {
     }
 
     public void handleExtendSubscription(String[] parts) {
-        if (parts.length < 2) {
-            System.out.println("Invalid command");
-        }
         PremiumPackage packageType=PremiumPackage.valueOf(parts[1].toUpperCase());
         String result=premiumController.extendSubscription(packageType);
         System.out.println(result);

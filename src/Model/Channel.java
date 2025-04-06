@@ -13,6 +13,7 @@ public class Channel {
     private String creator;
     private ArrayList<Playlist> playlists;
     private ArrayList<User> subscribers;
+    private User owner;
 
     public Channel(String channelName, String description, String channelCover, String creator) {
         this.channelId = idCounter++;

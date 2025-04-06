@@ -198,6 +198,18 @@ public class CommandPannel {
             case"AddComment":
                 commentView.handleAddComment(parts);
                 break;
+            case"AdminInfo":
+                adminView.handleGetAdminInfo();
+                break;
+            case"UnbanUser":
+                adminView.handleUnbanUser(parts);
+                break;
+            case"LikedContents":
+                libraryView.handleShowLikedContents(parts);
+                break;
+            case"Subscription":
+                libraryView.handleShowSubscriptions(parts);
+                break;
 
             default:
                 System.out.println("invalid command");

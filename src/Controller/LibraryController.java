@@ -32,28 +32,35 @@ public class LibraryController {
         return libraryController;
     }
 
-    public ArrayList<Channel> showSubscriptions() {
+    public String showSubscriptions() {
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return null;
+            return "You must be logged in to view subscriptions.";
         }
 
         User user = (User) loggedInUser;
-        return user.getSubscriptions();
+        ArrayList<Channel> subscriptions = user.getSubscriptions();
+
+        if (subscriptions == null || subscriptions.isEmpty()) {
+            return "You have no subscriptions.";
+        }
+
+        StringBuilder subscriptionsList = new StringBuilder("Your subscriptions:\n");
+        for (Channel channel : subscriptions) {
+            subscriptionsList.append(channel.getChannelName()).append("\n");
+        }
+
+        return subscriptionsList.toString();
     }
 
-    public ArrayList<Playlist> showPlaylists(){
-        return null;
-    }
 
-    public ArrayList<Content> showLikedContents() {
+    public String showLikedContents() {
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return null;
+            return "You must be logged in to view liked contents.";
         }
 
         User user = (User) loggedInUser;
-
         Playlist likedPlaylist = null;
         for (Playlist playlist : user.getPlaylists()) {
             if (playlist.getPlaylistName().equals("Liked")) {
@@ -61,10 +68,16 @@ public class LibraryController {
                 break;
             }
         }
+
         if (likedPlaylist != null) {
-            return likedPlaylist.getContents();
+            StringBuilder likedContentsList = new StringBuilder("Your liked contents:\n");
+            for (Content content : likedPlaylist.getContents()) {
+                likedContentsList.append(content.getTitle()).append("\n");
+            }
+            return likedContentsList.toString();
         }
-        return null;
+
+        return "You have no liked contents.";
     }
 }
 

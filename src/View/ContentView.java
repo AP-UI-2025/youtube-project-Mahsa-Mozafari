@@ -17,11 +17,6 @@ public class ContentView {
 
 
     public void handleSearch(String[] parts) {
-        if (parts.length < 2) {
-            System.out.println("Invalid command. Usage: Search - <keyword>");
-            return;
-        }
-
         String keyword = parts[1];
         ArrayList<String> results = contentController.searchInContentsAndChannels(keyword);
 

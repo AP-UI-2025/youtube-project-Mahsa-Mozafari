@@ -10,10 +10,6 @@ public class ReportView {
     }
 
     public void handleCreateReport(String[] parts) {
-        if (parts.length < 3) {
-            System.out.println("Invalid command.");
-            return;
-        }
         int contentId;
         contentId = Integer.parseInt(parts[1]);
         String description = parts[2];

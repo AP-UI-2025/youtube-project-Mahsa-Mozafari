@@ -20,21 +20,11 @@ public class ChannelView {
         this.channelController=ChannelController.getInstance();
     }
     public void handleCreateChannel(String[] parts) {
-        if (parts.length < 4) {
-            System.out.println("Invalid command. Usage: CreateChannel - <channelName> - <description> - <cover>");
-            return;
-        }
-
         String result = channelController.createChannel(parts[1], parts[2], parts[3]);
         System.out.println(result);
     }
 
     public void handlePublishPodcast(String[] parts) {
-        if (parts.length < 10) {
-            System.out.println("Invalid command format");
-            return;
-        }
-
             String input = parts[2];
             ContentSpecialStatus code;
             switch (input) {
@@ -63,10 +53,6 @@ public class ChannelView {
     }
 
     public void handlePublishNormalVideo(String[] parts) {
-        if (parts.length < 12) {
-            System.out.println("Invalid command. Provide all required fields.");
-            return;
-        }
         String input = parts[2];
         ContentSpecialStatus code;
         switch (input) {
@@ -102,22 +88,38 @@ public class ChannelView {
     }
 
     public void handlePublishShortVideo(String[] parts) {
-        if (parts.length < 11) {
-            System.out.println("Invalid command. Provide all required fields.");
-            return;
+        String input = parts[2];
+        ContentSpecialStatus code;
+        switch (input) {
+            case "N":
+                code = ContentSpecialStatus.NOT_SPECIAL;
+                break;
+            case "P":
+                code = ContentSpecialStatus.SPECIAL;
+                break;
+            default:
+                System.out.println("Invalid content status.");
+                return;
         }
-        ContentSpecialStatus code = ContentSpecialStatus.valueOf(parts[2]);
         String result = channelController.publishShortVideo(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9], parts[10]);
         System.out.println(result);
     }
 
     public void handlePublishLiveStream(String[] parts) {
-        if (parts.length < 11) {
-            System.out.println("Invalid command. Provide all required fields.");
-            return;
-        }
         try {
-            ContentSpecialStatus code = ContentSpecialStatus.valueOf(parts[2]);
+            String input = parts[2];
+            ContentSpecialStatus code;
+            switch (input) {
+                case "N":
+                    code = ContentSpecialStatus.NOT_SPECIAL;
+                    break;
+                case "P":
+                    code = ContentSpecialStatus.SPECIAL;
+                    break;
+                default:
+                    System.out.println("Invalid content status.");
+                    return;
+            }
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date scheduledTime = format.parse(parts[10]);
             String result = channelController.publishLiveStream(code, parts[3], parts[4], Integer.parseInt(parts[5]), Category.valueOf(parts[6]), parts[7], parts[8], parts[9], scheduledTime);
