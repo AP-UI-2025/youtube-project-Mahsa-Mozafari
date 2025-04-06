@@ -43,8 +43,17 @@ public class AdminController {
         return adminController;
     }
 
-    public Object[] getAdminInfo(){
-        return null;
+    public String getAdminInfo() {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof Admin)) {
+            return "Admin should login";
+        }
+        return "Admin Info:\n" +
+                "Username: " + Admin.getInstance().getUsername() + "\n" +
+                "Full Name: " + Admin.getInstance().getFullName() + "\n" +
+                "Phone Number: " + Admin.getInstance().getPhoneNumber() + "\n" +
+                "Email: " + Admin.getInstance().getEmail() + "\n" +
+                "Profile Cover: " + Admin.getInstance().getProfileCover();
     }
 
     public ArrayList<Content> viewPopularContents(){
