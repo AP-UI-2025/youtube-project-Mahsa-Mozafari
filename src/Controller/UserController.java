@@ -129,47 +129,12 @@ public class UserController {
         return "Successfully unsubscribed from: " + channel.getChannelName();
     }
 
-
-    public ArrayList<Content> showChannelContent(){
-        Account loggedInUser = getAuthController().getLoggedInUser();
-        if (!(loggedInUser instanceof User)) {
-            return null;
-        }
-        User user = (User) loggedInUser;
-        ArrayList<Content> userContents = new ArrayList<>();
-        for (Channel channel : database.getChannels()) {
-            if (channel.getCreator().equals(user.getFullName())) {
-                userContents.addAll(getChannelContents(channel));
-            }
-        }
-
-        return userContents;
-    }
-
     private ArrayList<Content> getChannelContents(Channel channel) {
         ArrayList<Content> contents = new ArrayList<>();
         for (Playlist playlist : channel.getPlaylists()) {
             contents.addAll(playlist.getContents());
         }
         return contents;
-    }
-
-    public int showChannelSubscribers(){
-        Account loggedInUser = getAuthController().getLoggedInUser();
-        if (!(loggedInUser instanceof User)) {
-            return 0;
-        }
-
-        User user = (User) loggedInUser;
-        int totalSubscribers = 0;
-
-        for (Channel channel : database.getChannels()) {
-            if (channel.getCreator().equals(user.getFullName())) {
-                totalSubscribers += channel.getSubscribers().size();
-            }
-        }
-
-        return totalSubscribers;
     }
 
     public String increaseCredit(double amount) {
@@ -214,10 +179,10 @@ public class UserController {
     }
 
 
-    public boolean editChannelName(String newName){
+    public String editChannelName(String newName){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only users can edit channel names.";
         }
 
         User user = (User) loggedInUser;
@@ -225,16 +190,17 @@ public class UserController {
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(user.getFullName())) {
                 channel.setChannelName(newName);
-                return true;
+                return "Channel name updated successfully.";
             }
         }
-        return false;
+
+        return "You don't own any channel to edit its name.";
     }
 
-    public boolean editChannelDescription(String newDescription){
+    public String editChannelDescription(String newDescription){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return false;
+            return "Only users can edit channel descriptions.";
         }
 
         User user = (User) loggedInUser;
@@ -242,12 +208,55 @@ public class UserController {
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(user.getFullName())) {
                 channel.setDescription(newDescription);
-                return true;
+                return "Channel description updated successfully.";
             }
         }
-        return false;
+
+        return "You don't own any channel to edit its description.";
     }
 
+    public String showChannelSubscribers() {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only logged-in users can see subscriber count.";
+        }
+
+        User user = (User) loggedInUser;
+        int totalSubscribers = 0;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                totalSubscribers += channel.getSubscribers().size();
+            }
+        }
+
+        return "Total Subscribers: " + totalSubscribers;
+    }
+
+    public String showChannelContent() {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only logged-in users can see channel contents.";
+        }
+
+        User user = (User) loggedInUser;
+        StringBuilder sb = new StringBuilder();
+        boolean hasContent = false;
+
+        for (Channel channel : database.getChannels()) {
+            if (channel.getCreator().equals(user.getFullName())) {
+                ArrayList<Content> contents = getChannelContents(channel);
+                for (Content content : contents) {
+                    sb.append("Title: ").append(content.getTitle())
+                            .append(" | Likes: ").append(content.getLikes())
+                            .append(" | Views: ").append(content.getViews()).append("\n");
+                    hasContent = true;
+                }
+            }
+        }
+
+        return hasContent ? sb.toString() : "No content published by your channel.";
+    }
 
 
     public String setFavoriteCategories(String input) {

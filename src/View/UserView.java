@@ -16,9 +16,6 @@ public class UserView {
     }
 
     public void handleIncreaseCredit(String[] parts) {
-        if (parts.length < 2) {
-            System.out.println("Invalid command");
-        }
         double amount= Double.parseDouble(parts[1]);
         String result=userController.increaseCredit(amount);
 
@@ -26,10 +23,6 @@ public class UserView {
     }
 
     public void handleBuyPremium(String[] parts) {
-        if (parts.length < 2) {
-            System.out.println("Invalid command");
-        }
-
         PremiumPackage packageType=PremiumPackage.valueOf(parts[1].trim().toUpperCase());
             String result =userController.buyPremium(packageType);
         System.out.println(result);
@@ -60,5 +53,25 @@ public class UserView {
             int channelId = Integer.parseInt(parts[1]);
             String result = userController.unsubscribe(channelId);
             System.out.println(result);
+    }
+
+    public void handleShowChannelSubscribers() {
+        String result = userController.showChannelSubscribers();
+        System.out.println(result);
+    }
+
+    public void handleShowChannelContent() {
+        String result = userController.showChannelContent();
+        System.out.println(result);
+    }
+
+    public void handleEditChannelName(String[] parts) {
+        String result = userController.editChannelName(parts[1]);
+        System.out.println(result);
+    }
+
+    public void handleEditChannelDescription(String[] parts) {
+        String result = userController.editChannelDescription(parts[1]);
+        System.out.println(result);
     }
 }
