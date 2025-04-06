@@ -36,30 +36,27 @@ public class ReportController {
         }
         return reportController;
     }
-
-    public boolean createReport(int reportedContentId, String description){
-        Account loggedInUser= getAuthController().getLoggedInUser();
-        if(!(loggedInUser instanceof User)){
-            return false;
+    public String createReport(int reportedContentId, String description) {
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (!(loggedInUser instanceof User)) {
+            return "Only users can report content.";
         }
-        User user= (User) loggedInUser;
+        User user = (User) loggedInUser;
 
-        Content reportedContent=getContentController().findContentById(reportedContentId);
-        if (reportedContent==null){
-            return false;
+        Content reportedContent = getContentController().findContentById(reportedContentId);
+        if (reportedContent == null) {
+            return "Content not found.";
         }
 
-        User uploader= reportedContent.getUploader();
-        if(uploader==null){
-            return false;
+        User uploader = reportedContent.getUploader();
+        if (uploader == null) {
+            return "Uploader not found.";
         }
 
         Report newReport = new Report(reportedContentId, user, description);
         newReport.setReportedUserId(uploader.getUserId());
         database.getReports().add(newReport);
-        return true;
-
+        return "Report submitted successfully.";
     }
-
 
 }

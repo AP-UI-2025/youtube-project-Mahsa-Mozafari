@@ -269,6 +269,8 @@ public class AdminController {
         }
         return false;
     }
+
+
     private User findUserById(int userId) {
         for (User user : database.getUsers()) {
             if (user.getUserId() == userId) {
