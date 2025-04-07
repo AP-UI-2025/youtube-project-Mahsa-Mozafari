@@ -260,6 +260,7 @@ public class AdminController {
             userToBan.setBanned(true);
             return "User banned successfully.";
         }
+
         return "User not found.";
     }
 

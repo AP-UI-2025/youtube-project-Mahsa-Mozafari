@@ -1,10 +1,6 @@
 package View;
 
 import Controller.LibraryController;
-import Model.AccountPck.Account;
-import Model.AccountPck.User;
-import Model.ContentPck.Content;
-
 public class LibraryView {
     private LibraryController libraryController;
     LibraryView(){

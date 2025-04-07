@@ -109,17 +109,17 @@ public class PlaylistController {
     }
 
     public Playlist findPlaylistById(int id) {
-        Account user = getAuthController().getLoggedInUser();
-        if (user instanceof User) {
-            User u = (User) user;
+        Account loggedInUser = getAuthController().getLoggedInUser();
+        if (loggedInUser instanceof User) {
+            User user = (User) loggedInUser;
 
-            for (Playlist p : u.getPlaylists()) {
-                if (p.getPlaylistId() == id) return p;
+            for (Playlist playlist : user.getPlaylists()) {
+                if (playlist.getPlaylistId() == id) return playlist;
             }
-            for (Channel c : database.getChannels()) {
-                if (c.getCreator().equals(user.getFullName())) {
-                    for (Playlist p : c.getPlaylists()) {
-                        if (p.getPlaylistId() == id) return p;
+            for (Channel channel : database.getChannels()) {
+                if (channel.getCreator().equals(user.getFullName())) {
+                    for (Playlist playlist : channel.getPlaylists()) {
+                        if (playlist.getPlaylistId() == id) return playlist;
                     }
                 }
             }
