@@ -1,6 +1,6 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.CommentController;
+import com.example.videoplayer.Controller.CommentController;
 
 public class CommentView {
     private CommentController commentController;

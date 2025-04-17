@@ -1,12 +1,12 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.ChannelController;
-import Controller.UserController;
-import Model.Category;
-import Model.ContentPck.Content;
-import Model.ContentPck.ContentSpecialStatus;
-import Model.ContentPck.VideoFormat;
-import Model.ContentPck.VideoResolution;
+
+
+import com.example.videoplayer.Controller.ChannelController;
+import com.example.videoplayer.Model.Category;
+import com.example.videoplayer.Model.ContentPck.ContentSpecialStatus;
+import com.example.videoplayer.Model.ContentPck.VideoFormat;
+import com.example.videoplayer.Model.ContentPck.VideoResolution;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

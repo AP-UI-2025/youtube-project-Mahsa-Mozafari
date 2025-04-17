@@ -1,6 +1,7 @@
-package Model;
+package com.example.videoplayer.Model;
 
-import Model.ContentPck.Content;
+
+import com.example.videoplayer.Model.ContentPck.Content;
 
 import java.util.ArrayList;
 

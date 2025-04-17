@@ -1,4 +1,4 @@
-package View;
+package com.example.videoplayer.View;
 
 public class CommandPannel {
     private boolean signupCompleted=false;

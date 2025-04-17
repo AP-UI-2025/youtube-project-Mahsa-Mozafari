@@ -1,7 +1,10 @@
-package Model;
+package com.example.videoplayer.Model;
 
-import Model.AccountPck.User;
-import Model.ContentPck.Content;
+
+
+
+import com.example.videoplayer.Model.AccountPck.User;
+import com.example.videoplayer.Model.ContentPck.Content;
 
 import java.util.ArrayList;
 

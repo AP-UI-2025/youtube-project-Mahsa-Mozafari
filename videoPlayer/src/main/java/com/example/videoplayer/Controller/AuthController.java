@@ -1,10 +1,11 @@
-package Controller;
+package com.example.videoplayer.Controller;
 
-import Model.AccountPck.Account;
-import Model.AccountPck.Admin;
-import Model.AccountPck.RegularUser;
-import Model.AccountPck.User;
-import Model.Database;
+
+import com.example.videoplayer.Model.AccountPck.Account;
+import com.example.videoplayer.Model.AccountPck.Admin;
+import com.example.videoplayer.Model.AccountPck.RegularUser;
+import com.example.videoplayer.Model.AccountPck.User;
+import com.example.videoplayer.Model.Database;
 
 public class AuthController {
     private static AuthController authController;

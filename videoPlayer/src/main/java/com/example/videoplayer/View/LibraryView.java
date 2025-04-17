@@ -1,6 +1,8 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.LibraryController;
+
+import com.example.videoplayer.Controller.LibraryController;
+
 public class LibraryView {
     private LibraryController libraryController;
     LibraryView(){

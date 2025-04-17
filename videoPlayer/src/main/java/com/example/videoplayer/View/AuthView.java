@@ -1,12 +1,13 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.AuthController;
+
+import com.example.videoplayer.Controller.AuthController;
 
 public class AuthView {
     private AuthController authController;
 
     AuthView(){
-        this.authController=AuthController.getInstance();
+        this.authController= AuthController.getInstance();
     }
 
     public boolean handleSignup(String[] parts) {

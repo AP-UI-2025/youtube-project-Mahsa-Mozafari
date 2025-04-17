@@ -1,10 +1,11 @@
-package Controller;
+package com.example.videoplayer.Controller;
 
-import Model.AccountPck.Account;
-import Model.AccountPck.User;
-import Model.ContentPck.Content;
-import Model.Database;
-import Model.Report;
+
+import com.example.videoplayer.Model.AccountPck.Account;
+import com.example.videoplayer.Model.AccountPck.User;
+import com.example.videoplayer.Model.ContentPck.Content;
+import com.example.videoplayer.Model.Report;
+import com.example.videoplayer.Model.Database;
 
 public class ReportController {
     private static ReportController reportController;

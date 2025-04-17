@@ -1,11 +1,8 @@
-package View;
+package com.example.videoplayer.View;
 
-
-import Controller.ChannelController;
-import Controller.ContentController;
-import Model.Category;
-import Model.ContentPck.Content;
-import Model.Database;
+import com.example.videoplayer.Controller.ContentController;
+import com.example.videoplayer.Model.Category;
+import com.example.videoplayer.Model.ContentPck.Content;
 
 import java.util.ArrayList;
 

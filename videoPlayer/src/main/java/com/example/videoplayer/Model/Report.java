@@ -1,6 +1,7 @@
-package Model;
+package com.example.videoplayer.Model;
 
-import Model.AccountPck.User;
+
+import com.example.videoplayer.Model.AccountPck.User;
 
 public class Report {
     private int reportedContentId;

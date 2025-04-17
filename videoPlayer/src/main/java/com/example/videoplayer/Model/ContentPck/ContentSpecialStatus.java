@@ -1,4 +1,4 @@
-package Model.ContentPck;
+package com.example.videoplayer.Model.ContentPck;
 
 public enum ContentSpecialStatus {
     SPECIAL,

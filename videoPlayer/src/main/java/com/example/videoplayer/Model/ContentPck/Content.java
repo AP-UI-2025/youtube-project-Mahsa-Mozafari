@@ -1,8 +1,8 @@
-package Model.ContentPck;
+package com.example.videoplayer.Model.ContentPck;
 
-import Model.AccountPck.User;
-import Model.Category;
-import Model.Comment;
+import com.example.videoplayer.Model.AccountPck.User;
+import com.example.videoplayer.Model.Category;
+import com.example.videoplayer.Model.Comment;
 
 import java.util.ArrayList;
 import java.util.Date;

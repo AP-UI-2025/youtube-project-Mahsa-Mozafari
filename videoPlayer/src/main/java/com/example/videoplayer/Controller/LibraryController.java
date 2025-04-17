@@ -1,11 +1,12 @@
-package Controller;
+package com.example.videoplayer.Controller;
 
-import Model.AccountPck.Account;
-import Model.AccountPck.User;
-import Model.Channel;
-import Model.ContentPck.Content;
-import Model.Database;
-import Model.Playlist;
+
+import com.example.videoplayer.Model.AccountPck.Account;
+import com.example.videoplayer.Model.AccountPck.User;
+import com.example.videoplayer.Model.Channel;
+import com.example.videoplayer.Model.ContentPck.Content;
+import com.example.videoplayer.Model.Playlist;
+import com.example.videoplayer.Model.Database;
 
 import java.util.ArrayList;
 

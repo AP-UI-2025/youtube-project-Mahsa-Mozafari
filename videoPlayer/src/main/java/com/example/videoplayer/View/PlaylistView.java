@@ -1,6 +1,6 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.PlaylistController;
+import com.example.videoplayer.Controller.PlaylistController;
 
 public class PlaylistView {
 private PlaylistController playlistController;

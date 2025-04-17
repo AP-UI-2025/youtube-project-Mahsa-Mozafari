@@ -1,7 +1,7 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.UserController;
-import Model.AccountPck.PremiumPackage;
+import com.example.videoplayer.Controller.UserController;
+import com.example.videoplayer.Model.AccountPck.PremiumPackage;
 
 public class UserView {
     private UserController userController;
@@ -23,7 +23,7 @@ public class UserView {
     }
 
     public void handleBuyPremium(String[] parts) {
-        PremiumPackage packageType=PremiumPackage.valueOf(parts[1].trim().toUpperCase());
+        PremiumPackage packageType= PremiumPackage.valueOf(parts[1].trim().toUpperCase());
             String result =userController.buyPremium(packageType);
         System.out.println(result);
     }

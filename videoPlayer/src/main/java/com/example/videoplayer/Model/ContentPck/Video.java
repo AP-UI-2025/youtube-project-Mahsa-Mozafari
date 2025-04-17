@@ -1,6 +1,7 @@
-package Model.ContentPck;
+package com.example.videoplayer.Model.ContentPck;
 
-import Model.Category;
+
+import com.example.videoplayer.Model.Category;
 
 public abstract class Video extends Content {
     private String videoSubtitle;

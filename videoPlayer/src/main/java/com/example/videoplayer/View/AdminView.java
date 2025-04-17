@@ -1,6 +1,7 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.AdminController;
+
+import com.example.videoplayer.Controller.AdminController;
 
 public class AdminView {
     private AdminController adminController;

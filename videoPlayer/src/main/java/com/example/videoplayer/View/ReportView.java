@@ -1,6 +1,7 @@
-package View;
+package com.example.videoplayer.View;
 
-import Controller.ReportController;
+
+import com.example.videoplayer.Controller.ReportController;
 
 public class ReportView {
     private ReportController reportController;

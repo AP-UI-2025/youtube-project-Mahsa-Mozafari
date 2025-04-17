@@ -1,4 +1,4 @@
-package Model.AccountPck;
+package com.example.videoplayer.Model.AccountPck;
 
 public class Admin extends Account {
     private static Admin admin;

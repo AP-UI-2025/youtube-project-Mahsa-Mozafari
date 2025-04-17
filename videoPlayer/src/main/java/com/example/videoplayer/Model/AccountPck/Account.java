@@ -1,4 +1,4 @@
-package Model.AccountPck;
+package com.example.videoplayer.Model.AccountPck;
 
 public abstract class Account {
     private String username;
