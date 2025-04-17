@@ -68,7 +68,7 @@ public class ChannelController {
 
                 Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
                 newPodcast.setUploader(user);
-                channel.getPlaylists().get(0).getContents().add(newPodcast);
+                channel.getPlaylists().getFirst().getContents().add(newPodcast);
                 database.getContents().add(newPodcast);
                 return "Podcast published successfully.";
             }
