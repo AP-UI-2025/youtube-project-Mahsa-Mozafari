@@ -11,7 +11,7 @@ public class RegularUser extends User {
     private final int MAX_PLAYLIST;
 
     public RegularUser(String username, String fullName, String phoneNumber, String email, String profileCover) {
-        super(username, fullName, phoneNumber, email, new ArrayList<Category>(), profileCover);
+        super(username, fullName, phoneNumber, email, new ArrayList<>(), profileCover);
         this.MAX_CONTENT_PER_PLAYLIST=10;
         this.MAX_PLAYLIST=3;
     }
@@ -27,10 +27,7 @@ public class RegularUser extends User {
 
     @Override
     public boolean canCreatePlaylist() {
-        if ((getPlaylists().size()-2)>=MAX_PLAYLIST){
-            return false;
-        }
-        return true;
+        return (getPlaylists().size() - 2) < MAX_PLAYLIST;
     }
 
     @Override
