@@ -60,7 +60,6 @@ public class ContentController {
                 results.add("Channel: " + channel.getChannelName());
             }
         }
-
         return results;
     }
 
