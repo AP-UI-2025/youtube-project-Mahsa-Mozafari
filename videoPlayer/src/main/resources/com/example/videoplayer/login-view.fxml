@@ -20,6 +20,7 @@
             <PasswordField fx:id="passwordText" promptText="password" />
             <Button mnemonicParsing="false" onAction="#loginAct" text="Login" />
             <Button mnemonicParsing="false" onAction="#backToStart" text="Back" />
+            <Label fx:id="messageLabel" text="message" textFill="WHITE" />
          </children>
       </VBox>
    </children>
