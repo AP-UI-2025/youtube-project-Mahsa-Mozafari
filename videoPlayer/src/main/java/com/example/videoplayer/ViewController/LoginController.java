@@ -1,10 +1,11 @@
-package com.example.videoplayer.Controller;
+package com.example.videoplayer.ViewController;
 
+import com.example.videoplayer.Controller.AuthController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -17,10 +18,6 @@ public static Stage ctrlStage;
 
     @FXML
     private PasswordField passwordText;
-
-    @FXML
-    private Label messageLabel;
-
 
     @FXML
     private TextField usernameText;
@@ -43,9 +40,17 @@ public static Stage ctrlStage;
             ctrlStage.setScene(scene);
             ctrlStage.show();
         } else if (result.equals("banned_user")) {
-            messageLabel.setText("You are banned.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Access Denied");
+            alert.setHeaderText(null);
+            alert.setContentText("You are banned");
+            alert.show();
         } else if (result.equals("invalid")) {
-            messageLabel.setText("Invalid username or password");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid username or password.");
+            alert.show();
         }
     }
 }

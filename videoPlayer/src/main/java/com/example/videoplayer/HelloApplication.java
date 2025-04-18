@@ -1,7 +1,8 @@
 package com.example.videoplayer;
 
-import com.example.videoplayer.Controller.LoginController;
-import com.example.videoplayer.Controller.MainController;
+import com.example.videoplayer.ViewController.LoginController;
+import com.example.videoplayer.ViewController.MainController;
+import com.example.videoplayer.ViewController.SignupController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         MainController.ctrlStage = stage;
         LoginController.ctrlStage = stage;
+        SignupController.ctrlStage=stage;
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));

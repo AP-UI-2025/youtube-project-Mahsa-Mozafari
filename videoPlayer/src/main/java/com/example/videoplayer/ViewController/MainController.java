@@ -1,4 +1,4 @@
-package com.example.videoplayer.Controller;
+package com.example.videoplayer.ViewController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +20,11 @@ public class MainController {
     }
 
     @FXML
-    void goToSignup(ActionEvent event) {
+    void goToSignup(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/signup-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
 
     }
 }

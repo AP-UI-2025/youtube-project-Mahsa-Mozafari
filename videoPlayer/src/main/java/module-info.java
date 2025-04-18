@@ -14,4 +14,6 @@ module com.example.videoplayer {
     opens com.example.videoplayer.View to javafx.fxml;
 
     opens com.example.videoplayer.Controller to javafx.fxml;
+    exports com.example.videoplayer.ViewController;
+    opens com.example.videoplayer.ViewController to javafx.fxml;
 }

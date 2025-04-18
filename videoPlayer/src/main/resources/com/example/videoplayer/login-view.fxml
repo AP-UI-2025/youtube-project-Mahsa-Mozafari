@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Controller.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.ViewController.LoginController">
    <children>
       <VBox alignment="CENTER" layoutX="78.0" layoutY="19.0" prefHeight="360.0" prefWidth="462.0" spacing="20.0" style="-fx-border-color: gray; -fx-border-width: 3;">
          <padding>
@@ -20,7 +20,6 @@
             <PasswordField fx:id="passwordText" promptText="password" />
             <Button mnemonicParsing="false" onAction="#loginAct" text="Login" />
             <Button mnemonicParsing="false" onAction="#backToStart" text="Back" />
-            <Label fx:id="messageLabel" text="message" textFill="WHITE" />
          </children>
       </VBox>
    </children>
