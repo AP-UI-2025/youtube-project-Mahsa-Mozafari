@@ -72,10 +72,10 @@ public class SignupController {
                 alert.show();
                 break;
             case "success":
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/login-view.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/category-view.fxml"));
                         Scene scene = new Scene(fxmlLoader.load(), 680, 480);
-                        LoginController.ctrlStage.setScene(scene);
-                        LoginController.ctrlStage.show();
+                        SignupController.ctrlStage.setScene(scene);
+                        SignupController.ctrlStage.show();
                 break;
         }
     }
