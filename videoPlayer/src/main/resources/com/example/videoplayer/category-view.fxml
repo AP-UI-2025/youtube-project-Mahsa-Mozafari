@@ -33,7 +33,7 @@
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="134.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="submitBtn" layoutX="274.0" layoutY="344.0" mnemonicParsing="false" onAction="#submitAct" text="Submit" />
+      <Button fx:id="submitBtn" layoutX="272.0" layoutY="360.0" mnemonicParsing="false" onAction="#submitAct" text="Submit" />
       <Label layoutX="219.0" layoutY="35.0" text="Favorite Categories" textAlignment="CENTER" textFill="#fcf7f7">
          <font>
             <Font name="Georgia Bold" size="16.0" />

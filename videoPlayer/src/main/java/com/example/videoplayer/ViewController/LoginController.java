@@ -35,7 +35,7 @@ public static Stage ctrlStage;
         String result = AuthController.getInstance().login(usernameText.getText(), passwordText.getText());
 
         if (result.startsWith("success")) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 680, 480);
             ctrlStage.setScene(scene);
             ctrlStage.show();
