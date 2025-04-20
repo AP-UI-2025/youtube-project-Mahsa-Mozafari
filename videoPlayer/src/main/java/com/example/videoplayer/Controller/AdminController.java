@@ -195,7 +195,6 @@ public class AdminController {
 
         return result.toString();
     }
-
     public String confirmReport(int reportedContentId){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof Admin)) {
@@ -279,7 +278,6 @@ public class AdminController {
         return "Content not found.";
     }
 
-
     private User findUserById(int userId) {
         for (User user : database.getUsers()) {
             if (user.getUserId() == userId) {
@@ -288,7 +286,6 @@ public class AdminController {
         }
         return null;
     }
-
     private Report findReport(int contentId){
         for (Report report: database.getReports()){
             if (report.getReportedContentId()==contentId) {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.ViewController.AdminPanelController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="600.0" prefWidth="137.0" spacing="50.0" style="-fx-background-color: #000000;">
+            <children>
+                <Label text="Admin" textFill="#ff0202">
+                    <font>
+                        <Font name="System Bold" size="30.0" />
+                    </font>
+                </Label>
+                <Label text="Panel" textFill="RED">
+                    <font>
+                        <Font name="Georgia Bold" size="30.0" />
+                    </font>
+                </Label>
+            <Button mnemonicParsing="false" text="Logout" />
+                <Separator prefWidth="200.0" />
+                <Button mnemonicParsing="false" text="ShowUsers" />
+                <Button mnemonicParsing="false" text="ShowContents" />
+                <Button mnemonicParsing="false" text="ShowReports" />
+                <Button mnemonicParsing="false" text="ShowChannels" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+        <TabPane layoutX="138.0" prefHeight="600.0" prefWidth="762.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Popular Contents" />
+                <Tab text="Report Management">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="500.0">
+                            <TableView fx:id="reportTable" layoutX="13.0" layoutY="20.0" prefHeight="471.0" prefWidth="711.0">
+                                <columns>
+                                    <TableColumn fx:id="reportIdColumn" prefWidth="100.0" text="Report ID" />
+                                    <TableColumn fx:id="userColumn" prefWidth="160.0" text="User" />
+                                    <TableColumn fx:id="contentColumn" prefWidth="300.0" text="Content" />
+                                    <TableColumn fx:id="statusColumn" prefWidth="150.0" text="Status" />
+                                </columns>
+                            </TableView>
+                            <HBox layoutX="265.0" layoutY="491.0" spacing="10.0">
+                                <Button text="Confirm" />
+                                <Button text="Reject" />
+                                <Button text="Unban User" />
+                            </HBox>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Popular Channels">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
