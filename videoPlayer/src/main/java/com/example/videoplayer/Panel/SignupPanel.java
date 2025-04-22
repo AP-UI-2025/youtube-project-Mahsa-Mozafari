@@ -1,4 +1,4 @@
-package com.example.videoplayer.ViewController;
+package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.AuthController;
 import javafx.event.ActionEvent;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SignupController {
+public class SignupPanel {
     public static Stage ctrlStage;
 
     @FXML
@@ -74,8 +74,8 @@ public class SignupController {
             case "success":
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/category-view.fxml"));
                         Scene scene = new Scene(fxmlLoader.load(), 680, 480);
-                        SignupController.ctrlStage.setScene(scene);
-                        SignupController.ctrlStage.show();
+                        SignupPanel.ctrlStage.setScene(scene);
+                        SignupPanel.ctrlStage.show();
                 break;
         }
     }

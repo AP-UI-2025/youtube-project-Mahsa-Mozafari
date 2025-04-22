@@ -1,4 +1,4 @@
-package com.example.videoplayer.ViewController;
+package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.ContentController;
 import com.example.videoplayer.Model.ContentPck.Content;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class HomeController {
+public class HomePanel {
     public static Stage ctrlStage;
     @FXML
     private VBox mainContainer;

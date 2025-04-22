@@ -1,4 +1,4 @@
-package com.example.videoplayer.ViewController;
+package com.example.videoplayer.Panel;
 import com.example.videoplayer.Controller.UserController;
 import com.example.videoplayer.Model.Category;
 import javafx.event.ActionEvent;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class CategoryController {
+public class CategoryPanel {
     public static Stage ctrlStage;
 
     @FXML
@@ -82,8 +82,8 @@ public class CategoryController {
         if (result.equals("Categories updated.")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/login-view.fxml"));
             Scene scene = new Scene(loader.load(), 800, 600);
-            LoginController.ctrlStage.setScene(scene);
-            LoginController.ctrlStage.show();
+            LoginPanel.ctrlStage.setScene(scene);
+            LoginPanel.ctrlStage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

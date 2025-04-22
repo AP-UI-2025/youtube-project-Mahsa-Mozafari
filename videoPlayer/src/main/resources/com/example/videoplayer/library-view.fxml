@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.LibraryView">
    <children>
-      <VBox alignment="CENTER" layoutX="-1.0" prefHeight="526.0" prefWidth="128.0" spacing="30.0" style="-fx-background-color: #1e1e1e;">
+      <VBox alignment="CENTER" layoutX="-1.0" prefHeight="526.0" prefWidth="135.0" spacing="30.0" style="-fx-background-color: #1e1e1e;">
          <children>
             <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="homeBtn" mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" text="🏠" textFill="WHITE">

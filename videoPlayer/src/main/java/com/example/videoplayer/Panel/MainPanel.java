@@ -1,4 +1,4 @@
-package com.example.videoplayer.ViewController;
+package com.example.videoplayer.Panel;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainController {
+public class MainPanel {
     public static Stage ctrlStage;
     @FXML
     void goToLogin(ActionEvent event) throws IOException {

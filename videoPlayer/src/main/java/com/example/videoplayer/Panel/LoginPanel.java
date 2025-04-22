@@ -1,4 +1,4 @@
-package com.example.videoplayer.ViewController;
+package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.AuthController;
 import javafx.event.ActionEvent;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginController {
+public class LoginPanel {
 
 public static Stage ctrlStage;
 

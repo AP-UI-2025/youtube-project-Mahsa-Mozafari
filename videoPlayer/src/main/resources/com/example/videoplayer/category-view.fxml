@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.ViewController.CategoryController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.CategoryPanel">
    <children>
       <GridPane fx:id="categoryGrid" alignment="CENTER" layoutX="110.0" layoutY="74.0" prefHeight="238.0" prefWidth="379.0" AnchorPane.bottomAnchor="87.20000000000002" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.40000000000003" AnchorPane.topAnchor="74.0">
         <columnConstraints>
