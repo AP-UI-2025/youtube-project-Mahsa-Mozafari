@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.PlaylistPanel">
+   <children>
+      <VBox alignment="CENTER" layoutY="-13.0" prefHeight="526.0" prefWidth="135.0" spacing="30.0" style="-fx-background-color: #1e1e1e;">
+         <children>
+            <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="homeBtn" mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" text="🏠" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="libraryBtn" mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" text="📚" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="subscriptionBtn" mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" text="📁" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="channelBtn" mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" text="👤" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </VBox>
+      <ScrollPane fitToWidth="true" layoutX="155.0" prefHeight="513.0" prefWidth="644.0">
+         <content>
+            <VBox fx:id="playlistContainer" prefHeight="516.0" prefWidth="629.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

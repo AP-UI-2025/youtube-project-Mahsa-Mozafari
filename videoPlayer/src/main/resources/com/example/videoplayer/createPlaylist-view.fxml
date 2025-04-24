@@ -18,11 +18,11 @@
                   <Font name="Segoe UI Bold" size="21.0" />
                </font>
             </Label>
-            <TextField prefHeight="47.0" prefWidth="450.0" promptText="Title:" />
+            <TextField fx:id="playlistName" prefHeight="47.0" prefWidth="450.0" promptText="Title:" />
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="430.0" spacing="60.0">
                <children>
                   <Button fx:id="handleCancel" mnemonicParsing="false" style="-fx-background-color: #ff0000;" text="Cancel" textFill="WHITE" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" text="Create" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#handleCreatePlaylist" style="-fx-background-color: #1e1e1e;" text="Create" textFill="WHITE" />
                </children>
             </HBox>
          </children>

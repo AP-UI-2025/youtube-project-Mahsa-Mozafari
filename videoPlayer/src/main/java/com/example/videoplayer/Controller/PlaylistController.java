@@ -61,6 +61,7 @@ public class PlaylistController {
         }
 
         user.getPlaylists().add(new Playlist(playlistName));
+
         return "Playlist created successfully.";
     }
 
