@@ -8,8 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SignupPanel {
@@ -32,6 +37,33 @@ public class SignupPanel {
 
     @FXML
     private TextField usernameTxt;
+
+    @FXML
+    private ImageView profileImageView;
+
+    private File selectedProfilePicture;
+
+    @FXML
+    public void initialize() {
+        Circle clip = new Circle(50, 50, 50); // x, y, radius
+        profileImageView.setClip(clip);
+    }
+
+    @FXML
+    private void chooseProfilePicture() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Picture");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+        Stage stage = (Stage) profileImageView.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            selectedProfilePicture = file;
+            Image image = new Image(file.toURI().toString());
+            profileImageView.setImage(image);
+        }
+    }
 
     @FXML
     void signupAct(ActionEvent event) throws IOException {
@@ -73,7 +105,7 @@ public class SignupPanel {
                 break;
             case "success":
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/category-view.fxml"));
-                        Scene scene = new Scene(fxmlLoader.load(), 680, 480);
+                        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
                         SignupPanel.ctrlStage.setScene(scene);
                         SignupPanel.ctrlStage.show();
                 break;
@@ -82,7 +114,7 @@ public class SignupPanel {
     @FXML
     void backToStart(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         ctrlStage.setScene(scene);
         ctrlStage.show();
 

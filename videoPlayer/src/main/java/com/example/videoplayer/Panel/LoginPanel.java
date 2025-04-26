@@ -25,7 +25,7 @@ public static Stage ctrlStage;
     @FXML
     void backToStart(ActionEvent event)throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         ctrlStage.setScene(scene);
         ctrlStage.show();
     }
@@ -36,7 +36,7 @@ public static Stage ctrlStage;
 
         if (result.startsWith("success")) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 680, 480);
+            Scene scene = new Scene(fxmlLoader.load(), 900, 500);
             ctrlStage.setScene(scene);
             ctrlStage.show();
         } else if (result.equals("banned_user")) {

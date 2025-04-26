@@ -5,31 +5,50 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.SignupPanel">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.SignupPanel">
    <children>
-      <VBox alignment="CENTER" layoutX="43.0" layoutY="14.0" prefHeight="380.0" prefWidth="508.0" spacing="15.0">
+      <VBox alignment="CENTER" layoutX="222.0" layoutY="9.0" prefHeight="470.0" prefWidth="478.0" spacing="15.0" style="-fx-border-color: #dcdcdc; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-radius: 10;">
          <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <Label text="Signup" textFill="#fcfafa">
+
+            <Label text="Sign Up" textFill="#202020">
                <font>
-                  <Font name="Georgia Bold" size="16.0" />
+                  <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTxt" promptText="username" />
-            <PasswordField fx:id="passwordTxt" promptText="password" />
-            <TextField fx:id="fullNameTxt" promptText="fullName" />
-            <TextField fx:id="emailTxt" promptText="email" />
-            <TextField fx:id="phoneNumberTxt" promptText="phoneNumber" />
-            <TextField fx:id="profileTxt" />
-            <Button mnemonicParsing="false" onAction="#signupAct" text="Signup" />
-            <Button mnemonicParsing="false" onAction="#backToStart" text="Back" />
+
+            <StackPane>
+               <ImageView fx:id="profileImageView" fitHeight="99.0" fitWidth="182.0" preserveRatio="true" style="-fx-background-color: lightgray;" />
+            </StackPane>
+            <Button onAction="#chooseProfilePicture" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-background-radius: 8;" text="Choose Profile Picture" />
+
+
+            <TextField fx:id="usernameTxt" promptText="Username" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cccccc;" />
+            <PasswordField fx:id="passwordTxt" promptText="Password" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cccccc;" />
+            <TextField fx:id="fullNameTxt" promptText="Full Name" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cccccc;" />
+            <TextField fx:id="emailTxt" promptText="Email" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cccccc;" />
+            <TextField fx:id="phoneNumberTxt" promptText="Phone Number" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #cccccc;" />
+
+            <HBox alignment="CENTER" spacing="10.0">
+               <Button onAction="#signupAct" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Sign Up" />
+               <Button onAction="#backToStart" style="-fx-background-color: transparent; -fx-border-color: #FF0000; -fx-text-fill: #FF0000; -fx-border-radius: 8; -fx-font-weight: bold;" text="Back" />
+            </HBox>
          </children>
       </VBox>
+      <ImageView fitHeight="135.0" fitWidth="223.0" layoutX="-36.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Image/1000043274-removebg-preview.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

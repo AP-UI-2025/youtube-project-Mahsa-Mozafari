@@ -2,12 +2,16 @@ package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.ContentController;
 import com.example.videoplayer.Model.ContentPck.Content;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HomePanel {
@@ -38,7 +42,8 @@ public class HomePanel {
     }
 
     @FXML
-    private void onSearch() {
+    private void onSearch(ActionEvent event
+    ) {
         String keyword = searchField.getText().trim();
 
         if (keyword.isEmpty()) {
@@ -62,5 +67,32 @@ public class HomePanel {
                 mainContainer.getChildren().add(label);
             }
         }
+    }
+
+    @FXML
+    void goToChannel(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channel-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
+    }
+
+    @FXML
+    void goToLibrary(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/library-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
+    }
+
+    @FXML
+    void goToSubscription(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 680, 480);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
     }
 }

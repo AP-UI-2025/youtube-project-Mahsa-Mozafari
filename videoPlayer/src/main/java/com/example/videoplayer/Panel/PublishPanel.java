@@ -1,4 +1,4 @@
-package com.example.videoplayer.Panel;
+/*package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.AuthController;
 import com.example.videoplayer.Controller.ContentController;
@@ -160,3 +160,5 @@ public class PublishPanel {
         alert.show();
     }
 }
+
+ */

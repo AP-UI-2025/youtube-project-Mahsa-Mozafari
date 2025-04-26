@@ -18,8 +18,8 @@ public class HelloApplication extends Application {
         HomePanel.ctrlStage=stage;
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("library-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         stage.setTitle("Youtube");
         stage.setScene(scene);
         stage.show();

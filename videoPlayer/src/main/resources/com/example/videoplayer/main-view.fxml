@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.MainPanel">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.MainPanel">
    <children>
-      <Text fill="#ff2121" layoutX="20.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Youtube" wrappingWidth="133.0198974609375">
-         <font>
-            <Font name="Segoe UI Bold" size="27.0" />
-         </font>
-      </Text>
-      <Button layoutX="260.0" layoutY="137.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="36.0" prefWidth="79.0" text="Login">
-         <font>
-            <Font name="Georgia Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button layoutX="260.0" layoutY="213.0" mnemonicParsing="false" onAction="#goToSignup" prefHeight="36.0" prefWidth="79.0" text="Signup">
-         <font>
-            <Font name="Georgia Bold" size="16.0" />
-         </font>
-      </Button>
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="900.0" spacing="30.0">
+         <padding>
+            <Insets bottom="40.0" left="50.0" right="50.0" top="40.0" />
+         </padding>
+         <children>
+
+            <ImageView fitHeight="306.0" fitWidth="303.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Image/444-ezgif.com-video-to-gif-converter.gif" />
+               </image>
+            </ImageView>
+
+            <Button mnemonicParsing="false" onAction="#goToSignup" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1; -fx-border-radius: 12; -fx-background-radius: 12; -fx-font-family: 'Georgia'; -fx-font-size: 16px; -fx-text-fill: #333333; -fx-cursor: hand;">
+               <text>Signup</text>
+            </Button>
+
+            <Button mnemonicParsing="false" onAction="#goToLogin" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1; -fx-border-radius: 12; -fx-background-radius: 12; -fx-font-family: 'Georgia'; -fx-font-size: 16px; -fx-text-fill: #333333; -fx-cursor: hand;">
+               <text>Login</text>
+            </Button>
+
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
