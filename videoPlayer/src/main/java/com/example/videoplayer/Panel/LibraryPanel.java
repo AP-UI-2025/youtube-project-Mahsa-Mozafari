@@ -80,4 +80,12 @@ public class LibraryPanel {
         ctrlStage.setScene(scene);
         ctrlStage.show();
     }
+
+    @FXML
+    void goToPlaylistPanel(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/playlist-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+    }
 }

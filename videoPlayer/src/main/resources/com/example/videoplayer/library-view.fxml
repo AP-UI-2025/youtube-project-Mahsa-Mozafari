@@ -75,7 +75,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="9.0" prefWidth="97.0" style="-fx-background-color: #ff0000; -fx-background-radius: 20; -fx-font-weight: bold;" text="View All" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#goToPlaylistPanel" prefHeight="9.0" prefWidth="97.0" style="-fx-background-color: #ff0000; -fx-background-radius: 20; -fx-font-weight: bold;" text="View All" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
