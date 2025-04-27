@@ -54,7 +54,7 @@ public class AdminController {
                 "Full Name: " + Admin.getInstance().getFullName() + "\n" +
                 "Phone Number: " + Admin.getInstance().getPhoneNumber() + "\n" +
                 "Email: " + Admin.getInstance().getEmail() + "\n" +
-                "Profile Cover: " + Admin.getInstance().getProfileCover();
+                "Profile Cover: " + Admin.getInstance().getProfileCoverLink();
     }
 
 

@@ -69,17 +69,9 @@ public class HomePanel {
         }
     }
 
-    @FXML
-    void goToChannel(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channel-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
-        ctrlStage.setScene(scene);
-        ctrlStage.show();
-
-    }
 
     @FXML
-    void goToLibrary(ActionEvent event) throws IOException {
+    public void goToLibrary(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/library-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         ctrlStage.setScene(scene);
@@ -87,12 +79,4 @@ public class HomePanel {
 
     }
 
-    @FXML
-    void goToSubscription(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 680, 480);
-        ctrlStage.setScene(scene);
-        ctrlStage.show();
-
-    }
 }

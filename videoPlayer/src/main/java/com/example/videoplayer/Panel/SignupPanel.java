@@ -23,8 +23,6 @@ public class SignupPanel {
     @FXML
     private TextField emailTxt;
 
-    @FXML
-    private TextField profileTxt;
 
     @FXML
     private TextField fullNameTxt;
@@ -67,7 +65,8 @@ public class SignupPanel {
 
     @FXML
     void signupAct(ActionEvent event) throws IOException {
-        String result = AuthController.getInstance().signup(usernameTxt.getText(), passwordTxt.getText(),fullNameTxt.getText(),emailTxt.getText(),phoneNumberTxt.getText(),profileTxt.getText());
+        String profileCoverLink=selectedProfilePicture!=null?selectedProfilePicture.toURI().toString():null;
+        String result = AuthController.getInstance().signup(usernameTxt.getText(), passwordTxt.getText(),fullNameTxt.getText(),emailTxt.getText(),phoneNumberTxt.getText(),profileCoverLink);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);

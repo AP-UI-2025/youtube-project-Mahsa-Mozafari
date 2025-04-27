@@ -14,9 +14,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CreatePlaylistPanel {
-    public Stage ctrlStage;
+    public static Stage ctrlStage;
+
+    @FXML
+    private LibraryPanel libraryPanel=new LibraryPanel();
     @FXML
     private TextField playlistNameField;
+    @FXML
+    private AnchorPane overlayPane;
 
     @FXML
     void handleCreatePlaylist(ActionEvent event) throws IOException {
@@ -55,14 +60,12 @@ public class CreatePlaylistPanel {
 
 
     @FXML
-    private void handleCancel(ActionEvent event) {
-
-        Node source = (Node) event.getSource();
-        AnchorPane popup = (AnchorPane) source.getScene().getRoot();
-        AnchorPane overlay = (AnchorPane) popup.getParent();
-        overlay.getChildren().clear();
-        overlay.setVisible(false);
-        overlay.setManaged(false);
+    private void handleCancel(ActionEvent event) throws IOException {
+       libraryPanel.closeOverlay();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/library-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
     }
 }
 

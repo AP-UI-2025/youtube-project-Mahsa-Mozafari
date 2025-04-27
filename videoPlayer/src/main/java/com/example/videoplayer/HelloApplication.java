@@ -16,6 +16,8 @@ public class HelloApplication extends Application {
         SignupPanel.ctrlStage=stage;
         CategoryPanel.ctrlStage=stage;
         HomePanel.ctrlStage=stage;
+        LibraryPanel.ctrlStage=stage;
+        CreatePlaylistPanel.ctrlStage=stage;
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));

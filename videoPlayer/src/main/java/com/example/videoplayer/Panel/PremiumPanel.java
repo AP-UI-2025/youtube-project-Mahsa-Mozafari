@@ -6,7 +6,6 @@ import com.example.videoplayer.Model.AccountPck.PremiumPackage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -32,7 +31,7 @@ public class PremiumPanel {
         bronzeImage.setStyle("");
         silverImage.setStyle("");
         goldImage.setStyle("");
-        selectedImage.setStyle("-fx-effect: dropshadow(three-pass-box, gold, 10, 0, 0, 0);");
+        selectedImage.setStyle("-fx-effect: dropshadow(three-pass-box, red, 10, 0, 0, 0);");
     }
 
     @FXML

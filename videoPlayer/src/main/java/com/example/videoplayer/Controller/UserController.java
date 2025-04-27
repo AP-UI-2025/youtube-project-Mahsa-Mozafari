@@ -47,9 +47,9 @@ public class UserController {
         }
         User user=(User) loggedInUser;
         return "Account Info:\n" +
-                "FullName: " + user.getFullName() + "\n" +
+                "FullName: " + user.getFullName() + " | " +
                 "Password: " + user.getPassword()+ "\n"+
-                "Email: " +  user.getEmail()+"\n"+
+                "Email: " +  user.getEmail()+" | "+
                 "Username: "+ user.getUsername()+"\n";
     }
 
@@ -164,7 +164,7 @@ public class UserController {
                     user.getPhoneNumber(),
                     user.getEmail(),
                     user.getFavoriteCategories(),
-                    user.getProfileCover()
+                    user.getProfileCoverLink()
             );
             premiumUser.setCredit(user.getCredit());
             premiumUser.setSubscriptionEndDate(new Date(System.currentTimeMillis() + packageType.getDays()));

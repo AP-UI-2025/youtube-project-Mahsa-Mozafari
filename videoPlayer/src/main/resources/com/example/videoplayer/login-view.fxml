@@ -25,8 +25,8 @@
             </Label>
             <TextField fx:id="usernameText" promptText="Username" />
             <PasswordField fx:id="passwordText" promptText="Password" />
-            <Button mnemonicParsing="false" onAction="#loginAct" style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-background-radius: 5;" text="Login" />
-            <Button mnemonicParsing="false" onAction="#backToStart" style="-fx-background-color: transparent; -fx-text-fill: #ff0000; -fx-border-color: #ff0000; -fx-border-radius: 5;" text="Back" />
+            <Button mnemonicParsing="false" onAction="#loginAct" style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Login" />
+            <Button mnemonicParsing="false" onAction="#backToStart" style="-fx-background-color: transparent; -fx-text-fill: #ff0000; -fx-border-color: #ff0000; -fx-border-radius: 8; -fx-font-weight: bold;" text="Back" />
          </children>
       </VBox>
       <ImageView fitHeight="149.0" fitWidth="220.0" layoutX="-36.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">

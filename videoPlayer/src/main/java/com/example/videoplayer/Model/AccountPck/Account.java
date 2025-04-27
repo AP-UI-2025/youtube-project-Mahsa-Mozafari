@@ -5,7 +5,7 @@ public abstract class Account {
     private String password;
     private String fullName;
     private String email;
-    private String profileCover;
+    private String profileCoverLink;
     private String phoneNumber;
 
     public Account(String username, String fullName, String phoneNumber, String email,String profileCover) {
@@ -14,7 +14,7 @@ public abstract class Account {
         this.fullName=fullName;
         this.phoneNumber=phoneNumber;
         this.password="";
-        this.profileCover=profileCover;
+        this.profileCoverLink =profileCover;
     }
 
 
@@ -34,8 +34,8 @@ public abstract class Account {
         return password;
     }
 
-    public String getProfileCover() {
-        return profileCover;
+    public String getProfileCoverLink() {
+        return profileCoverLink;
     }
 
     public String getUsername() {
@@ -54,8 +54,8 @@ public abstract class Account {
         this.password = password;
     }
 
-    public void setProfileCover(String profileCover) {
-        this.profileCover = profileCover;
+    public void setProfileCoverLink(String profileCoverLink) {
+        this.profileCoverLink = profileCoverLink;
     }
 
     public void setPhoneNumber(String phoneNumber) {
