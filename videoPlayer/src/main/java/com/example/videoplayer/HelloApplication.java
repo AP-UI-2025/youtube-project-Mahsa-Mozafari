@@ -19,6 +19,7 @@ public class HelloApplication extends Application {
         LibraryPanel.ctrlStage=stage;
         CreatePlaylistPanel.ctrlStage=stage;
         PlaylistPanel.ctrlStage=stage;
+        CreateChannelPanel.ctrlStage=stage;
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));

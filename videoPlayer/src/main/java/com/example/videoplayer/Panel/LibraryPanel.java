@@ -88,4 +88,12 @@ public class LibraryPanel {
         ctrlStage.setScene(scene);
         ctrlStage.show();
     }
+
+    @FXML
+    void goToCreateChannelPanel(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/createChannel-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+    }
 }
