@@ -17,7 +17,7 @@ public class ChannelController {
     private Database database;
     private AuthController authController;
 
-    private ChannelController(){
+    public ChannelController(){
         this.database=Database.getInstance();
     }
     public static ChannelController getInstance(){
