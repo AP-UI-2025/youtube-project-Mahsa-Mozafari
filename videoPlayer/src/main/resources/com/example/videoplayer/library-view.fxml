@@ -75,7 +75,7 @@
                         <Font name="Georgia Bold" size="21.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#showCreatePlaylist" prefHeight="22.0" prefWidth="39.0" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10;" text="+">
+                  <Button mnemonicParsing="false" onAction="#showCreatePlaylistForUser" prefHeight="22.0" prefWidth="39.0" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10;" text="+">
                      <font>
                         <Font size="16.0" />
                      </font>

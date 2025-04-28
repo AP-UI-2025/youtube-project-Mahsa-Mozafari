@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.CreatePlaylistPanel">
+<AnchorPane prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.CreatePlaylistForUserPanel">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" spacing="60.0" style="-fx-border-radius: 5; -fx-background-color: gray;">
          <children>
@@ -22,7 +22,7 @@
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="430.0" spacing="60.0">
                <children>
                   <Button fx:id="handleCancel" mnemonicParsing="false" style="-fx-background-color: #ff0000;" text="Cancel" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#handleCreatePlaylist" style="-fx-background-color: #1e1e1e;" text="Create" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#handleCreatePlaylistForUser" style="-fx-background-color: #1e1e1e;" text="Create" textFill="WHITE" />
                </children>
             </HBox>
          </children>

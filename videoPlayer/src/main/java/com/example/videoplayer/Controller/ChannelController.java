@@ -43,6 +43,9 @@ public class ChannelController {
         }
 
         User user = (User) loggedInUser;
+        if(user.getChannel()!=null){
+            return "You have already created a channel";
+        }
         Channel newChannel = new Channel(channelName, description, channelCover, loggedInUser.getFullName());
         user.setChannel(newChannel);
         Playlist allContents = new Playlist("allContents");

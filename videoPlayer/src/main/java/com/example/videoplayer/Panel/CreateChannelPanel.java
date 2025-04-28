@@ -2,6 +2,8 @@ package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.ChannelController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 
 public class CreateChannelPanel {
     public static Stage ctrlStage;
@@ -50,7 +53,7 @@ public class CreateChannelPanel {
     }
 
     @FXML
-    private void handleCreateChannel() {
+    private void handleCreateChannel() throws IOException {
         String name = channelNameField.getText().trim();
         String description = descriptionArea.getText().trim();
 
@@ -62,7 +65,10 @@ public class CreateChannelPanel {
         String coverPath = selectedCoverFile.getAbsolutePath();
         String result = ChannelController.getInstance().createChannel(name,description,coverPath);
         if (result.equals("Channel created successfully.")) {
-            showAlert(Alert.AlertType.INFORMATION, "Success", result);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channel-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+            ctrlStage.setScene(scene);
+            ctrlStage.show();
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", result);
         }

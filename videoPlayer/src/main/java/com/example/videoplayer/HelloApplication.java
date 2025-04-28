@@ -17,12 +17,12 @@ public class HelloApplication extends Application {
         CategoryPanel.ctrlStage=stage;
         HomePanel.ctrlStage=stage;
         LibraryPanel.ctrlStage=stage;
-        CreatePlaylistPanel.ctrlStage=stage;
+        CreatePlaylistForUserPanel.ctrlStage=stage;
         PlaylistPanel.ctrlStage=stage;
         CreateChannelPanel.ctrlStage=stage;
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/videoplayer/signup-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         stage.setTitle("Youtube");
         stage.setScene(scene);

@@ -11,8 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
@@ -50,9 +48,9 @@ public class LibraryPanel {
     }
 
     @FXML
-    public void showCreatePlaylist(ActionEvent event) {
+    public void showCreatePlaylistForUser(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/createPlaylist-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/createPlaylistForUser-view.fxml"));
             AnchorPane popup = loader.load();
 
             popup.setLayoutX((overlayPane.getPrefWidth() - popup.getPrefWidth()) / 2);
