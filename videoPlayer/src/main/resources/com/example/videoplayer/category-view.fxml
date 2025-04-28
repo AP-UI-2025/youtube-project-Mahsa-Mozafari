@@ -11,40 +11,46 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.CategoryPanel">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.CategoryPanel">
     <children>
-        <VBox alignment="CENTER" layoutX="150.0" layoutY="10.0" prefHeight="478.0" prefWidth="558.0" spacing="15.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
+        <VBox alignment="CENTER" layoutX="136.0" layoutY="7.0" prefHeight="480.0" prefWidth="618.0" spacing="15.0" style="-fx-border-color: #dcdcdc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 2;">
             <children>
-            <Label text="Choose Your Favorite Categories" textFill="RED">
+            <Label style="-fx-text-fill: bold;" text="Choose Your Favorite Categories">
                <font>
-                  <Font name="Segoe UI Italic" size="18.0" />
+                  <Font name="Segoe UI Bold" size="18.0" />
                </font>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <ImageView fitHeight="152.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="151.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043287-removebg-preview.png" />
+                        <Image url="@../../../Image/4ea98108e0dd10a1dc417a24e32232e2.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="149.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043282-removebg-preview.png" />
+                        <Image url="@../../../Image/c94f7263d9d6bf1f5a09d9cd611422bd.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="147.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="149.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043281-removebg-preview.png" />
+                        <Image url="@../../../Image/afc89cbaeeb9ff9d7c4b0cd41e042f8c.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="141.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="162.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043283-removebg-preview.png" />
+                        <Image url="@../../../Image/d1a2a5cd94d4741fc79d5350ed1b7e39.jpg" />
                      </image>
                   </ImageView>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="8.0" right="8.0" />
+               </padding>
             </HBox>
-            <HBox prefHeight="98.0" prefWidth="578.0" spacing="110.0">
+            <HBox prefHeight="98.0" prefWidth="578.0" spacing="120.0">
                <children>
                       <CheckBox fx:id="newsCheck" text="News" textFill="#151515">
                      <font>
@@ -64,29 +70,35 @@
                      </font></CheckBox>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <ImageView fitHeight="130.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="155.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043294-removebg-preview.png" />
+                        <Image url="@../../../Image/71267e196665cb6a2e48310bcf87f2c7.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="147.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043286-removebg-preview.png" />
+                        <Image url="@../../../Image/9f69a467c2a8167e89f029de77b297a1.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="133.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="144.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);">
                      <image>
-                        <Image url="@../../../Image/1000043284-removebg-preview.png" />
+                        <Image url="@../../../Image/e7372e410003951ab0acee665f1ade3b.jpg" />
                      </image>
                   </ImageView>
                </children>
+               <opaqueInsets>
+                  <Insets left="8.0" right="8.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
             </HBox>
-            <HBox prefHeight="71.0" prefWidth="578.0" spacing="80.0">
+            <HBox prefHeight="43.0" prefWidth="650.0" spacing="100.0">
                <children>
                       <CheckBox fx:id="societyCheck" text="Society">
                      <font>
@@ -112,9 +124,9 @@
             <Image url="@../../../Image/1000043274-removebg-preview.png" />
          </image>
       </ImageView>
-        <Button fx:id="submitBtn" layoutX="814.0" layoutY="447.0" mnemonicParsing="false" onAction="#submitAct" style="-fx-background-color: #ff0000; -fx-border-radius: 10;" text="Submit" textFill="WHITE">
+        <Button fx:id="submitBtn" layoutX="814.0" layoutY="447.0" mnemonicParsing="false" onAction="#submitAct" style="-fx-background-color: #ff0000; -fx-border-radius: 10; -fx-background-radius: 20; -fx-text-fill: bold;" text="Submit" textFill="WHITE">
          <font>
-            <Font name="Segoe UI" size="16.0" />
+            <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </Button>
     </children>
