@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.SignupPanel">
    <children>
-      <VBox alignment="CENTER" layoutX="222.0" layoutY="9.0" prefHeight="470.0" prefWidth="478.0" spacing="15.0" style="-fx-border-color: #dcdcdc; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-radius: 10;">
+      <VBox alignment="CENTER" layoutX="222.0" layoutY="9.0" prefHeight="470.0" prefWidth="478.0" spacing="15.0" style="-fx-border-color: #e0e0e0; -fx-background-color: #f9f9f9; -fx-border-radius: 10; -fx-border-width: 2; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -28,7 +28,7 @@
             </Label>
 
             <StackPane>
-               <ImageView fx:id="profileImageView" fitHeight="99.0" fitWidth="182.0" preserveRatio="true" style="-fx-background-color: lightgray;" />
+               <ImageView fx:id="profileImageView" fitHeight="100.0" fitWidth="100.0" preserveRatio="true" style="-fx-background-color: lightgray;" />
             </StackPane>
             <Button onAction="#chooseProfilePicture" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-background-radius: 8;" text="Choose Profile Picture" />
 

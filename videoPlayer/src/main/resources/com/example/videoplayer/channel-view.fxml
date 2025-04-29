@@ -22,7 +22,7 @@
                 </Label>
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                     <children>
-                        <ImageView fx:id="channelCover" fitHeight="94.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="channelCover" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                         <Label fx:id="channelInfo" prefHeight="102.0" prefWidth="300.0" text="Channel Info">
                             <font>
                                 <Font name="Segoe UI Bold" size="14.0" />
