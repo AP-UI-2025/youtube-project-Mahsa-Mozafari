@@ -43,7 +43,7 @@ public class SignupPanel {
 
     @FXML
     public void initialize() {
-        Circle clip = new Circle(50, 50, 50); // x, y, radius
+        Circle clip = new Circle(50, 50, 50);
         profileImageView.setClip(clip);
     }
 

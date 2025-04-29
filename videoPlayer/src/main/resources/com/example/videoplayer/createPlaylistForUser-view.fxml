@@ -21,7 +21,7 @@
             <TextField fx:id="playlistNameField" prefHeight="47.0" prefWidth="450.0" promptText="Title:" />
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="430.0" spacing="60.0">
                <children>
-                  <Button fx:id="handleCancel" mnemonicParsing="false" style="-fx-background-color: #ff0000;" text="Cancel" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #ff0000;" text="Cancel" textFill="WHITE" />
                   <Button mnemonicParsing="false" onAction="#handleCreatePlaylistForUser" style="-fx-background-color: #1e1e1e;" text="Create" textFill="WHITE" />
                </children>
             </HBox>

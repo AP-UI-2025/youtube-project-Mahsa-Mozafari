@@ -8,6 +8,7 @@ import com.example.videoplayer.Model.Channel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,10 +16,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ChannelPanel {
+
+    public static Stage ctrlStage;
     @FXML
     private Button channelBtn;
 
@@ -62,8 +66,11 @@ public class ChannelPanel {
     }
 
     @FXML
-    void goToChannelPlaylistPanel(ActionEvent event) {
-
+    void goToChannelPlaylistPanel(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/playlist-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
     }
 
 
@@ -76,8 +83,10 @@ public class ChannelPanel {
     @FXML
     void showCreatePlaylistForChannel(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/createPlaylistForUser-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/createPlaylistForChannel.fxml"));
             AnchorPane popup = loader.load();
+            CreatePlaylistForChannelPanel controller=loader.getController();
+            controller.setChannelPanel(this);
 
             popup.setLayoutX((overlayPane.getPrefWidth() - popup.getPrefWidth()) / 2);
             popup.setLayoutY((overlayPane.getPrefHeight() - popup.getPrefHeight()) / 2);

@@ -20,9 +20,12 @@ public class HelloApplication extends Application {
         CreatePlaylistForUserPanel.ctrlStage=stage;
         PlaylistPanel.ctrlStage=stage;
         CreateChannelPanel.ctrlStage=stage;
+        ChannelPanel.ctrlStage=stage;
+        CreatePlaylistForChannelPanel.ctrlStage=stage;
+        ChannelPlaylistPanel.ctrlStage=stage;
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/videoplayer/signup-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/videoplayer/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         stage.setTitle("Youtube");
         stage.setScene(scene);

@@ -11,10 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class ChannelPlaylistPanel {
+    public static Stage ctrlStage;
+
     @FXML
     private Button channelBtn;
 

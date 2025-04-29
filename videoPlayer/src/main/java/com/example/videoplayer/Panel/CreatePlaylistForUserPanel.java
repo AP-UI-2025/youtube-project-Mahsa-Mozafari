@@ -16,11 +16,15 @@ public class CreatePlaylistForUserPanel {
     public static Stage ctrlStage;
 
     @FXML
-    private LibraryPanel libraryPanel=new LibraryPanel();
+    private LibraryPanel libraryPanel;
     @FXML
     private TextField playlistNameField;
     @FXML
     private AnchorPane overlayPane;
+
+    public void setLibraryPanel(LibraryPanel libraryPanel) {
+        this.libraryPanel = libraryPanel;
+    }
 
     @FXML
     void handleCreatePlaylistForUser(ActionEvent event) throws IOException {
@@ -59,13 +63,7 @@ public class CreatePlaylistForUserPanel {
 
 
     @FXML
-    private void handleCancel(ActionEvent event) throws IOException {
-       libraryPanel.closeOverlay();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/library-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
-        ctrlStage.setScene(scene);
-        ctrlStage.show();
+    private void handleCancel(ActionEvent event){
+        libraryPanel.closeOverlay();
     }
 }
-
-

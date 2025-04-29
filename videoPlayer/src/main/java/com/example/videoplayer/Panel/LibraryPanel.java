@@ -52,6 +52,8 @@ public class LibraryPanel {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/createPlaylistForUser-view.fxml"));
             AnchorPane popup = loader.load();
+            CreatePlaylistForUserPanel controller=loader.getController();
+            controller.setLibraryPanel(this);
 
             popup.setLayoutX((overlayPane.getPrefWidth() - popup.getPrefWidth()) / 2);
             popup.setLayoutY((overlayPane.getPrefHeight() - popup.getPrefHeight()) / 2);

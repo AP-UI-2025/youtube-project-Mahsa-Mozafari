@@ -65,27 +65,26 @@ public class PlaylistController {
         return "Playlist created successfully.";
     }
 
-    public String createPlaylistForChannel(String playlistName){
-        Account loggedInUser = getAuthController().getLoggedInUser();
-        if (!(loggedInUser instanceof User)) {
-            return "Only regular users can create channel playlists.";
-        }
+    public String createPlaylistForChannel(String playlistName) {
+        Account account = AuthController.getInstance().getLoggedInUser();
 
-        User user = (User) loggedInUser;
+        if (account instanceof User user) {
+            Channel channel = user.getChannel();
+            if (channel == null) return "Channel not found.";
 
-        for (Channel channel : database.getChannels()) {
-            if (channel.getCreator().equals(user.getFullName())) {
-                for (Playlist playlist : channel.getPlaylists()) {
-                    if (playlist.getPlaylistName().equalsIgnoreCase(playlistName)) {
-                        return "Channel already has a playlist with this name.";
-                    }
+
+            for (Playlist pl : channel.getPlaylists()) {
+                if (pl.getPlaylistName().equals(playlistName)) {
+                    return "A playlist with this name already exists.";
                 }
-                channel.getPlaylists().add(new Playlist(playlistName));
-                return "Playlist created for channel successfully.";
             }
+
+            Playlist newPlaylist = new Playlist(playlistName);
+            channel.getPlaylists().add(newPlaylist);
+            return "Playlist created successfully.";
         }
 
-        return "You don’t have a channel.";
+        return "Only users with channels can create playlists.";
     }
 
 

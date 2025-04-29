@@ -16,14 +16,18 @@ public class CreatePlaylistForChannelPanel {
     public static Stage ctrlStage;
 
     @FXML
-    private LibraryPanel libraryPanel=new LibraryPanel();
+    private ChannelPanel channelPanel;
     @FXML
     private TextField playlistNameField;
     @FXML
     private AnchorPane overlayPane;
 
+    public void setChannelPanel(ChannelPanel channelPanel) {
+        this.channelPanel = channelPanel;
+    }
+
     @FXML
-    void handleCreatePlaylistForUser(ActionEvent event) throws IOException {
+    void handleCreatePlaylistForChannel(ActionEvent event) throws IOException {
 
         String playlistName = playlistNameField.getText().trim();
 
@@ -38,7 +42,7 @@ public class CreatePlaylistForChannelPanel {
             showAlert(Alert.AlertType.INFORMATION, "Success", result);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channelPlaylist-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 900, 500);
             ctrlStage.setScene(scene);
             ctrlStage.show();
 
@@ -59,11 +63,7 @@ public class CreatePlaylistForChannelPanel {
 
 
     @FXML
-    private void handleCancel(ActionEvent event) throws IOException {
-        libraryPanel.closeOverlay();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/library-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
-        ctrlStage.setScene(scene);
-        ctrlStage.show();
+    private void handleCancel(ActionEvent event){
+        channelPanel.closeOverlay();
     }
 }
