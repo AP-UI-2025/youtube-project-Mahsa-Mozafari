@@ -44,7 +44,7 @@
                   <Image url="@../../../Image/1000043271-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="🏠" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#goToHome" style="-fx-background-color: transparent;" text="🏠" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>

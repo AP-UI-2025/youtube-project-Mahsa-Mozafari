@@ -100,17 +100,17 @@
                   <Image url="@../../../Image/1000043271-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button fx:id="homeBtn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="🏠" textFill="WHITE">
+            <Button fx:id="homeBtn" mnemonicParsing="false"  style="-fx-background-color: transparent;" text="🏠" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="libraryBtn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="📚" textFill="WHITE">
+            <Button fx:id="libraryBtn" mnemonicParsing="false"  style="-fx-background-color: transparent;" text="📚" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="subscriptionBtn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="📁" textFill="WHITE">
+            <Button fx:id="subscriptionBtn" mnemonicParsing="false"  style="-fx-background-color: transparent;" text="📁" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
