@@ -1,6 +1,7 @@
 package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.ChannelController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -80,5 +81,41 @@ public class CreateChannelPanel {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void goToLibrary(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/library-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
+    }
+
+    @FXML
+    public void goToHome(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
+    }
+
+    @FXML
+    public void goToChannel(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channel-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
+    }
+
+    @FXML
+    public void goToSubscription(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/subscription-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+
     }
 }
