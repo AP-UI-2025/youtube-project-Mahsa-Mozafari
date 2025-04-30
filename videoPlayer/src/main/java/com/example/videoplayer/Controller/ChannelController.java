@@ -81,7 +81,7 @@ public class ChannelController {
         return "You must have a channel to publish a podcast.";
     }
 
-    public String publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String subtitle, VideoResolution resolution, VideoFormat format){
+    public String publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, VideoResolution resolution, VideoFormat format,Playlist selectedPlaylist){
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
             return "Only regular users can publish videos.";
@@ -94,11 +94,12 @@ public class ChannelController {
                     return "No valid 'allContents' playlist found.";
                 }
 
-                NormalVideo newNormalVideo = new NormalVideo(code, title, description, duration, category, fileLink, thumbnail, subtitle, resolution, format);
+                NormalVideo newNormalVideo = new NormalVideo(code, title, description, duration, category, fileLink, thumbnail,resolution, format);
                 database.getContents().add(newNormalVideo);
                 newNormalVideo.setUploader(user);
                 channel.getPlaylists().get(0).getContents().add(newNormalVideo);
-
+                if(selectedPlaylist!=null && !selectedPlaylist.getPlaylistName().equalsIgnoreCase("allContents"))
+                    selectedPlaylist.getContents().add(newNormalVideo);
                 return "Normal video published successfully.";
             }
         }

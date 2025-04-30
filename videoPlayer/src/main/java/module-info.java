@@ -8,10 +8,10 @@ module com.example.videoplayer {
     exports com.example.videoplayer;
     exports com.example.videoplayer.Model;
     exports com.example.videoplayer.Controller;
-    exports com.example.videoplayer.View;
+
 
     opens com.example.videoplayer.Model to javafx.fxml;
-    opens com.example.videoplayer.View to javafx.fxml;
+
 
     opens com.example.videoplayer.Controller to javafx.fxml;
     exports com.example.videoplayer.Panel;

@@ -9,13 +9,19 @@ import com.example.videoplayer.Model.Playlist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -24,18 +30,16 @@ public class ChannelPlaylistPanel {
 
     @FXML
     private Button channelBtn;
-
     @FXML
     private Button homeBtn;
-
     @FXML
     private Button libraryBtn;
-
     @FXML
     private VBox playlistContainer;
-
     @FXML
     private Button subscriptionBtn;
+
+    private Playlist selectedPlaylist;
 
     public void initialize() {
         refreshChannelPlaylists();
@@ -68,12 +72,43 @@ public class ChannelPlaylistPanel {
             VBox contentBox = new VBox(5);
 
             for (Content content : playlist.getContents()) {
+                HBox contentRow = new HBox(10);
+                contentRow.setAlignment(Pos.CENTER_LEFT);
+                contentRow.setStyle("-fx-padding: 5 10; -fx-background-color: #f4f4f4; -fx-cursor: hand;");
+
+                ImageView thumbnailView = new ImageView(new Image(new File(content.getThumbnail()).toURI().toString()));
+                thumbnailView.setFitHeight(50);
+                thumbnailView.setFitWidth(80);
+
                 Label contentLabel = new Label(content.getTitle());
-                contentLabel.setStyle("-fx-padding: 5 10; -fx-background-color: #f4f4f4; -fx-cursor: hand;");
+                contentLabel.setStyle("-fx-font-size: 24px;");
+                contentLabel.setWrapText(true);
+                contentLabel.setMaxWidth(600);
 
-                //contentLabel.setOnMouseClicked(e -> openContentPlayerPage(content));
+                contentRow.getChildren().addAll(thumbnailView, contentLabel);
+                contentRow.setOnMouseClicked(e -> {
+                    try {
+                        goToContentPlayerPanel(content);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
 
-                contentBox.getChildren().add(contentLabel);
+                contentBox.getChildren().add(contentRow);
+            }
+
+            Button publishBtn = new Button("Add Content");
+            publishBtn.setOnAction(e -> {
+                selectedPlaylist = playlist;
+                try {
+                    goToPublishPanel();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+
+            if (!playlist.getPlaylistName().equalsIgnoreCase("All Contents")) {
+                contentBox.getChildren().add(publishBtn);
             }
 
             TitledPane pane = new TitledPane(playlist.getPlaylistName(), contentBox);
@@ -115,6 +150,25 @@ public class ChannelPlaylistPanel {
         ctrlStage.setScene(scene);
         ctrlStage.show();
 
+    }
+
+
+    public void goToPublishPanel() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/publish-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        PublishPanel publishPanel = fxmlLoader.getController();
+        publishPanel.setSelectedPlaylist(selectedPlaylist);
+
+        Scene scene = new Scene(root, 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
+    }
+    private void goToContentPlayerPanel(Content content) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/contentPlayer01-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
     }
 
 }

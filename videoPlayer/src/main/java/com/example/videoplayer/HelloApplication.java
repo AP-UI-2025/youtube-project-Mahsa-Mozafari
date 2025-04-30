@@ -23,6 +23,7 @@ public class HelloApplication extends Application {
         ChannelPanel.ctrlStage=stage;
         CreatePlaylistForChannelPanel.ctrlStage=stage;
         ChannelPlaylistPanel.ctrlStage=stage;
+        PublishPanel.ctrlStage=stage;
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/videoplayer/main-view.fxml"));

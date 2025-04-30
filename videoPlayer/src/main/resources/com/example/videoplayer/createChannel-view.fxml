@@ -31,7 +31,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="subscriptionBtn" mnemonicParsing="false" onAction="#gooToChannel" style="-fx-background-color: transparent;" text="📁" textFill="WHITE">
+            <Button fx:id="subscriptionBtn" mnemonicParsing="false" onAction="#goToChannel" style="-fx-background-color: transparent;" text="📁" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
