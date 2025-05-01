@@ -59,7 +59,7 @@ public class PlaylistPanel {
                     Label contentLabel = new Label(content.getTitle());
                     contentLabel.setStyle("-fx-padding: 5 10; -fx-background-color: #f4f4f4; -fx-cursor: hand;");
 
-                    //contentLabel.setOnMouseClicked(e -> openContentPlayerPage(content));
+
 
                     contentBox.getChildren().add(contentLabel);
                 }

@@ -86,9 +86,14 @@ public class ChannelPlaylistPanel {
                 contentLabel.setMaxWidth(600);
 
                 contentRow.getChildren().addAll(thumbnailView, contentLabel);
-                contentRow.setOnMouseClicked(e -> {
+                thumbnailView.setOnMouseClicked(e -> {
                     try {
-                        goToContentPlayerPanel(content);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/contentPlayer-view.fxml"));
+                        Scene scene = new Scene(loader.load(),800,900);
+                        ContentPlayerPanel controller = loader.getController();
+                        controller.setContent(content);
+                        ctrlStage.setScene(scene);
+                        ctrlStage.show();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -164,11 +169,6 @@ public class ChannelPlaylistPanel {
         ctrlStage.setScene(scene);
         ctrlStage.show();
     }
-    private void goToContentPlayerPanel(Content content) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/contentPlayer01-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
-        ctrlStage.setScene(scene);
-        ctrlStage.show();
-    }
+
 
 }
