@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -13,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.PublishPanel">
+<TabPane prefHeight="500.0" prefWidth="574.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.PublishPanel">
     <tabs>
         <Tab text="Video">
             <AnchorPane prefHeight="482.0" prefWidth="678.0">
-                <VBox layoutX="7.0" prefHeight="482.0" prefWidth="275.0" spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="618.0" AnchorPane.topAnchor="0.0">
+                <VBox prefHeight="482.0" prefWidth="354.0" spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="0.0">
                     <TextField fx:id="titleVideo" promptText="Title" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
                     <TextField fx:id="descriptionVideo" promptText="Description" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
                     <TextField fx:id="durationVideo" promptText="Duration" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
@@ -37,7 +36,7 @@
                     <ComboBox fx:id="videoFormatComboBox" promptText="Select Format" style="-fx-background-color: white; -fx-border-color: #ccc;" />
                     <Button onAction="#publishNormalVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Publish Video" />
                 </VBox>
-            <Button layoutX="785.0" mnemonicParsing="false" onAction="#backToPlaylistPanel" prefHeight="63.0" prefWidth="115.0" style="-fx-background-color: white;" text="❌" textFill="RED">
+            <Button layoutX="486.0" mnemonicParsing="false" onAction="#backToPlaylistPanel" prefHeight="63.0" prefWidth="115.0" style="-fx-background-color: white;" text="❌" textFill="RED">
                <font>
                   <Font size="29.0" />
                </font>
@@ -45,42 +44,19 @@
             </AnchorPane>
         </Tab>
 
-        <Tab text="Short">
-            <AnchorPane>
-                <VBox prefHeight="454.0" prefWidth="279.0" spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10">
-                    <TextField fx:id="titleShort" promptText="Title" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <TextField fx:id="descriptionShort" promptText="Description" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <TextField fx:id="durationShort" promptText="Duration" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Button fx:id="chooseShortBtn" onAction="#handleChooseFileForVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose File" />
-                        <Label fx:id="shortPathLabel" style="-fx-text-fill: #555;" text="No file selected" />
-                    </HBox>
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Button fx:id="chooseShortThumbnailBtn" onAction="#handleChooseThumbnailForVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose Cover" />
-                        <Label fx:id="shortThumbnailPathLabel" style="-fx-text-fill: #555;" text="No cover selected" />
-                    </HBox>
-
-                    <ComboBox fx:id="shortCategoryComboBox" promptText="Select Category" style="-fx-background-color: white; -fx-border-color: #ccc;" />
-                    <ComboBox fx:id="shortSpecialStatusComoBox" prefWidth="150.0" promptText="Select Type" style="-fx-background-color: white; -fx-border-color: #ccc;" />
-                    <TextField fx:id="musicRefField" promptText="Music Reference (optional)" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <Button onAction="#publishShortVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Publish Short Video" />
-                </VBox>
-            </AnchorPane>
-        </Tab>
-
         <Tab text="Podcast">
-            <AnchorPane>
-                <VBox spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10">
+            <AnchorPane prefHeight="574.0" prefWidth="450.0">
+                <VBox layoutY="11.2" prefHeight="563.0" prefWidth="339.0" spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="11.0">
                     <TextField fx:id="titlePodcast" promptText="Title" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
                     <TextField fx:id="descriptionPodcast" promptText="Description" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
                     <TextField fx:id="durationPodcast" promptText="Duration" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
                     <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Button fx:id="choosePodcastBtn" onAction="#handleChooseFileForVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose File" />
+                        <Button fx:id="choosePodcastBtn" onAction="#handleChooseFileForPodcast" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose File" />
                         <Label fx:id="podcastPathLabel" style="-fx-text-fill: #555;" text="No file selected" />
                     </HBox>
 
                     <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Button fx:id="choosePodcastThumbnailBtn" onAction="#handleChooseThumbnailForVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose Cover" />
+                        <Button fx:id="choosePodcastThumbnailBtn" onAction="#handleChooseThumbnailForPodcast" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose Cover" />
                         <Label fx:id="podcastThumbnailPathLabel" style="-fx-text-fill: #555;" text="No cover selected" />
                     </HBox>
 
@@ -89,35 +65,11 @@
                     <Button onAction="#publishPodcast" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Publish Podcast" />
                     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                 </VBox>
-            <Button layoutX="784.0" mnemonicParsing="false" onAction="#backToPlaylistPanel" prefHeight="63.0" prefWidth="115.0" style="-fx-background-color: white;" text="❌" textFill="RED">
+            <Button layoutX="487.0" mnemonicParsing="false" onAction="#backToPlaylistPanel" prefHeight="63.0" prefWidth="115.0" style="-fx-background-color: white;" text="❌" textFill="RED">
                <font>
                   <Font size="29.0" />
                </font>
             </Button>
-            </AnchorPane>
-        </Tab>
-
-        <Tab text="Live">
-            <AnchorPane>
-                <VBox spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10">
-                    <TextField fx:id="titleLive" promptText="Title" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <TextField fx:id="descriptionLive" promptText="Description" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <TextField fx:id="durationLive" promptText="Duration" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Button fx:id="chooseLiveBtn" onAction="#handleChooseFileForVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose File" />
-                        <Label fx:id="livePathLabel" style="-fx-text-fill: #555;" text="No file selected" />
-                    </HBox>
-
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Button fx:id="chooseLiveThumbnailBtn" onAction="#handleChooseThumbnailForVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Choose Cover" />
-                        <Label fx:id="liveThumbnailPathLabel" style="-fx-text-fill: #555;" text="No cover selected" />
-                    </HBox>
-
-                    <ComboBox fx:id="liveCategoryComboBox" promptText="Select Category" style="-fx-background-color: white; -fx-border-color: #ccc;" />
-                    <ComboBox fx:id="liveSpecialStatusComoBox3" prefWidth="150.0" promptText="Select Type" style="-fx-background-color: white; -fx-border-color: #ccc;" />
-                    <DatePicker fx:id="schedulePicker" promptText="Select Date" style="-fx-background-color: white; -fx-border-color: #ccc;" />
-                    <Button onAction="#publishLiveStream" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Publish Live Stream" />
-                </VBox>
             </AnchorPane>
         </Tab>
     </tabs>

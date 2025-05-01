@@ -55,7 +55,7 @@ public class ChannelController {
         return "Channel created successfully.";
     }
 
-    public String publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator) {
+    public String publishPodcast(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, String creator,Playlist selectedPlaylist) {
         Account loggedInUser = getAuthController().getLoggedInUser();
 
         if (!(loggedInUser instanceof User)) {
@@ -63,22 +63,23 @@ public class ChannelController {
         }
 
         User user = (User) loggedInUser;
-
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(loggedInUser.getFullName())) {
                 if (!channel.getPlaylists().get(0).getPlaylistName().equals("allContents")) {
-                    return "Missing 'allContents' playlist in your channel.";
+                    return "No valid 'allContents' playlist found.";
                 }
 
-                Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail, creator);
-                newPodcast.setUploader(user);
-                channel.getPlaylists().getFirst().getContents().add(newPodcast);
+                Podcast newPodcast = new Podcast(code, title, description, duration, category, fileLink, thumbnail,creator);
                 database.getContents().add(newPodcast);
+                newPodcast.setUploader(user);
+                channel.getPlaylists().get(0).getContents().add(newPodcast);
+                if(selectedPlaylist!=null && !selectedPlaylist.getPlaylistName().equalsIgnoreCase("allContents"))
+                    selectedPlaylist.getContents().add(newPodcast);
                 return "Podcast published successfully.";
             }
         }
+        return "User does not own a channel.";
 
-        return "You must have a channel to publish a podcast.";
     }
 
     public String publishNormalVideo(ContentSpecialStatus code, String title, String description, int duration, Category category, String fileLink, String thumbnail, VideoResolution resolution, VideoFormat format,Playlist selectedPlaylist){

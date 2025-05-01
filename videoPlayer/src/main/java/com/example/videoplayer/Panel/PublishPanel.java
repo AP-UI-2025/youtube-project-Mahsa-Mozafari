@@ -163,23 +163,11 @@ public class PublishPanel {
         videoCategoryComboBox.getItems().addAll(" News","Game","Podcast","Music","Live","Society","History");
         videoCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
 
-        liveCategoryComboBox.getItems().addAll(" News","Game","Podcast","Music","Live","Society","History");
-        liveCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
-
-        shortCategoryComboBox.getItems().addAll(" News","Game","Podcast","Music","Live","Society","History");
-        shortCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
-
         podcastCategoryComboBox.getItems().addAll(" News","Game","Podcast","Music","Live","Society","History");
         podcastCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
 
         videoSpecialStatusComoBox.getItems().addAll("Normal","Special");
         videoSpecialStatusComoBox.setOnAction(event -> selectCategoryForVideo());
-
-        liveSpecialStatusComoBox3.getItems().addAll("Normal","Special");
-        liveSpecialStatusComoBox3.setOnAction(event -> selectCategoryForVideo());
-
-        shortSpecialStatusComoBox.getItems().addAll("Normal","Special");
-        shortSpecialStatusComoBox.setOnAction(event -> selectCategoryForVideo());
 
        podcastSpecialStatusComoBox.getItems().addAll("Normal","Special");
         podcastCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
@@ -190,7 +178,7 @@ public class PublishPanel {
         videoFormatComboBox.getItems().addAll(" MP4","MKV","MOV","WMV");
         videoFormatComboBox.setOnAction(event -> selectFormat());
     }
-
+    @FXML
     private void selectCategoryForVideo() {
         String category = videoCategoryComboBox.getValue();
         if ("Music".equals(category)) {
@@ -209,7 +197,7 @@ public class PublishPanel {
             selectedCategory = Category.Society;
         }
     }
-
+@FXML
     private void selectCategoryForPodcast() {
         String category = podcastCategoryComboBox.getValue();
         if ("Music".equals(category)) {
@@ -254,7 +242,7 @@ public class PublishPanel {
             selectedFormat = VideoFormat.WMV;
         }
     }
-
+@FXML
     private void selectSpecialStatusForVideo() {
         String status = videoSpecialStatusComoBox.getValue();
         if ("Special".equals(status)) {
@@ -263,7 +251,7 @@ public class PublishPanel {
            selectedStatus = ContentSpecialStatus.NOT_SPECIAL;
         }
     }
-
+@FXML
     private void selectSpecialStatusForPodcast() {
         String status = podcastSpecialStatusComoBox.getValue();
         if ("Special".equals(status)) {
@@ -300,7 +288,51 @@ public class PublishPanel {
     }
 
     @FXML
-    void publishPodcast(ActionEvent event) {
+    void handleChooseFileForPodcast(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Content");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("video/audio", "*.mp4", "*.mp3", "*.wav", "*.avi")
+        );
+        selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            podcastPathLabel.setText(selectedFile.getAbsolutePath());
+        }
+    }
+
+    @FXML
+    void handleChooseThumbnailForPodcast(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Cover");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image", "*.jpg", "*.jpeg", "*.png")
+        );
+        selectedThumbnail = fileChooser.showOpenDialog(null);
+        if (selectedThumbnail != null) {
+            podcastThumbnailPathLabel.setText(selectedThumbnail.getAbsolutePath());
+        }
+    }
+
+
+    @FXML
+    void publishPodcast(ActionEvent event) throws IOException {
+        Account user = AuthController.getInstance().getLoggedInUser();
+        String msg = ChannelController.getInstance().publishPodcast(
+                selectedStatus,
+                titleVideo.getText(),
+                descriptionVideo.getText(),
+                Integer.parseInt(durationVideo.getText()),
+                selectedCategory,
+                selectedFile.getAbsolutePath(),
+                selectedThumbnail.getAbsolutePath(),
+                user.getFullName(), selectedPlaylist
+
+        );
+        showAlert(msg);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channelPlaylist-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
     }
 
     @FXML
@@ -323,17 +355,6 @@ public class PublishPanel {
         ctrlStage.setScene(scene);
         ctrlStage.show();
     }
-
-    @FXML
-    void publishShortVideo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void publishLiveStream(ActionEvent event) {
-
-    }
-
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
