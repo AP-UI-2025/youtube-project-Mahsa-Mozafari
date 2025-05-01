@@ -53,7 +53,7 @@ public class ChannelPlaylistPanel {
 
             if (channel != null) {
                 ArrayList<Playlist> playlists = channel.getPlaylists();
-                loadPlaylists(playlists);
+                loadChannelPlaylists(playlists);
             } else {
                 playlistContainer.getChildren().clear();
                 Label noChannelLabel = new Label("You don't have a channel yet.");
@@ -65,7 +65,7 @@ public class ChannelPlaylistPanel {
             playlistContainer.getChildren().add(noUserLabel);
         }
     }
-    private void loadPlaylists(ArrayList<Playlist> playlists) {
+    public void loadChannelPlaylists(ArrayList<Playlist> playlists) {
         playlistContainer.getChildren().clear();
 
         for (Playlist playlist : playlists) {

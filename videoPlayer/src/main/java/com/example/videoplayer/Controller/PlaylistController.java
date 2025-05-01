@@ -139,5 +139,15 @@ public class PlaylistController {
         return null;
     }
 
+    public Playlist findChannelPlaylistByName(User user, String name) {
+        for (Playlist playlist : user.getChannel().getPlaylists()) {
+                if(playlist.getPlaylistName().equalsIgnoreCase(name))
+                    return playlist;
+        }
+        return null;
+    }
+
+
+
 }
 

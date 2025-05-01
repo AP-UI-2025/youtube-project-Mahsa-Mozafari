@@ -39,6 +39,7 @@ public class CreatePlaylistForUserPanel {
         String result = PlaylistController.getInstance().createPlaylistForUser(playlistName);
 
         if (result.equals("Playlist created successfully.")) {
+
             showAlert(Alert.AlertType.INFORMATION, "Success", result);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/playlist-view.fxml"));

@@ -225,7 +225,6 @@ public class ContentPlayerPanel implements Initializable {
                     alert.show();
                 }
             });
-
             addToPlaylistMenu.getItems().add(item);
         }
     }

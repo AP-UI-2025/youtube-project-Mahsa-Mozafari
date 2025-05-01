@@ -30,6 +30,7 @@ public abstract class Content{
         this.likes=0;
         this.views=0;
         this.duration=0;
+        this.title=title;
         this.thumbnail =thumbnail;
         this.description=description;
         this.fileLink=fileLink;

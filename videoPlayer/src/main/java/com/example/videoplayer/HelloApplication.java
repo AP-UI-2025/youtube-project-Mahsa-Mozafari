@@ -3,8 +3,10 @@ package com.example.videoplayer;
 import com.example.videoplayer.Controller.AuthController;
 import com.example.videoplayer.Controller.ChannelController;
 import com.example.videoplayer.Controller.PlaylistController;
+import com.example.videoplayer.Controller.UserController;
 import com.example.videoplayer.Model.AccountPck.User;
 import com.example.videoplayer.Model.Category;
+import com.example.videoplayer.Model.Channel;
 import com.example.videoplayer.Model.ContentPck.ContentSpecialStatus;
 import com.example.videoplayer.Model.ContentPck.VideoFormat;
 import com.example.videoplayer.Model.ContentPck.VideoResolution;
@@ -40,6 +42,12 @@ public class HelloApplication extends Application {
         SubscriptionPanel.ctrlStage=stage;
         PremiumPanel.ctrlStage=stage;
         AdminPanel.ctrlStage=stage;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channelPlaylist-view.fxml"));
+        Parent root = loader.load();
+
+        ChannelPlaylistPanel.ctrlStage =stage;
+        stage.setScene(new Scene(root));
+        stage.show();
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/videoplayer/main-view.fxml"));
@@ -58,16 +66,18 @@ public class HelloApplication extends Application {
         authController.signup("Mah","Mah1385!","Mahsa","mah@gmail.com","09356669588", profilePath1);
         String profilePath2 =new File("src/main/resources/Image/afc89cbaeeb9ff9d7c4b0cd41e042f8c.jpg").toURI().toString();
         authController.signup("Asal","Asal1385!","Asalm","Asal@gmail.com","09356669599", profilePath2);
-
+        UserController.getInstance().setFavoriteCategories("News");
         authController.login("Mah","Mah1385!");
         User user= (User) authController.getLoggedInUser();
         channelController.createChannel("Ziba","vlog bahal",profilePath2);
         playlistController.createPlaylistForChannel("salam");
-        Playlist salam=playlistController.findPlaylistByName(user,"salam");
-        String videoPath1=new File("src/main/resources/video/Rec 0002.mp4").toURI().toString();
-        String coverPath1=new File("src/main/resources/Image/InShot_20250425_114751640.jpg").toURI().toString();
+        Playlist salam=playlistController.findChannelPlaylistByName(user,"salam");
+        String videoPath1=new File("src/main/resources/video/Rec 0002.mp4").getAbsolutePath();
+        String coverPath1=new File("src/main/resources/Image/InShot_20250425_114751640.jpg").getAbsolutePath();
         channelController.publishNormalVideo(ContentSpecialStatus.NOT_SPECIAL,"Vibe","enjoy the vibe",10, Category.News,videoPath1,coverPath1, VideoResolution.HIGH, VideoFormat.MP4,salam);
-        authController.login("Asal","Asal1385!");
+        Channel currentChannel=ChannelController.getInstance().findChannelById(1);
+        ArrayList<Playlist> playlists=currentChannel.getPlaylists();
+
         launch(args);
     }
 }
