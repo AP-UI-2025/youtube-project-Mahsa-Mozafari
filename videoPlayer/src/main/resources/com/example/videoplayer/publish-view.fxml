@@ -11,11 +11,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<TabPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.PublishPanel">
+<TabPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.PublishPanel">
     <tabs>
         <Tab text="Video">
-            <AnchorPane prefHeight="424.0" prefWidth="900.0">
+            <AnchorPane prefHeight="482.0" prefWidth="678.0">
                 <VBox layoutX="7.0" prefHeight="482.0" prefWidth="275.0" spacing="15" style="-fx-background-color: #F9F9F9; -fx-padding: 20;" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="618.0" AnchorPane.topAnchor="0.0">
                     <TextField fx:id="titleVideo" promptText="Title" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
                     <TextField fx:id="descriptionVideo" promptText="Description" style="-fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white; -fx-border-color: #ccc;" />
@@ -36,6 +37,11 @@
                     <ComboBox fx:id="videoFormatComboBox" promptText="Select Format" style="-fx-background-color: white; -fx-border-color: #ccc;" />
                     <Button onAction="#publishNormalVideo" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Publish Video" />
                 </VBox>
+            <Button layoutX="785.0" mnemonicParsing="false" onAction="#backToPlaylistPanel" prefHeight="63.0" prefWidth="115.0" style="-fx-background-color: white;" text="❌" textFill="RED">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
             </AnchorPane>
         </Tab>
 
@@ -83,6 +89,11 @@
                     <Button onAction="#publishPodcast" style="-fx-background-color: #FF0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5;" text="Publish Podcast" />
                     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                 </VBox>
+            <Button layoutX="784.0" mnemonicParsing="false" onAction="#backToPlaylistPanel" prefHeight="63.0" prefWidth="115.0" style="-fx-background-color: white;" text="❌" textFill="RED">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
             </AnchorPane>
         </Tab>
 

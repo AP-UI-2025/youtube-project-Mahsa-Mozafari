@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -131,5 +132,23 @@ public class LibraryPanel {
         ctrlStage.setScene(scene);
         ctrlStage.show();
 
+    }
+
+    @FXML
+    private void handleLogout() {
+        boolean success = AuthController.getInstance().logout();
+        if (success) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/login-view.fxml"));
+                Scene scene = new Scene(loader.load());
+                ctrlStage.setScene(scene);
+                ctrlStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No user is currently logged in.");
+            alert.show();
+        }
     }
 }

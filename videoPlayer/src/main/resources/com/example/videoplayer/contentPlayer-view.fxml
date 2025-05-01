@@ -17,22 +17,22 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.ContentPlayerPanel">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.ContentPlayerPanel">
     <children>
-      <ScrollPane fitToWidth="true" prefHeight="950.0" prefWidth="810.0">
+      <ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="813.0" AnchorPane.bottomAnchor="-0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.6000000000000227" AnchorPane.topAnchor="0.0">
          <content>
-            <VBox fx:id="hi" prefHeight="1000.0" prefWidth="810.0">
+            <VBox fx:id="hi" prefHeight="1191.0" prefWidth="812.0">
                <children>
-                    <VBox prefHeight="610.0" prefWidth="810.0">
+                    <VBox prefHeight="522.0" prefWidth="795.0">
                         <children>
-                            <HBox alignment="TOP_RIGHT" prefHeight="76.0" prefWidth="800.0" spacing="500.0" style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 10;">
+                            <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="795.0" spacing="500.0" style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 10;">
                                 <children>
                                     <Label fx:id="titleLabel" text="Title" textFill="WHITE">
                                         <font>
                                             <Font size="24.0" />
                                         </font>
                                     </Label>
-                                    <Button fx:id="backButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="31.0" style="-fx-background-color: red;" text="❌" />
+                                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToHome" prefHeight="18.0" prefWidth="31.0" style="-fx-background-color: red;" text="❌" />
                                 </children>
                             </HBox>
                             <StackPane prefHeight="378.0" prefWidth="800.0">

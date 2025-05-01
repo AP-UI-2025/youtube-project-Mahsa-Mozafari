@@ -10,7 +10,9 @@ import com.example.videoplayer.Model.Comment;
 import com.example.videoplayer.Model.ContentPck.Content;
 import com.example.videoplayer.Model.Playlist;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -18,9 +20,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,6 +59,7 @@ public class ContentPlayerPanel implements Initializable {
     private Slider videoSlider, volumeSlider;
     private Content currentContent;
     private boolean isMuted = false;
+    public static Stage ctrlStage;
 
 
     public void setContent(Content content) {
@@ -223,5 +228,13 @@ public class ContentPlayerPanel implements Initializable {
 
             addToPlaylistMenu.getItems().add(item);
         }
+    }
+
+    @FXML
+    public void backToHome() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        ctrlStage.setScene(scene);
+        ctrlStage.show();
     }
 }
