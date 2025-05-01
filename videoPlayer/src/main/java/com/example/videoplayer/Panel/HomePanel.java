@@ -90,6 +90,7 @@ public class HomePanel {
         ArrayList<Content> contents = (ArrayList<Content>) results.get("contents");
         ArrayList<Channel> channels = (ArrayList<Channel>) results.get("channels");
 
+
         if (contents.isEmpty() && channels.isEmpty()) {
             mainContainer.getChildren().add(new Label("No results found."));
             return;

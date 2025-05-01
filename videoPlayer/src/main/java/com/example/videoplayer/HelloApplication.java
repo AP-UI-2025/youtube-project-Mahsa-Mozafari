@@ -69,7 +69,7 @@ public class HelloApplication extends Application {
         UserController.getInstance().setFavoriteCategories("News");
         authController.login("Mah","Mah1385!");
         User user= (User) authController.getLoggedInUser();
-        channelController.createChannel("Ziba","vlog bahal",profilePath2);
+        channelController.createChannel("vibe ali","vlog bahal",profilePath2);
         playlistController.createPlaylistForChannel("salam");
         Playlist salam=playlistController.findChannelPlaylistByName(user,"salam");
         String videoPath1=new File("src/main/resources/video/Rec 0002.mp4").getAbsolutePath();
