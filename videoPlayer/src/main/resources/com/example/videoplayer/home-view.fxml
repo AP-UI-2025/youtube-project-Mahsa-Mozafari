@@ -15,7 +15,7 @@
    <children>
       <ScrollPane fitToWidth="true" layoutX="85.0" prefHeight="500.0" prefWidth="821.0" style="-fx-background-color:transparent;">
          <content>
-            <VBox alignment="TOP_RIGHT" prefHeight="500.0" prefWidth="814.0" spacing="15.0">
+            <VBox fx:id="mainContainer" alignment="TOP_RIGHT" prefHeight="500.0" prefWidth="814.0" spacing="15.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="722.0" spacing="10.0">
                      <children>

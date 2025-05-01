@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,59 +12,72 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.AdminPanel">
-    <children>
-        <VBox alignment="CENTER" prefHeight="600.0" prefWidth="137.0" spacing="50.0" style="-fx-background-color: #000000;">
-            <children>
-                <Label text="Admin" textFill="#ff0202">
-                    <font>
-                        <Font name="System Bold" size="30.0" />
-                    </font>
-                </Label>
-                <Label text="Panel" textFill="RED">
-                    <font>
-                        <Font name="Georgia Bold" size="30.0" />
-                    </font>
-                </Label>
-            <Button mnemonicParsing="false" text="Logout" />
-                <Separator prefWidth="200.0" />
-                <Button mnemonicParsing="false" text="ShowUsers" />
-                <Button mnemonicParsing="false" text="ShowContents" />
-                <Button mnemonicParsing="false" text="ShowReports" />
-                <Button mnemonicParsing="false" text="ShowChannels" />
-            </children>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-        </VBox>
-        <TabPane layoutX="138.0" prefHeight="600.0" prefWidth="762.0" tabClosingPolicy="UNAVAILABLE">
+<AnchorPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.AdminPanel">
+    <VBox prefWidth="800" spacing="20">
+        <padding>
+            <Insets bottom="20" left="30" right="30" top="20" />
+        </padding>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Button fx:id="backButton" onAction="#handleBack" style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-font-weight: bold;" text="❌" textFill="WHITE">
+                <font>
+                    <Font size="11.0" />
+                </font>
+            </Button>
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #202020;" text="Admin Panel" />
+        </HBox>
+
+        <TabPane fx:id="adminTabPane" style="-fx-background-color: #F9F9F9; -fx-border-color: #DDDDDD;" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Popular Contents" />
-                <Tab text="Report Management">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="500.0">
-                            <TableView fx:id="reportTable" layoutX="13.0" layoutY="20.0" prefHeight="471.0" prefWidth="711.0">
-                                <columns>
-                                    <TableColumn fx:id="reportIdColumn" prefWidth="100.0" text="Report ID" />
-                                    <TableColumn fx:id="userColumn" prefWidth="160.0" text="User" />
-                                    <TableColumn fx:id="contentColumn" prefWidth="300.0" text="Content" />
-                                    <TableColumn fx:id="statusColumn" prefWidth="150.0" text="Status" />
-                                </columns>
-                            </TableView>
-                            <HBox layoutX="265.0" layoutY="491.0" spacing="10.0">
-                                <Button text="Confirm" />
-                                <Button text="Reject" />
-                                <Button text="Unban User" />
-                            </HBox>
-                        </AnchorPane>
-                    </content>
+                <Tab text="Users">
+                    <TableView fx:id="userTable">
+                        <columns>
+                            <TableColumn fx:id="usernameCol" prefWidth="110.0" text="Username" />
+                            <TableColumn fx:id="fullNameCol" text="Full Name" />
+                            <TableColumn fx:id="emailCol" text="Email" />
+                            <TableColumn fx:id="phoneCol" text="Phone" />
+                        </columns>
+                    </TableView>
                 </Tab>
-                <Tab text="Popular Channels">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+
+                <Tab text="Contents">
+                    <TableView fx:id="contentTable">
+                        <columns>
+                            <TableColumn fx:id="titleCol" text="Title" />
+                            <TableColumn fx:id="uploaderCol" text="Uploader" />
+                            <TableColumn fx:id="viewsCol" text="Views" />
+                            <TableColumn fx:id="likesCol" text="Likes" />
+                        </columns>
+                    </TableView>
                 </Tab>
+
+                <Tab text="Channels">
+                    <TableView fx:id="channelTable">
+                        <columns>
+                            <TableColumn fx:id="channelNameCol" prefWidth="90.0" text="Channel Name" />
+                            <TableColumn fx:id="creatorCol" text="Creator" />
+                            <TableColumn fx:id="subsCol" text="Subscribers" />
+                        </columns>
+                    </TableView>
+                </Tab>
+
+                <Tab text="Reports">
+                    <VBox spacing="10">
+                        <TableView fx:id="reportTable">
+                            <columns>
+                                <TableColumn fx:id="reporterCol" text="Reporter" />
+                                <TableColumn fx:id="reportedContentCol" prefWidth="110.0" text="Reported Content" />
+                                <TableColumn fx:id="descriptionCol" text="Description" />
+                            </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <Button onAction="#handleConfirmReport" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Confirm Report" />
+                            <Button onAction="#handleRejectReport" style="-fx-background-color: #ffc107; -fx-text-fill: black;" text="Reject Report" />
+                            <Button fx:id="unbanButton" onAction="#handleUnbanUser" style="-fx-background-color: #17a2b8; -fx-text-fill: white;" text="Unban User" />
+                        </HBox>
+                    </VBox>
+                </Tab>
+
             </tabs>
         </TabPane>
-    </children>
+    </VBox>
 </AnchorPane>

@@ -1,6 +1,8 @@
 package com.example.videoplayer.Panel;
 
 import com.example.videoplayer.Controller.AuthController;
+import com.example.videoplayer.Model.AccountPck.Account;
+import com.example.videoplayer.Model.AccountPck.Admin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,11 +36,20 @@ public static Stage ctrlStage;
     void loginAct(ActionEvent event) throws IOException {
         String result = AuthController.getInstance().login(usernameText.getText(), passwordText.getText());
 
-        if (result.startsWith("success")) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 900, 500);
-            ctrlStage.setScene(scene);
-            ctrlStage.show();
+        if (result.equals("success")) {
+            Account user = AuthController.getInstance().getLoggedInUser();
+            if (user instanceof Admin) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/admin-view.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+                ctrlStage.setScene(scene);
+                ctrlStage.show();
+            } else {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+                ctrlStage.setScene(scene);
+                ctrlStage.show();
+            }
+
         } else if (result.equals("banned_user")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Access Denied");
