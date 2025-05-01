@@ -67,7 +67,7 @@ public class ChannelPanel {
 
     @FXML
     void goToChannelPlaylistPanel(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/playlist-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channelPlaylist-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         ctrlStage.setScene(scene);
         ctrlStage.show();

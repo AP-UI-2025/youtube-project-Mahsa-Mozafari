@@ -13,29 +13,24 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.HomePanel">
    <children>
-      <VBox alignment="TOP_RIGHT" layoutX="123.0" layoutY="9.0" prefHeight="531.0" prefWidth="777.0" spacing="15.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="722.0" spacing="10.0">
+      <ScrollPane fitToWidth="true" layoutX="85.0" prefHeight="500.0" prefWidth="821.0" style="-fx-background-color:transparent;">
+         <content>
+            <VBox alignment="TOP_RIGHT" prefHeight="500.0" prefWidth="814.0" spacing="15.0">
                <children>
-                  <TextField fx:id="searchField" prefHeight="35.0" prefWidth="538.0" promptText="Search" style="-fx-background-radius: 20; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-padding: 0 0 0 10;" />
-                  <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#onSearch" style="-fx-background-color: #f1f1f1; -fx-background-radius: 20; -fx-padding: 5 15;" text="🔍">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <ScrollPane fitToWidth="true" prefHeight="422.0" prefWidth="625.0" style="-fx-background-color:transparent;">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="798.0">
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="722.0" spacing="10.0">
                      <children>
-                        <VBox fx:id="mainContainer" layoutX="-35.0" layoutY="-19.0" prefHeight="442.0" prefWidth="786.0" spacing="15.0" style="-fx-background-color:transparent;" />
+                        <TextField fx:id="searchField" prefHeight="35.0" prefWidth="538.0" promptText="Search" style="-fx-background-radius: 20; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-padding: 0 0 0 10;" />
+                        <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#onSearch" style="-fx-background-color: #f1f1f1; -fx-background-radius: 20; -fx-padding: 5 15;" text="🔍">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                      </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
 
       <VBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="500.0" prefWidth="88.0" spacing="20.0" style="-fx-background-color: #1e1e1e;">
          <children>

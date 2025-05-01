@@ -5,6 +5,7 @@ import com.example.videoplayer.Controller.AuthController;
 import com.example.videoplayer.Controller.UserController;
 import com.example.videoplayer.Model.AccountPck.Account;
 import com.example.videoplayer.Model.AccountPck.User;
+import com.example.videoplayer.Model.Playlist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LibraryPanel {
     public static Stage ctrlStage;
@@ -151,4 +153,5 @@ public class LibraryPanel {
             alert.show();
         }
     }
+
 }

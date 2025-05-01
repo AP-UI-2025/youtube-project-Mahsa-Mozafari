@@ -13,6 +13,8 @@ import com.example.videoplayer.Model.Playlist;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ContentController {
     private static ContentController contentController;
@@ -46,22 +48,27 @@ public class ContentController {
     }
 
 
-    public ArrayList<String> searchInContentsAndChannels(String searchBox) {
-        ArrayList<String> results = new ArrayList<>();
-        String lowerKeyword = searchBox.toLowerCase();
+    public Map<String, ArrayList<?>> searchInContentsAndChannels(String searchBox) {
+        String keyword = searchBox.toLowerCase();
+        ArrayList<Content> foundContents = new ArrayList<>();
+        ArrayList<Channel> foundChannels = new ArrayList<>();
 
         for (Content content : database.getContents()) {
-            if (content.getTitle().toLowerCase().contains(lowerKeyword)) {
-                results.add("Content: " + content.getTitle());
+            if (content.getTitle().toLowerCase().contains(keyword)) {
+                foundContents.add(content);
             }
         }
 
         for (Channel channel : database.getChannels()) {
-            if (channel.getChannelName().toLowerCase().contains(lowerKeyword)) {
-                results.add("Channel: " + channel.getChannelName());
+            if (channel.getChannelName().toLowerCase().contains(keyword)) {
+                foundChannels.add(channel);
             }
         }
-        return results;
+
+        Map<String, ArrayList<?>> result = new HashMap<>();
+        result.put("contents", foundContents);
+        result.put("channels", foundChannels);
+        return result;
     }
 
     public ArrayList<Content> sortContentByLikes() {
