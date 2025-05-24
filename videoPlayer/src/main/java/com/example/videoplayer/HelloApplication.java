@@ -70,11 +70,19 @@ public class HelloApplication extends Application {
         authController.login("Mah","Mah1385!");
         User user= (User) authController.getLoggedInUser();
         channelController.createChannel("vibe ali","vlog bahal",profilePath2);
-        playlistController.createPlaylistForChannel("salam");
-        Playlist salam=playlistController.findChannelPlaylistByName(user,"salam");
-        String videoPath1=new File("src/main/resources/video/Rec 0002.mp4").getAbsolutePath();
-        String coverPath1=new File("src/main/resources/Image/InShot_20250425_114751640.jpg").getAbsolutePath();
-        channelController.publishNormalVideo(ContentSpecialStatus.NOT_SPECIAL,"Vibe","enjoy the vibe",10, Category.News,videoPath1,coverPath1, VideoResolution.HIGH, VideoFormat.MP4,salam);
+        playlistController.createPlaylistForChannel("GameMovie");
+        Playlist GameMovie =playlistController.findChannelPlaylistByName(user,"GameMovie");
+        String videoPath1=new File("src/main/resources/video/Game1").getAbsolutePath();
+        String coverPath1=new File("src/main/resources/Image/GamePic1.jpg").getAbsolutePath();
+        channelController.publishNormalVideo(ContentSpecialStatus.NOT_SPECIAL,"Rush","this is Rush Movie",10, Category.Game,videoPath1,coverPath1, VideoResolution.HIGH, VideoFormat.MP4, GameMovie);
+        String videoPath2=new File("src/main/resources/video/Game2").getAbsolutePath();
+        String coverPath2 =new File("src/main/resources/Image/GamePic2.jpg").getAbsolutePath();
+        channelController.publishNormalVideo(ContentSpecialStatus.NOT_SPECIAL,"Alice in Borderland","this is Alice Movie",10, Category.Game,videoPath2, coverPath2, VideoResolution.HIGH, VideoFormat.MP4, GameMovie);
+        playlistController.createPlaylistForChannel("MusicLover");
+        Playlist MusicLover =playlistController.findChannelPlaylistByName(user,"MusicLover");
+        String videoPath3 =new File("src/main/resources/video/music3").getAbsolutePath();
+        String coverPath3 =new File("src/main/resources/Image/MusicPic1.jpg").getAbsolutePath();
+        channelController.publishNormalVideo(ContentSpecialStatus.NOT_SPECIAL,"Whiplash","this is Whiplash Movie",10, Category.Music, videoPath3, coverPath3, VideoResolution.HIGH, VideoFormat.MP4, MusicLover);
         Channel currentChannel=ChannelController.getInstance().findChannelById(1);
         ArrayList<Playlist> playlists=currentChannel.getPlaylists();
 

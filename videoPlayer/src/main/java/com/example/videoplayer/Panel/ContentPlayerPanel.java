@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -37,16 +38,18 @@ public class ContentPlayerPanel implements Initializable {
     @FXML private Label likesLabel;
     @FXML private Label viewsLabel;
     @FXML private ImageView thumbnailImg;
-    @FXML private Button likeBtn, dislikeBtn, reportBtn, sendCommentBtn;
+    @FXML private ImageView likeBtn, dislikeBtn, reportBtn;
+    @FXML private Button sendCommentBtn;
     @FXML private TextField commentTextField;
     @FXML private ListView<String> commentListView;
     @FXML private MenuButton addToPlaylistMenu;
+    @FXML private ImageView downButton;
     @FXML
-    private Button pauseButton;
+    private ImageView pauseButton;
     @FXML
-    private Button playButton;
+    private ImageView playButton;
     @FXML
-    private Button stopButton;
+    private ImageView stopButton;
     @FXML
     private StackPane audioStackPane;
     @FXML
@@ -86,22 +89,21 @@ public class ContentPlayerPanel implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setupIcons();
         setupButtons();
         setupSliders();
     }
     private void setupButtons(){
-        likeBtn.setOnAction(e -> {
+        likeBtn.setOnMouseClicked(e -> {
             ContentController.getInstance().likeContent(currentContent.getContentId());
             updateUI();
         });
 
-        dislikeBtn.setOnAction(e -> {
+        dislikeBtn.setOnMouseClicked(e -> {
             ContentController.getInstance().dislikeContent(currentContent.getContentId());
             updateUI();
         });
 
-        reportBtn.setOnAction(e -> {
+        reportBtn.setOnMouseClicked(e -> {
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Report Content");
             dialog.setHeaderText("Why are you reporting this content?");
@@ -113,7 +115,7 @@ public class ContentPlayerPanel implements Initializable {
             });
         });
 
-        sendCommentBtn.setOnAction(e -> {
+        sendCommentBtn.setOnMouseClicked(e -> {
             String text = commentTextField.getText().trim();
             if (!text.isEmpty()) {
                 boolean added = CommentController.getInstance().addComment(currentContent.getContentId(), text);
@@ -124,17 +126,17 @@ public class ContentPlayerPanel implements Initializable {
             }
         });
 
-        playButton.setOnAction(e -> {
+        playButton.setOnMouseClicked(e -> {
             if (mediaPlayer != null) mediaPlayer.play();
             updateUI();
         });
 
-        pauseButton.setOnAction(e -> {
+        pauseButton.setOnMouseClicked(e -> {
             if (mediaPlayer != null) mediaPlayer.pause();
             updateUI();
         });
 
-        stopButton.setOnAction(e -> {
+        stopButton.setOnMouseClicked(e -> {
             if (mediaPlayer != null) mediaPlayer.stop();
             updateUI();
         });
@@ -154,15 +156,8 @@ public class ContentPlayerPanel implements Initializable {
         });
     }
 
-    private void setupIcons() {
-        URL soundURL = getClass().getResource("/image/sound.png");
-        URL muteURL = getClass().getResource("/image/mute.png");
-        if (soundURL != null && muteURL != null) {
-            soundImage.setImage(new Image(soundURL.toExternalForm()));
-            muteImage.setImage(new Image(muteURL.toExternalForm()));
-            muteImage.setVisible(false);
-        }
-    }
+
+
 
     @FXML
     private void toggleMute() {
@@ -230,7 +225,7 @@ public class ContentPlayerPanel implements Initializable {
     }
 
     @FXML
-    public void backToHome() throws IOException {
+    public void backToHome(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         ctrlStage.setScene(scene);

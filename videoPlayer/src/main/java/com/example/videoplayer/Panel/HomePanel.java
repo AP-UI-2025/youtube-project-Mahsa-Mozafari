@@ -6,9 +6,11 @@ import com.example.videoplayer.Model.ContentPck.Content;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -44,14 +46,21 @@ public class HomePanel {
         for (Content content : suggestions) {
             HBox itemBox = new HBox(10);
             itemBox.setAlignment(Pos.CENTER_LEFT);
+            itemBox.setPadding(new Insets(10));
+            itemBox.setStyle(
+                    "-fx-padding: 15; " +
+                            "-fx-background-color: #ffffff; " +
+                            "-fx-background-radius: 8; " +
+                            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 2);"
+            );
 
             ImageView thumbnail = new ImageView(new Image("file:" + content.getThumbnail()));
-            thumbnail.setFitWidth(100);
-            thumbnail.setFitHeight(60);
+            thumbnail.setFitWidth(160);
+            thumbnail.setFitHeight(90);
             thumbnail.setPreserveRatio(true);
 
             Label label = new Label(content.getTitle() + " | " + content.getCategory());
-            label.setStyle("-fx-font-size: 14px;");
+            label.setStyle("-fx-font-size: 16px; -fx-font-wight: bold;");
 
             thumbnail.setOnMouseClicked(e -> {
                 try {
@@ -67,7 +76,7 @@ public class HomePanel {
             });
 
             itemBox.getChildren().addAll(thumbnail, label);
-            mainContainer.getChildren().add(itemBox);
+            mainContainer.getChildren().addAll(itemBox,new Separator());
         }
     }
 
@@ -97,25 +106,31 @@ public class HomePanel {
         }
 
         for (Content content : contents) {
-            mainContainer.getChildren().add(createContentBox(content));
+            mainContainer.getChildren().addAll(createContentBox(content),new Separator());
         }
 
         for (Channel channel : channels) {
-            mainContainer.getChildren().add(createChannelBox(channel));
+            mainContainer.getChildren().addAll(createChannelBox(channel), new Separator());
         }
     }
     private HBox createContentBox(Content content) {
         ImageView imageView = new ImageView(new Image("file:" + content.getThumbnail()));
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(150);
+        imageView.setFitHeight(180);
+        imageView.setFitWidth(110);
         imageView.setPreserveRatio(true);
 
         Label label = new Label(content.getTitle());
-        label.setStyle("-fx-font-size: 14px; -fx-padding: 10;");
+        label.setStyle("-fx-font-size: 16px; -fx-padding: 10 ; -fx-font-weight: bold;");
 
         HBox box = new HBox(10, imageView, label);
         box.setAlignment(Pos.CENTER_LEFT);
-        box.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0;");
+        box.setPadding(new Insets(10));
+        box.setStyle(
+                "-fx-padding: 15; " +
+                        "-fx-background-color: #ffffff; " +
+                        "-fx-background-radius: 8; " +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 2);"
+        );
 
        imageView.setOnMouseClicked(e -> {
             try {
