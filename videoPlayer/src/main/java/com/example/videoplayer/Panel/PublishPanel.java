@@ -69,6 +69,9 @@ public class PublishPanel {
     private TextField descriptionVideo;
 
     @FXML
+    private TextField creatorPodcast;
+
+    @FXML
     private TextField durationLive;
 
     @FXML
@@ -164,13 +167,13 @@ public class PublishPanel {
         videoCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
 
         podcastCategoryComboBox.getItems().addAll(" News","Game","Podcast","Music","Live","Society","History");
-        podcastCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
+        podcastCategoryComboBox.setOnAction(event -> selectCategoryForPodcast());
 
         videoSpecialStatusComoBox.getItems().addAll("Normal","Special");
-        videoSpecialStatusComoBox.setOnAction(event -> selectCategoryForVideo());
+        videoSpecialStatusComoBox.setOnAction(event -> selectSpecialStatusForVideo());
 
        podcastSpecialStatusComoBox.getItems().addAll("Normal","Special");
-        podcastCategoryComboBox.setOnAction(event -> selectCategoryForVideo());
+        podcastCategoryComboBox.setOnAction(event -> selectSpecialStatusForPodcast());
 
         videoResolutionComboBox.getItems().addAll("480","720p", "1080p");
         videoResolutionComboBox.setOnAction(event -> selectResolution());
@@ -292,8 +295,7 @@ public class PublishPanel {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Content");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("video/audio", "*.mp4", "*.mp3", "*.wav", "*.avi")
-        );
+                new FileChooser.ExtensionFilter("audio", "*.m4a", "*.mp3", "*.wav", "*.aac" , "*.ogg"));
         selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             podcastPathLabel.setText(selectedFile.getAbsolutePath());
@@ -319,13 +321,13 @@ public class PublishPanel {
         Account user = AuthController.getInstance().getLoggedInUser();
         String msg = ChannelController.getInstance().publishPodcast(
                 selectedStatus,
-                titleVideo.getText(),
-                descriptionVideo.getText(),
-                Integer.parseInt(durationVideo.getText()),
+                titlePodcast.getText(),
+                descriptionPodcast.getText(),
+                Integer.parseInt(durationPodcast.getText()),
                 selectedCategory,
                 selectedFile.getAbsolutePath(),
                 selectedThumbnail.getAbsolutePath(),
-                user.getFullName(), selectedPlaylist
+                creatorPodcast.getText(), selectedPlaylist
 
         );
         showAlert(msg);

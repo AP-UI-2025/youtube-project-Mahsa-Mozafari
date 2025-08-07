@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.videoplayer.Panel.ChannelSecPanel">
+
+    <!-- VBox wrapper inside AnchorPane -->
+    <VBox spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+
+        <!-- Channel Header -->
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+         <ImageView fitHeight="27.0" fitWidth="22.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../Image/1000048524-removebg-preview.png" />
+            </image>
+            <HBox.margin>
+               <Insets bottom="100.0" />
+            </HBox.margin>
+         </ImageView>
+            <ImageView fx:id="channelCover" fitHeight="80" fitWidth="80" />
+            <VBox spacing="10.0">
+                <Label fx:id="channelNameLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                <Label fx:id="subscriberCountLabel" style="-fx-text-fill: gray;" />
+                <Button fx:id="followButton" style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-font-weight: bold;" text="Subscribe" />
+            </VBox>
+        </HBox>
+
+        <Separator />
+
+        <!-- Playlist Section -->
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Playlists" />
+
+        <ScrollPane fitToWidth="true" prefHeight="400">
+         <content>
+            <VBox fx:id="playlistContainer" prefHeight="294.0" prefWidth="722.0" />
+         </content>
+        </ScrollPane>
+
+    </VBox>
+</AnchorPane>

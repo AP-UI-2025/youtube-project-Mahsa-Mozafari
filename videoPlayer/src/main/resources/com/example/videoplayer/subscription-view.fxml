@@ -54,7 +54,7 @@
             </Label>
             <ScrollPane fitToWidth="true" prefHeight="481.0" prefWidth="812.0">
                <content>
-                  <ListView fx:id="subscriptionList" prefHeight="481.0" prefWidth="813.0" style="-fx-background-color: #FAFAFA;" />
+                  <ListView fx:id="channelListView" prefHeight="481.0" prefWidth="813.0" style="-fx-background-color: #FAFAFA;" />
                </content>
             </ScrollPane>
          </children>

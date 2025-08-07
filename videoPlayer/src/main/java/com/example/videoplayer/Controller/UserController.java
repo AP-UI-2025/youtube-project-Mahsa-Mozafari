@@ -53,34 +53,36 @@ public class UserController {
                 "Username: "+ user.getUsername()+"\n";
     }
 
-    public String editUserName(String newValue){
+    public User editUserName(String newValue) {
         Account loggedInUser = getAuthController().getLoggedInUser();
-        if (!(loggedInUser instanceof User)) {
-            return "Only users can change their username.";
+        if (!(loggedInUser instanceof User user)) {
+            return null;
         }
 
-        for (User user : database.getUsers()) {
-            if (user.getUsername().equalsIgnoreCase(newValue))
-                return "Username already taken.";
+        for (User u : database.getUsers()) {
+            if (u.getUsername().equalsIgnoreCase(newValue)) {
+                return null;
+            }
         }
 
-        loggedInUser.setUsername(newValue);
-        return "Username changed successfully.";
+        user.setUsername(newValue);
+        return user;
     }
 
-    public String editUserPassword(String newValue){
+    public User editUserPassword(String newValue) {
         Account loggedInUser = getAuthController().getLoggedInUser();
-        if (!(loggedInUser instanceof User)) {
-            return "Only users can change their password.";
+        if (!(loggedInUser instanceof User user)) {
+            return null;
         }
 
-        for (User user : database.getUsers()) {
-            if (user.getPassword().equalsIgnoreCase(newValue))
-                return "Password already in use. Choose a different one.";
+        for (User u : database.getUsers()) {
+            if (u.getPassword().equalsIgnoreCase(newValue)) {
+                return null;
+            }
         }
 
-        loggedInUser.setPassword(newValue);
-        return "Password changed successfully.";
+        user.setPassword(newValue);
+        return user;
     }
 
     public String subscribe(int channelId){
@@ -177,10 +179,10 @@ public class UserController {
     }
 
 
-    public String editChannelName(String newName){
+    public Channel editChannelName(String newName) {
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return "Only users can edit channel names.";
+            return null;
         }
 
         User user = (User) loggedInUser;
@@ -188,17 +190,17 @@ public class UserController {
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(user.getFullName())) {
                 channel.setChannelName(newName);
-                return "Channel name updated successfully.";
+                return channel;
             }
         }
 
-        return "You don't own any channel to edit its name.";
+        return null;
     }
 
-    public String editChannelDescription(String newDescription){
+    public Channel editChannelDescription(String newDescription) {
         Account loggedInUser = getAuthController().getLoggedInUser();
         if (!(loggedInUser instanceof User)) {
-            return "Only users can edit channel descriptions.";
+            return null;
         }
 
         User user = (User) loggedInUser;
@@ -206,12 +208,13 @@ public class UserController {
         for (Channel channel : database.getChannels()) {
             if (channel.getCreator().equals(user.getFullName())) {
                 channel.setDescription(newDescription);
-                return "Channel description updated successfully.";
+                return channel;
             }
         }
 
-        return "You don't own any channel to edit its description.";
+        return null;
     }
+
 
     public String showChannelSubscribers() {
         Account loggedInUser = getAuthController().getLoggedInUser();
@@ -268,10 +271,11 @@ public class UserController {
         ArrayList<Category> selected = new ArrayList<>();
 
         for (String part : parts) {
-            String trimmed = part.trim().toUpperCase();
+            String trimmed = part.trim().toUpperCase().replaceAll("\\s+", "");
             boolean isValid = false;
+
             for (Category c : Category.values()) {
-                if (c.name().toUpperCase().equals(trimmed)) {
+                if (c.name().equalsIgnoreCase(trimmed)) {
                     if (!selected.contains(c)) {
                         selected.add(c);
                     }

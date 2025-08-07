@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -18,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -149,7 +151,19 @@ public class HomePanel {
     }
 
     private HBox createChannelBox(Channel channel) {
-        ImageView imageView = new ImageView(new Image("file:" + channel.getChannelCover()));
+        ImageView imageView = new ImageView();
+        try {
+            String path = channel.getChannelCover();
+            File file = new File(path);
+            if (file.exists()) {
+                imageView.setImage(new Image(file.toURI().toString()));
+            } else {
+                System.out.println("File not found: " + path);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         imageView.setFitHeight(100);
         imageView.setFitWidth(100);
         imageView.setPreserveRatio(true);
@@ -161,22 +175,28 @@ public class HomePanel {
         box.setAlignment(Pos.CENTER_LEFT);
         box.setStyle("-fx-padding: 10; -fx-background-color: #e0e0e0;");
 
-        /*imageView.setOnMouseClicked(e -> {
-            try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/contentPlayer-view.fxml"));
-            Scene scene = new Scene(loader.load(),800,900);
-            ChannelPanel controller = loader.getController();
-            controller.;
-            ctrlStage.setScene(scene);
-            ctrlStage.show();
-        } catch (IOException ex){
-            ex.printStackTrace();
-
-        }
-        });
-        */
+        imageView.setOnMouseClicked(e -> openChannelSection(channel));
+        label.setOnMouseClicked(e -> openChannelSection(channel));
 
         return box;
+    }
+
+    private void openChannelSection(Channel channel) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/videoplayer/channelSec-view.fxml"));
+            Parent root = loader.load();
+
+            ChannelSecPanel controller = loader.getController();
+            controller.setViewedChannel(channel);
+
+            Scene scene = new Scene(root);
+            ctrlStage.setScene(scene);
+            ctrlStage.setTitle(channel.getChannelName());
+            ctrlStage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML

@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
@@ -49,6 +50,63 @@ public class LibraryPanel {
            userInfo.setText(UserController.getInstance().getAccountInfo());
         }
     }
+
+    @FXML
+    void handleEditUsername() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (loggedInUser instanceof User user) {
+            TextInputDialog dialog = new TextInputDialog(user.getUsername());
+            dialog.setTitle("Edit Username");
+            dialog.setHeaderText("Enter new username:");
+            dialog.setContentText("Username:");
+
+            dialog.showAndWait().ifPresent(newUsername -> {
+                if (!newUsername.isBlank()) {
+                    User updated = UserController.getInstance().editUserName(newUsername);
+                    if (updated != null) {
+                        showAlert("Username changed successfully.", Alert.AlertType.INFORMATION);
+                    } else {
+                        showAlert("Failed to change username. It may already be taken.", Alert.AlertType.ERROR);
+                    }
+                } else {
+                    showAlert("Username cannot be empty.", Alert.AlertType.WARNING);
+                }
+            });
+        }
+    }
+
+    @FXML
+    void handleEditPassword() {
+        Account loggedInUser = AuthController.getInstance().getLoggedInUser();
+        if (loggedInUser instanceof User user) {
+            TextInputDialog dialog = new TextInputDialog(user.getPassword());
+            dialog.setTitle("Edit Password");
+            dialog.setHeaderText("Enter new password:");
+            dialog.setContentText("Password:");
+
+            dialog.showAndWait().ifPresent(newPassword -> {
+                if (!newPassword.isBlank()) {
+                    User updated = UserController.getInstance().editUserPassword(newPassword);
+                    if (updated != null) {
+                        showAlert("Password changed successfully.", Alert.AlertType.INFORMATION);
+                    } else {
+                        showAlert("Failed to change password. It may already be in use.", Alert.AlertType.ERROR);
+                    }
+                } else {
+                    showAlert("Password cannot be empty.", Alert.AlertType.WARNING);
+                }
+            });
+        }
+    }
+
+    private void showAlert(String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle("Notification");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     @FXML
     public void showCreatePlaylistForUser(ActionEvent event) {

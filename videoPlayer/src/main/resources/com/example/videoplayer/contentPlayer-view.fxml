@@ -26,14 +26,14 @@
                <children>
                     <VBox prefHeight="522.0" prefWidth="795.0">
                         <children>
-                            <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="795.0" spacing="500.0" style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 10;">
+                            <HBox prefHeight="34.0" prefWidth="795.0" spacing="20.0" style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 10;">
                                 <children>
-                              <ImageView fx:id="backButton" fitHeight="36.0" fitWidth="54.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="backButton" fitHeight="35.0" fitWidth="26.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../Image/1000048524-removebg-preview.png" />
                                  </image>
                                  <HBox.margin>
-                                    <Insets right="210.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </ImageView>
                                     <Label fx:id="titleLabel" text="Title" textFill="WHITE">
@@ -41,15 +41,18 @@
                                             <Font size="24.0" />
                                         </font>
                                  <HBox.margin>
-                                    <Insets left="-30.0" />
+                                    <Insets />
                                  </HBox.margin>
                                     </Label>
                                 </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                             </HBox>
                             <StackPane prefHeight="378.0" prefWidth="800.0">
                                 <children>
-                              <ImageView fx:id="thumbnailImg" fitHeight="340.0" fitWidth="638.0" pickOnBounds="true" preserveRatio="true" />
-                                    <MediaView fx:id="mediaView" fitHeight="300.0" fitWidth="700.0" />
+                                    <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="700.0" />
+                              <ImageView fx:id="thumbnailImg" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" />
                                 </children>
                             </StackPane>
                             <Slider fx:id="videoSlider" prefHeight="14.0" prefWidth="731.0">

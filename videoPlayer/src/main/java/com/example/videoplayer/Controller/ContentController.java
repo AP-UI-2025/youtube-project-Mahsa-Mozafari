@@ -237,7 +237,7 @@ public class ContentController {
         for (Content content : allContents) {
             if (!suggestions.contains(content)) {
                 suggestions.add(content);
-                if (suggestions.size() == 3) break;
+                if (suggestions.size() == 4) break;
             }
         }
 

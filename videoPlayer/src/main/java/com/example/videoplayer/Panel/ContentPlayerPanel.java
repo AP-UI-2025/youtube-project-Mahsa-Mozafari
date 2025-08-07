@@ -26,6 +26,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -68,7 +69,7 @@ public class ContentPlayerPanel implements Initializable {
     public void setContent(Content content) {
         this.currentContent = content;
         setupAddToPlaylistMenu();
-        playVideo(content.getFileLink());
+        playMedia(content.getFileLink());
         updateUI();
 
         ContentController.getInstance().playContent(content.getContentId());
@@ -79,7 +80,7 @@ public class ContentPlayerPanel implements Initializable {
         titleLabel.setText(currentContent.getTitle());
         likesLabel.setText("Likes: " + currentContent.getLikes());
         viewsLabel.setText("Views: " + currentContent.getViews());
-        thumbnailImg.setImage(new Image(new File(currentContent.getThumbnail()).toURI().toString()));
+
 
         commentListView.getItems().clear();
         for (Comment comment : currentContent.getComments()) {
@@ -169,17 +170,34 @@ public class ContentPlayerPanel implements Initializable {
         }
     }
 
-    private void playVideo(String filePath) {
+    private void playMedia(String filePath) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
+
         Media media = new Media(new File(filePath).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setOnReady(() ->
-                videoSlider.setMax(mediaPlayer.getMedia().getDuration().toSeconds())
-        );
+
+        mediaPlayer.setOnReady(() -> {
+            videoSlider.setMax(mediaPlayer.getMedia().getDuration().toSeconds());
+
+            boolean hasVideo = media.getWidth() > 0;
+
+            if (hasVideo) {
+                mediaView.setVisible(true);
+                thumbnailImg.setVisible(false);
+            } else {
+                mediaView.setVisible(false);
+                thumbnailImg.setVisible(true);
+
+                String path = currentContent.getThumbnail();
+                File file = new File(path);
+                URI uri = file.toURI();
+                Image image = new Image(uri.toString());
+                thumbnailImg.setImage(image);
+            }
+        });
 
         mediaPlayer.setOnEndOfMedia(() -> {
             mediaPlayer.stop();

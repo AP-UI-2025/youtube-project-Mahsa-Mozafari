@@ -1,5 +1,6 @@
 package com.example.videoplayer.Panel;
 import com.example.videoplayer.Controller.AdminController;
+import com.example.videoplayer.Controller.ContentController;
 import com.example.videoplayer.Model.AccountPck.User;
 import com.example.videoplayer.Model.Channel;
 import com.example.videoplayer.Model.ContentPck.Content;
@@ -8,6 +9,8 @@ import com.example.videoplayer.Model.Report;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +27,8 @@ import javafx.stage.Stage;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+
 
 public class AdminPanel {
 
@@ -44,7 +49,11 @@ public class AdminPanel {
     private TableColumn<Content, String> titleCol, uploaderCol;
     @FXML
     private TableColumn<Content, Integer> viewsCol, likesCol;
+    @FXML
+    private BarChart<String, Number> contentBarChart;
 
+    @FXML
+    private BarChart<String, Number> channelBarChart;
     @FXML
     private TableView<Channel> channelTable;
     @FXML
@@ -56,6 +65,8 @@ public class AdminPanel {
     private TableView<Report> reportTable;
     @FXML
     private TableColumn<Report, String> reporterCol, reportedContentCol, descriptionCol;
+
+    private ContentController contentController=ContentController.getInstance();
 
     @FXML
     public void initialize() {
@@ -93,6 +104,39 @@ public class AdminPanel {
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         refreshTables();
+
+        loadPopularContentsChart();
+        loadPopularChannelsChart();
+    }
+
+    public void loadPopularContentsChart() {
+        ArrayList<Content> contents = contentController.sortContentByLikes();
+
+        XYChart.Series<String, Number> likesSeries = new XYChart.Series<>();
+        likesSeries.setName("Likes");
+
+        for (Content content : contents) {
+            likesSeries.getData().add(new XYChart.Data<>(content.getTitle(), content.getLikes()));
+        }
+
+        contentBarChart.getData().clear();
+        contentBarChart.getData().add(likesSeries);
+    }
+
+    public void loadPopularChannelsChart() {
+        ArrayList<Channel> channels = new ArrayList<>(database.getChannels());
+
+        channels.sort((c1, c2) -> Integer.compare(c2.getSubscribers().size(), c1.getSubscribers().size()));
+
+        XYChart.Series<String, Number> subscriberSeries = new XYChart.Series<>();
+        subscriberSeries.setName("Subscribers");
+
+        for (Channel channel : channels) {
+            subscriberSeries.getData().add(new XYChart.Data<>(channel.getChannelName(), channel.getSubscribers().size()));
+        }
+
+        channelBarChart.getData().clear();
+        channelBarChart.getData().add(subscriberSeries);
     }
 
     @FXML

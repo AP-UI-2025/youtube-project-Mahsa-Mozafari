@@ -168,6 +168,7 @@ public class ChannelController {
         User user=(User) loggedInUser;
         return "Channel Info:\n" +
                 "Channel Name: " + user.getChannel().getChannelName() + "\n" +
+                "Description: " + user.getChannel().getDescription()+ "\n"+
                 "Creator: " + user.getChannel().getCreator()+ "\n";
     }
 

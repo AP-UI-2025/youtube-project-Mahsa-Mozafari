@@ -165,7 +165,7 @@ public class ChannelPlaylistPanel {
         PublishPanel publishPanel = fxmlLoader.getController();
         publishPanel.setSelectedPlaylist(selectedPlaylist);
 
-        Scene scene = new Scene(root, 900, 500);
+        Scene scene = new Scene(root, 574, 500);
         ctrlStage.setScene(scene);
         ctrlStage.show();
     }
